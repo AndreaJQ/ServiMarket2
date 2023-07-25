@@ -29,12 +29,12 @@ public class UserEntity {
     @Email
     private String email;
 
-    @Size(min = 5, max = 15)
+
     @NotBlank
     private String password;
 
     @NotBlank
-    @Size(min = 6, max = 10)
+
     private String contact;
 
     @NotBlank

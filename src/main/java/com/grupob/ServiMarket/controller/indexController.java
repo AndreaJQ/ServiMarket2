@@ -35,13 +35,13 @@ public class indexController {
         return "registro.html";
     }
     @PostMapping("/newuser")
-    public String saveUser(@Valid UserEntity userEntity, BindingResult result ){
+    public String saveUser(@Valid UserEntity userEntity, String password, BindingResult result ){
         System.out.println(userEntity.toString());
         if(result.hasErrors()){
             return "registro.html";
         }
        //  userEntity.setRole(Role.USER);
-        userService.create(userEntity);
+        userService.create(userEntity, password);
         return "index.html";
     }
 
