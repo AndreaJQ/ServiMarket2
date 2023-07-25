@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,72 +14,83 @@
     <title>ServiceMARKET - Tu app de servicios confiables</title>
 </head>
 
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg py-4 px-5">
-            <div class="container-fluid">
-                <div class="navbar-brand">
+<header>
+    <nav class="navbar navbar-expand-lg py-4 px-5">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <a href="/"><img src="img/logo horizontal.png" alt="logo" width="350" /></a>
+            </div>
+            <ul class="navbar-nav reg">
+                <li class="nav-item">
+                    <a href="/ingresar"id="login-link" class="nav-link">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="registrarse"id="register-link" class="nav-link">Registrarse</a>
+                </li>
 
-                    <a href="#"><img src="/img/logo horizontal.png" alt="logo" width="350" /></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false"> Hola Adrian
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <div class="jumbot">
+            <h1><strong>Contrata solo personal de confianza</strong> </h1>
+            <p>Localiza fácilmente y en tu zona, el profesional que estás buscando y contrátalo de acuerdo a sus
+                calificaciones.</p>
+        </div>
+        <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Ingrese un rubro a buscar"
+                   aria-label="Search">
+            <button class="btn btn-success" type="submit">Buscar</button>
+        </form>
 
 
-                    <a href="#"><img src="/img/logo horizontal.png" alt="logo" width="350" /></a>
+        <!-- En esta parte de abajo agregue los contenedores section que aparecen abajo de la pagina -->
 
 
-
-                    <a href="index.html"><img src="/img/logo horizontal.png" alt="logo" width="350" /></a>
-
+        <div class="publicaciones-container">
+            <div class="publicacion">
+                <img src="img/tablero.jpg" alt="Imagen de la publicación 1" class="imagen-publicacion">
+                <div class="contenido-publicacion">
+                    <h2 class="titulo-publicacion">Electricista</h2>
+                    <p class="descripcion-publicacion">"Nos enorgullecemos de contar con un equipo altamente capacitado y experimentado en el área de la electricidad. Nuestros electricistas están listos para brindarte un servicio confiable y eficiente, garantizando que tus instalaciones eléctricas funcionen de manera segura y eficiente. </p>
                 </div>
-                <ul class="navbar-nav reg">
-                    <li class="nav-item">
-                        <a href="/ingresar"id="login-link" class="nav-link">Ingresar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="registrarse"id="register-link" class="nav-link">Registrarse</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false"> Hola Adrian
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="container">
-
-            <div class="slider-frame">
-                <ul>
-
-                    <li><img src="/img/portada1.webp" alt=""></li>
-                    <li><img src="/img/portada2.webp" alt=""></li>
-                    <li><img src="/img/portada3.webp" alt=""></li>
-                    <li><img src="/img/portada4.webp" alt=""></li>
-                    <li><img src="/img/portada5.webp" alt=""></li>
-
-                </ul>
             </div>
 
-            <div class="jumbot">
-                <h1><strong>Contrata solo personal de confianza</strong> </h1>
-                <p>Localiza fácilmente y en tu zona, el profesional que estás buscando y contrátalo de acuerdo a sus
-                    calificaciones.</p>
+            <div class="publicacion">
+                <img src="img/planos.jpg" alt="Imagen de la publicación 2" class="imagen-publicacion">
+                <div class="contenido-publicacion">
+                    <h2 class="titulo-publicacion">Arquitecto</h2>
+                    <p class="descripcion-publicacion">Confía en nuestros arquitectos para crear espacios impresionantes y funcionales que se conviertan en el hogar o negocio de tus sueños. Contáctanos hoy mismo y comienza a dar forma a tu proyecto arquitectónico con nosotros."</p>
+                </div>
             </div>
-            <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Ingrese un rubro a buscar"
-                    aria-label="Search">
-                <button class="btn btn-success" type="submit">Buscar</button>
-            </form>
+
+            <div class="publicacion">
+                <img src="img/plomero.jpg" alt="Imagen de la publicación 3" class="imagen-publicacion">
+                <div class="contenido-publicacion">
+                    <h2 class="titulo-publicacion">Plomero</h2>
+                    <p class="descripcion-publicacion">Ya sea que necesites una reparación urgente o desees realizar mejoras en tus sistemas de fontanería, nuestros plomeros están disponibles para brindarte un servicio profesional y confiable. Nos aseguraremos de que tus sistemas de agua y desagüe funcionen sin problemas.</p>
+                </div>
+            </div>
+
+
+            <!--Aca finaliza ese codigo de los contenedores -->
 
         </div>
-    </main>
+</main>
 
     <footer class="container-fluid bg-dark text-white p-4">
         <div class="container text-center">
