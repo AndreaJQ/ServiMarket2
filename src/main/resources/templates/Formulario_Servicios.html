@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <title>Ingrese sus datos</title>
+    <link rel="stylesheet" href="../static/css/Formulario_Servicios.css">
+</head>
+<body>
+    <form th:object="${publicacion}" th:action="@{Vista_formulario_Servicios}" method="post">   <!--Aca tiene que ir la ruta donde esta el archivo Vista_formulario_Servicios.htm-->
+        <!-- Campos del formulario -->
+
+        <section class="form-login">
+            <h1>Completa la informacion de tu servicio</h1>
+        <label for="titulo">Título:</label>
+        <input type="text" th:field="*{titulo}" required>
+
+        <label for="rubro">Rubro:</label>
+        <input type="text" th:field="*{rubro}" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea th:field="*{descripcion}" rows="4" required></textarea>
+
+        
+        <label for="fotos"> Cargue sus imagenes :</label>
+        <input type="file" id="fotos" th:field="*{fotos}" accept="image/*" required multiple>
+         <div class="miniaturas" id="miniaturas"></div><!-- Contenedor para mostrar las imagenes que seleccionaste en miniaturas -->
+
+        <button type="submit">Publicar</button>
+    </form>
+
+    <!-- Área donde se mostrarán los datos de la publicación -->
+    <div id="publicacionMostrada"></div>
+    
+
+    <script src="../static/js/Formulario_Servicios.js"></script>
+</body>
+</html>
