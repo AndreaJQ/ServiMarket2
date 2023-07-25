@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <title>ServiceMARKET - Tu app de servicios confiables</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg py-4 px-5">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <a href="index.html"><img src="img/logo horizontal.png" alt="logo" width="350" /></a>
+                </div>
+                <ul class="navbar-nav reg">
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link">Ingresar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="registro.html" class="nav-link">Registrarse</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"> Hola Adrian
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="d-flex flex-row-reverse a1 ">
+            <div class="col-md-4 panel1">
+                <div class="container p-5" id="panel">
+                    <h1>Regístrate!</h1>
+                    <form class="formulario" th:action="@{/newuser}" method="POST" th:object="${userEntity}">
+
+
+                    <div class="form">
+                        <input type="text" class="form-control mb-4" placeholder="NOMBRE" id="name" th:field="*{name}" />
+                        <input type="text" class="form-control mb-4" placeholder="APELLIDO" id="lastname"th:field="*{lastName}" />
+
+                        <input type="text" class="form-control mb-4" placeholder="DIRECCIÓN" id="address"th:field="*{address}" />
+
+                        <input type="text" class="form-control mb-4" placeholder="TELEFONO" id="contact"th:field="*{contact}" />
+
+                        <input type="email" class="form-control mb-4" placeholder="CORREO ELECTRÓNICO" id="email" th:field="*{email}" />
+
+                        <input type="password" class="form-control mb-4" placeholder="CONTRASEÑA" id="password" th:field="*{password}" />
+
+                        <label for="role">Seleccione su perfil:</label>
+                        <select class="form-control mb-4" id="role" th:field="*{role}">
+                            <option th:value="USER" th:text="Usuario"></option>
+                            <option th:value="PROVIDER" th:text="Proovedor"></option>
+                        </select>
+                        <br>
+
+                        <button class="w-100 btn btn-success btn-lg" type="submit" id="submitButton">ENVIAR</button>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container-fluid bg-dark text-white p-4">
+        <!-- Código del pie de página -->
+    </footer>
+
+    <script>
+        const submitButton = document.getElementById('submitButton');
+        const inputs = document.querySelectorAll('input[type="text"], input[type="mail"], input[type="password"]');
+        const acceptCheckbox = document.getElementById('invalidCheck3');
+
+        function mostrarAlerta(mensaje) {
+            alert(mensaje);
+        }
+
+        function validarCampos() {
+            let camposCompletos = true;
+
+            inputs.forEach(input => {           // Con esto le digo que el campo apellido no es requerido si o si que lo complete 
+                if (input.id !== "apellido" && !input.value.trim()) {
+                    camposCompletos = false;
+                    mostrarAlerta(`El campo "${input.placeholder}" está vacío. Por favor, complétalo.`);
+                }
+            });
+
+            if (!acceptCheckbox.checked) { //si completaste todos los campos y apretaste en el tilde que te deje enviar el formulario
+                camposCompletos = false;
+                mostrarAlerta('Por favor, acepta los términos y condiciones.');
+            }
+
+            return camposCompletos;
+        }
+
+        submitButton.addEventListener('click', function () {
+            const camposValidos = validarCampos();
+
+            if (camposValidos) {
+                // Muestro una alertaa de que se registro y se envio bien
+                alert('Formulario enviado con éxito.');
+            }
+        });
+    </script>
+    <script src="js/fuction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
