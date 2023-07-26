@@ -52,7 +52,10 @@
                 calificaciones.</p>
         </div>
         <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Ingrese un rubro a buscar"
+            <input class="form-control me-2"
+                   type="search"
+                   placeholder="Ingrese un rubro a buscar"
+                   th:action="@{/busqueda}"
                    aria-label="Search">
             <button class="btn btn-success" type="submit">Buscar</button>
         </form>
@@ -62,28 +65,24 @@
 
 
         <div class="publicaciones-container">
-            <div class="publicacion">
-                <img src="img/tablero.jpg" alt="Imagen de la publicación 1" class="imagen-publicacion">
-                <div class="contenido-publicacion">
-                    <h2 class="titulo-publicacion">Electricista</h2>
-                    <p class="descripcion-publicacion">"Nos enorgullecemos de contar con un equipo altamente capacitado y experimentado en el área de la electricidad. Nuestros electricistas están listos para brindarte un servicio confiable y eficiente, garantizando que tus instalaciones eléctricas funcionen de manera segura y eficiente. </p>
-                </div>
-            </div>
 
-            <div class="publicacion">
-                <img src="img/planos.jpg" alt="Imagen de la publicación 2" class="imagen-publicacion">
-                <div class="contenido-publicacion">
-                    <h2 class="titulo-publicacion">Arquitecto</h2>
-                    <p class="descripcion-publicacion">Confía en nuestros arquitectos para crear espacios impresionantes y funcionales que se conviertan en el hogar o negocio de tus sueños. Contáctanos hoy mismo y comienza a dar forma a tu proyecto arquitectónico con nosotros."</p>
-                </div>
-            </div>
 
-            <div class="publicacion">
-                <img src="img/plomero.jpg" alt="Imagen de la publicación 3" class="imagen-publicacion">
+            <div th:each="publication:${publication}" class="publicacion">
                 <div class="contenido-publicacion">
-                    <h2 class="titulo-publicacion">Plomero</h2>
-                    <p class="descripcion-publicacion">Ya sea que necesites una reparación urgente o desees realizar mejoras en tus sistemas de fontanería, nuestros plomeros están disponibles para brindarte un servicio profesional y confiable. Nos aseguraremos de que tus sistemas de agua y desagüe funcionen sin problemas.</p>
+                    <img src="img/plomero.jpg" alt="Imagen de la publicación 3" class="imagen-publicacion">
+                    <h2 class="titulo-publicacion" th:text="${publication.title}"></h2>
+                    <p class="descripcion-publicacion"  th:text="${publication.description}"> </p>
+
+
                 </div>
+
+                <div>
+                    <a class="btn btn-primary" th:href="@{/publication/{pubId}(pubId=${publication.id})}">View</a>
+                    <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROVIDER')" th:href="@{/editPublication/{pId}(pId=${publication.id})}">Edit</a>
+
+
+                </div>
+
             </div>
 
 

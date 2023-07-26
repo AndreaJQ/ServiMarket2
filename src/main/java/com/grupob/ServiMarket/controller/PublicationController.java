@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/publicacion")
+@RequestMapping("/")
 public class PublicationController  {
 
     @Autowired
@@ -24,26 +24,41 @@ public class PublicationController  {
 
 
     //-------------------CREATE PUBLICATION---------------------------
+
+    @GetMapping("/publicacion")
+    public String newpublication(ModelMap model){
+        Publication publication = new Publication();
+        model.put("publicacion", publication);
+        return "newpublic.html";
+    }
     @PostMapping("/newPublication")
-    public String savePublication(@Valid @RequestBody Publication publication, BindingResult result){
+    public String savePublication(@Valid Publication publication, BindingResult result){
 
         if(result.hasErrors()){
-            return "error.html";
+            return "newpublic.html";
         }
         pService.create(publication);
 
-        return "index.html";
+        return "public-details.html";
     }
 
     //---------------------------READ-----------------------LIST
     //GET MAPPING
     @GetMapping("/publist")  //vista necesaria para el ADMIN
-    public String publicationsList(ModelMap model){
+    public String publicationsList(Model model){
 
-        List<Publication> allPubli = pService.list();
-        model.put("publicaciones",allPubli);
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication",publication);
 
-        return "inicio.html";
+        return "index.html";
+    }
+
+    //----------------------READ-----------------------DETAIL
+    @GetMapping("/publication/{pubId}")
+    public String newsDetail(@PathVariable("pubId") Long pubId, Model model){
+        Publication pub = pService.getPublicationById(pubId);
+        model.addAttribute("pub", pub);
+        return "public-details.html";
     }
 
 
