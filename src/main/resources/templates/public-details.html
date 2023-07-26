@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Publicaciones</title>
+</head>
+<body>
+    <h1>Datos de la publicación:</h1>
+    <p>ID: <span th:text="${pub.id}"></span></p>
+    <p>Título: <span th:text="${pub.title}"></span></p>
+    <p>Rubro: <span th:text="${pub.rubro}"></span></p>
+    <p>Descripción: <span th:text="${pub.description}"></span></p>
+    <img id="fotos" src="" alt="Fotos de la publicación">
+    <script src="../static/js/Vista_Formulario_Servicios.js"></script>
+</body>
+</html>
