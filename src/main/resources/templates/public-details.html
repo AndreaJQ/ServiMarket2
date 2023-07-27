@@ -9,7 +9,10 @@
     <p>Título: <span th:text="${pub.title}"></span></p>
     <p>Rubro: <span th:text="${pub.rubro}"></span></p>
     <p>Descripción: <span th:text="${pub.description}"></span></p>
-    <img id="fotos" src="" alt="Fotos de la publicación">
+    <img id="fotos" th:src="${pub.urlImagen}" alt="Fotos de la publicación">
     <script src="../static/js/Vista_Formulario_Servicios.js"></script>
+
+    <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/publication/{pubId}/delete(pubId=${pub.id})}">Delete</a>
+    <a class="btn btn-primary"  th:href="@{/question/{pubId}/new(pubId=${pub.id})}">PREGUNTAR</a>
 </body>
 </html>
