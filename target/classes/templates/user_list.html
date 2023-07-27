@@ -1,12 +1,12 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Lista de Usuarios</title>
-    <link rel="stylesheet" href="SerMak.css">
-</head>
-<body>
-    <h1>Lista de Usuarios</h1>
+ <head th:replace="/fragments/head :: head"></head>
+    <body>
+        <header>
+            <nav th:replace="/fragments/nav :: nav"></nav>
+        </header>
+        <h1>Lista de Usuarios</h1>
+       
     <table class="table table-secondary">
         <thead>
         <tr>
