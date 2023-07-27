@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,20 +27,27 @@ public class PublicationController  {
     //-------------------CREATE PUBLICATION---------------------------
 
     @GetMapping("/publicacion")
-    public String newpublication(ModelMap model){
+    public String newpublication(ModelMap model, HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("usersesssion");
         Publication publication = new Publication();
         model.put("publicacion", publication);
+        model.put("user", user);
         return "newpublic.html";
     }
     @PostMapping("/newPublication")
-    public String savePublication(@Valid Publication publication, BindingResult result){
+    public String savePublication(@Valid @ModelAttribute ("publication") Publication publication,
+                                  HttpSession session, BindingResult result,
+                                  ModelMap modelMap, Model model){
+        UserEntity user = (UserEntity) session.getAttribute("usersession");
+        modelMap.put("user",user);
+        Long userId = user.getId();
 
         if(result.hasErrors()){
             return "newpublic.html";
         }
-        pService.create(publication);
+        pService.create(publication, userId);
 
-        return "public-details.html";
+        return "/publist";
     }
 
     //---------------------------READ-----------------------LIST
