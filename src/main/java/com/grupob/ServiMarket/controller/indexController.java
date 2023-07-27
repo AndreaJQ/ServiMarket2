@@ -58,5 +58,15 @@ public class indexController {
         public String inicio(){
         return "inicio.html";
         }
+        
+        @GetMapping("/perfil")
+        public String perfil(){
+            return "perfil_user.html";
+        }
+        
+        @GetMapping("/perfil/editarPerfil")
+        public String editarPerfil(){
+            return "perfil_edit.html";
+        }
 
 }
