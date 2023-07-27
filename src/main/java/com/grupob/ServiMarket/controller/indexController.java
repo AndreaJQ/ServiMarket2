@@ -46,9 +46,17 @@ public class indexController {
     }
 
     @GetMapping("/ingresar")
-    public String login(){
-        return "login";
+    public String login(@RequestParam (required = false) String error, ModelMap modelo) {
+        if (error != null){
+            modelo.put("error","Usuario o contrasena invalidos ");
+        }
+
+        return "login.html";
     }
 
+        @GetMapping("/inicio")
+        public String inicio(){
+        return "inicio.html";
+        }
 
 }

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="SerMak.css">
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo Electrónico</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.name}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.role}"></td>
+            <td>
+            <button class="btn-editar"><a th:href="@{/admin/editar/{id}(id=${usuario.id})}">Editar</a></button> 
+            <button class="btn-eliminar"><a th:href="@{/admin/eliminar/{id}(id=${usuario.id})}" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a></button> 
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

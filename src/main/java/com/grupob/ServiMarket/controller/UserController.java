@@ -19,6 +19,12 @@ public class UserController {
 
 
     //---------------------------READ-----------------------LIST
+    @GetMapping("listaUsuarios")
+    public String listar(ModelMap modelo){
+        List<UserEntity> usuarios = userService.list();
+        modelo.addAttribute("usuarios", usuarios);
+return "user_list.html";
+    }
     //GET MAPPING
     @GetMapping("/userslist")
     public List<UserEntity> listuser(){

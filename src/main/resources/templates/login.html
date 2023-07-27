@@ -47,22 +47,28 @@
             <div class="col-md-4 panel2" id="panel">
                 <div class="container p-5">
                     <h1>Logéate!</h1>
-                    <div class="form">
 
-                        <input type="email" class="form-control mb-4" placeholder="INGRESA TU EMAIL" id="email" />
+                    <form class="form" th:action="@{/logincheck}" method="POST"  >
 
-                        <input type="password" class="form-control mb-4" placeholder="INGRESA TU CONTRASEÑA" id="contrasena" />
+                        <input type="email" class="form-control mb-4"
+                               placeholder="CORREO ELECTRÓNICO"
+                               id="email"
+                               name="email"/>
+                        <input type="password" class="form-control mb-4"
+                               placeholder="CONTRASEÑA"
+                               id="password"
+                              name="password"/>
 
 
-                        <button class="w-100 btn btn-primary btn-lg" type="button" id="submitButton">ENTRAR</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitButton">ENTRAR</button>
 
                         <div class="d-flex flex-colum justify-content-center mt-5">
                             <p>¿Aún no estás registrado?  </p>
                             <strong>
-                                <a class="nav-link" href="registro.html"> Regístrate!</a>
+                                <a class="nav-link" href="..."> Regístrate!</a>
                             </strong>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
