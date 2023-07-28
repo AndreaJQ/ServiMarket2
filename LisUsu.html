@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="LisUsu.css">
+</head>
+<body>
+    <img src="logo horizontal.png" alt="Logotipo" class="logo">
+    <h1>Lista de Usuarios</h1>
+    <button class="butto">
+        <span>Volver</span>
+    </button>
+    
+    <div class="container">
+    <table class="admin-table">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo Electrónico</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.name}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.role}"></td>
+            <td>
+            <a class="btn-editar"th:href="@{/admin/editar/{id}(id=${usuario.id})}">Editar</a>
+            <a class="btn-eliminar" th:href="@{/admin/eliminar/{id}(id=${usuario.id})}" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a> 
+            </td>
+        </tr>
+    </table>
+    </div>
+
+    <div class="navbar">
+        <!-- Contenido de la franja Azul marino -->
+      </div>
+   
+
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<link rel="stylesheet" href="styles.css">
+<head>
+    <title>Tabla de Admin</title>
+    <link rel="stylesheet" href="SerMak.css">
+</head>
+<body>
+    <h1>Tabla de Admin</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electronico</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>Proveedor</td>
+                <td>
+                    <button class="btn-editar">Editar</button>
+                    <button class="btn-rol">Rol</button>
+                    <button class="btn-eliminar">Eliminar</button>
+                    <button class="btn-monestar">!</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>Usuario</td>
+                <td>
+                    <button class="btn-editar">Editar</button>
+                    <button class="btn-rol">Rol</button>
+                    <button class="btn-eliminar">Eliminar</button>
+                    <button class="btn-monestar">!</button>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" href="SerMak.css">
+<head>
+    <title>Editar Usuario</title>
+</head>
+<body>
+    <h1>Editar Usuario</h1>
+    <table>
+    <form th:action="@{/admin/editar/{id}(id=${usuario.id})}" th:object="${usuario}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required>
+        <label>Correo Electrónico:</label>
+        <input type="email" th:field="*{correoElectronico}" required>
+        <label>Rol:</label>
+        <select th:field="*{rol}">
+            <option value="Cliente">Cliente</option>
+
+            <option value="Proveedor">Proveedor</option>
+        </select>
+        <button type="submit" class="btn-editar">Guardar</button>
+    </form>
+    <button href="/admin" class="btn-eliminar">Cancelar</button>
+</table>
+</body>
+</html>
