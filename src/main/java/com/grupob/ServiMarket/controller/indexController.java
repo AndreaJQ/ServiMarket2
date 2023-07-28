@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -35,13 +36,14 @@ public class indexController {
         return "registro.html";
     }
     @PostMapping("/newuser")
-    public String saveUser(@Valid UserEntity userEntity, String password, BindingResult result ){
+    public String saveUser(@Valid UserEntity userEntity, String password, MultipartFile archivo , BindingResult result ) throws Exception {
         System.out.println(userEntity.toString());
         if(result.hasErrors()){
             return "registro.html";
         }
        //  userEntity.setRole(Role.USER);
-        userService.create(userEntity, password);
+        userService.create(userEntity, password, archivo);
+
         return "index.html";
     }
 

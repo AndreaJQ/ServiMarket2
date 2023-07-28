@@ -1,5 +1,6 @@
 package com.grupob.ServiMarket.service;
 
+import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -27,8 +29,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ImageService imageService;
     @Transactional
-    public void create(UserEntity us, String password) {
+    public void create(UserEntity us, String password, MultipartFile archivo) throws Exception {
+        Image image = imageService.guardar(archivo);
+        us.setImage(image);
         us.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepository.save(us);
     }

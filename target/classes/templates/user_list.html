@@ -21,6 +21,11 @@
             <td th:text="${usuario.email}"></td>
             <td th:text="${usuario.role}"></td>
             <td>
+                <!-- Verificar si el usuario tiene una imagen asociada -->
+                <img th:if="${usuario.image != null}" th:src="@{'/imagen/' + ${usuario.image.id}}"
+                     alt="Imagen de usuario" width="100" height="100">
+            </td>
+            <td>
             <button class="btn-editar"><a th:href="@{/admin/editar/{id}(id=${usuario.id})}">Editar</a></button> 
             <button class="btn-eliminar"><a th:href="@{/admin/eliminar/{id}(id=${usuario.id})}" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a></button> 
             </td>
