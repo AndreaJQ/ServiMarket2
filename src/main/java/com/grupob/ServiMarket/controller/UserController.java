@@ -1,13 +1,19 @@
 package com.grupob.ServiMarket.controller;
+import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.exceptions.MyException;
+import com.grupob.ServiMarket.service.ImageService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -16,6 +22,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ImageService imageService;
 
 
     //---------------------------READ-----------------------LIST
@@ -31,29 +39,50 @@ return "user_list.html";
         return userService.list();
     }
 
+    //--------------------------READ USER DETAIL-----------------
+    //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVIDER', 'ROLE_ADMIN')")
+    @GetMapping("/perfil")
+    public String profile(ModelMap modelo, HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        modelo.put("user", user);
+        return "perfil_user";
+    }
+
 
     //--------------------------UPDATE-----------------
+    //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVIDER', 'ROLE_ADMIN')")
     @GetMapping("/edituser/{userId}")
-    public String editUser(@PathVariable("userId") Long id, ModelMap model){
-        model.put("user", userService.getUserById(id));
-        return"edituser.html";
+    public String editUser(@PathVariable("userId") long userId, ModelMap model, HttpSession session){
+        UserEntity user =userService.getUserById(userId);
+       // UserEntity userauth = (UserEntity) session.getAttribute("usuariosession");
+
+        model.put("user", user);
+        return"perfil_edit.html";
     }
 
-    @PutMapping("/edituser/{userId}")
-    public String editUser(@RequestBody UserEntity userE,
-                           @PathVariable("userId") Long userId){
+    //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVIDER', 'ROLE_ADMIN')")
 
-        userE.setId(userId);
-        userService.updateUser(userE);
-        return "Updated"; //string para ser visualizada en postman
+    @PostMapping("/edituser/{userId}/edit")
+    public String editUser(@PathVariable("userId") Long userId,@RequestParam String name, @RequestParam String lastName,
+                           @RequestParam String password,@RequestParam String address,@RequestParam String contact, ModelMap model,
+                           MultipartFile archivo) throws Exception {
+        UserEntity user = userService.getUserById(userId);
+        userService.updateUser(userId,name,lastName,contact,address,password,archivo);
+        return "redirect:/user/perfil";
+
     }
 
-    //-------------------DELETE------------------------
-    @GetMapping("/admin/delete/{id}")
+
+
+
+
+
+    //-------------------DELETE------------------------ va para ADMIN
+   /* @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         userService.delete(id);
         return "redirect:/user/listaUsuarios";
-    }
+    }*/
 
 
     //-------------------SEARCH QUERY------------------------

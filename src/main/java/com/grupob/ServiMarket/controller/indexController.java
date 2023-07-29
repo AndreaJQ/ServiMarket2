@@ -50,15 +50,7 @@ public class indexController {
 
             return "registro.html";
         }
-       // if(result.hasErrors()){
-        //    System.out.println();
-          //  return "registro.html";
         }
-       //  userEntity.setRole(Role.USER);
-
-
-        //return "index.html";
-    //}
 
     @GetMapping("/ingresar")
     public String login(@RequestParam (required = false) String error, ModelMap modelo) {

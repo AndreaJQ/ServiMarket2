@@ -13,22 +13,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="img/avatar.png" alt="perfil" width="250" class="rounded-circle">
+                    <img th:if="${session.usuariosession.image != null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"
+                         alt="perfil" width="250" class="rounded-circle">
                 </div>
+
                 <div class="col-md-9">
                     <div class="d-flex fles-row justify-content-between align-items-center">
                         <h2>Información de contacto</h2>
-                        <a href="/perfil/editarPerfil" class="btn btn-success" role="button">Editar</a>
+                        <a th:href="@{/user/edituser/{userId} (userId = ${user.id})}" class="btn btn-success" role="button">Editar</a>
                     </div>
 
                     <hr>
-                    <p><strong>Nombre: </strong>Joaquín</p>
-                    <p><strong>Apellido: </strong>García</p>
-                    <p><strong>Email: </strong>joaquingarcia@gmail.com</p>
-                    <p><strong>Teléfono: </strong>+541111111111</p>
-                    <p><strong>Direción: </strong>Puerto Madrid</p>
-                    <p><strong>Direción: </strong>Puerto Madrid</p>
-                    <p><strong>Tipo: </strong>Proveedor</p>
+                    <p><strong>Nombre: </strong ><span th:text="${session.usuariosession.name}"></span></p>
+                    <p><strong>Apellido: </strong ><span th:text="${session.usuariosession.lastName}"></span></p>
+                    <p><strong>Email: </strong ><span th:text="${session.usuariosession.email}"></span></p>
+                    <p><strong>Teléfono: </strong ><span th:text="${session.usuariosession.contact}"></span></p>
+                    <p><strong>Direción: </strong ><span th:text="${session.usuariosession.address}"></span></p>
+                    <p><strong>Tipo: </strong></strong ><span th:text="${session.usuariosession.role}"></span></p></p>
 
                 </div>
 

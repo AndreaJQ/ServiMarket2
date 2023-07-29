@@ -9,27 +9,40 @@
             <nav th:replace="/fragments/nav :: nav"></nav>
         </header>
         
-        <main class="bg-white pt-5">
+        <main class="bg-white pt-5" th:action="@{/user/edituser/{userId}/edit (userId = ${user.id})}"  method="POST">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="img/avatar.png" alt="perfil" width="250" class="rounded-circle">
+                        <img th:if="${session.usuariosession.image != null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="perfil" width="250" class="rounded-circle">
                     </div>
                     <div class="col-md-9">
                         <div class="form">
-                            <input type="text" class="form-control mb-4" placeholder="NOMBRE" />
-                            <input type="text" class="form-control mb-4" placeholder="APELLIDO" />
-                            <input type="text" class="form-control mb-4" placeholder="DIRECCIÓN" />
-                            <label for="formFile" class="form-label">Foto de perfil</label>
-                            <input class="form-control mb-4" type="file" id="formFile">
-                            <select class="form-select mb-4" aria-label="Default select example">
-                                <option selected>Tipo de usuario</option>
-                                <option value="1">..</option>
+                            <input type="text" class="form-control mb-4"
+                                   name="name"
+                                   th:value="${session.usuariosession.name}"
+                                    />
+                            <input type="text" class="form-control mb-4"
+                                   name="username"
+                                   th:value="${session.usuariosession.lastName}"/>
+                            <input type="text" class="form-control mb-4"
+                                   name="username"
+                                   th:value="${session.usuariosession.contact}" />
+                            <input type="text" class="form-control mb-4"
+                                   name="username"
+                                   th:value="${session.usuariosession.address}" />
+
+
+                            <label for="role">Seleccione su perfil:</label>
+                            <select class="form-control mb-4" id="role" th:value="${session.usuariosession.role}" >
+                                <option th:value="USER" th:text="Usuario"></option>
+                                <option th:value="PROVIDER" th:text="Proovedor"></option>
                             </select>
+                            <br>
+                            <label for="archivo" class="form-label">Foto de perfil</label>
+                            <input type="file" id="archivo" name="archivo" accept="image/*" required>
 
 
-
-                            <button class="w-100 btn btn-success btn-lg" type="submit">ENVIAR</button>
+                            <button class="w-100 btn btn-success btn-lg" type="submit" id="submitButton">ENVIAR</button>
                         </div>
 
                     </div>
