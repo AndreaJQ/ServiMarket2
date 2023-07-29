@@ -10,10 +10,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 private UserService userService;
@@ -25,43 +27,43 @@ private PublicationService pService;
         this.pService=pService;
     }
 
-    @GetMapping("/admin/dashboard")
+    @GetMapping("/dashboard")
     public String panelAdmin(){
 
         return "dashboard";
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("/users")
     public String listUser (ModelMap model){
         List<UserEntity> user = userService.list();
         model.addAttribute("user", user);
-        return "users-list";
+        return "listUsers";
     }
-    @GetMapping("/admin/publications")
+    @GetMapping("/publications")
     public String listPublic (ModelMap model){
         List<Publication> publication = pService.list();
         model.addAttribute("publication", publication);
         return "public-list";
     }
 
-    @GetMapping("/admin/editRole/{id}")
+    @GetMapping("/editRole/{id}")
     public String changeRol(@PathVariable Long id){
         userService.changeRole(id);
         return "redirect:/admin/users";
     }
-    @PostMapping("/admin/editRole/{id}")
+    @PostMapping("/editRole/{id}")
     public String changeRole(@PathVariable Long id){
         userService.changeRole(id);
         return "redirect:/admin/users";
     }
 
-    @GetMapping("/admin/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         userService.delete(id);
         return "redirect:/admin/users";
     }
 
-    @GetMapping("/admin/deletePub/{id}")
+    @GetMapping("/deletePub/{id}")
     public String deletePublication(@PathVariable("id") Long id){
         pService.delete(id);
         return "redirect:/admin/publications";

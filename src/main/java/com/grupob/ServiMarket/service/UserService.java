@@ -8,7 +8,6 @@ import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.enums.Role;
 
 import com.grupob.ServiMarket.repository.UserRepository;
-import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -58,10 +57,20 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void update(Long id, UserEntity us) {
+    public void update(UserEntity user, String password, MultipartFile archivo, Long id, Long idImage) throws Exception {
         Optional<UserEntity> response = userRepository.findById(id);
         if (response.isPresent()) {
-            userRepository.save(us);
+
+            user.setPassword(new BCryptPasswordEncoder().encode(password));
+
+            if (user.getImage() != null) {
+                idImage = user.getImage().getId();
+            }
+            Image image = imageService.actualizar(archivo,idImage);
+
+            user.setImage(image);
+
+            userRepository.save(user);
         }
     }
 
@@ -73,22 +82,27 @@ public class UserService implements UserDetailsService {
 
     //---------------------UPDATE USER-----------------
 
-    public UserEntity updateUser(UserEntity userE) {
-        UserEntity updateUser = userRepository.findById(userE.getId()).orElse(null);
-        if (updateUser != null) {
-            updateUser.setName(userE.getName());
-            updateUser.setLastName(userE.getLastName());
-            updateUser.setEmail(userE.getEmail());
-            updateUser.setContact(userE.getContact());
-            updateUser.setAddress(userE.getAddress());
-            updateUser.setPassword(userE.getPassword());
-            //updateUser.setScore(userE.getScore());
-            updateUser.setRole(userE.getRole());
-            updateUser.setStatus(true);
-            userRepository.save(updateUser);
-            return updateUser;
+    public void updateUser(Long id,String name, String lastName,String contact, String address, String password, MultipartFile archivo) throws Exception {
+
+        Optional<UserEntity> answer = userRepository.findById(id);
+        if (answer.isPresent()) {
+            UserEntity user = answer.get();
+            user.setName(name);
+            user.setLastName(lastName);
+            user.setContact(contact);
+            user.setAddress(address);
+            user.setPassword(new BCryptPasswordEncoder().encode(password));
+            Long idImage = null;
+
+            if (user.getImage() != null) {
+                idImage = user.getImage().getId();
+            }
+            Image image = imageService.actualizar(archivo,idImage);
+
+            user.setImage(image);
+
+            userRepository.save(user);
         }
-        return null;
     }
 
     //---------------------SEARCH USER NAME-----------------
@@ -159,9 +173,7 @@ public class UserService implements UserDetailsService {
 
     public void changeRole(Long id) {
         Optional<UserEntity> answer = userRepository.findById(id);
-
         if (answer.isPresent()) {
-
             UserEntity user = answer.get();
 
             if (user.getRole().equals(Role.USER)) {
