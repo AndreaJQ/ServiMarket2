@@ -4,6 +4,7 @@ package com.grupob.ServiMarket.service;
 import com.grupob.ServiMarket.entity.Publication;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.repository.PublicationRepository;
+import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +19,14 @@ public class PublicationService {
     @Autowired
     private PublicationRepository pRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Publication publication){
-        pRepository.save(publication);
+    public void create (Publication publication, Long userId) {
+            pRepository.save(publication);
+
     }
 
     //------------------------READ--------------------------

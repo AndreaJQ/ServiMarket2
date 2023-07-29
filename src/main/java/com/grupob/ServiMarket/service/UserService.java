@@ -2,7 +2,11 @@ package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
+
 import com.grupob.ServiMarket.exceptions.MyException;
+
+import com.grupob.ServiMarket.enums.Role;
+
 import com.grupob.ServiMarket.repository.UserRepository;
 import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +28,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -45,11 +48,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void delete(Long id) {
-        Optional<UserEntity> response = userRepository.findById(id);
-        if (response != null) {
-            UserEntity userToDelete = response.get();
-            userRepository.delete(userToDelete);
-        }
+        userRepository.deleteById(id);
     }
 
     public List<UserEntity> list() {
@@ -153,6 +152,26 @@ public class UserService implements UserDetailsService {
         // Verificar que el correo electrónico no esté registrado previamente
         if (userRepository.existsByEmail(us.getEmail())) {
             throw new MyException("El correo electrónico ya está registrado");
+        }
+    }
+    //----------------CHANGE ROLE----------------------
+
+
+    public void changeRole(Long id) {
+        Optional<UserEntity> answer = userRepository.findById(id);
+
+        if (answer.isPresent()) {
+
+            UserEntity user = answer.get();
+
+            if (user.getRole().equals(Role.USER)) {
+                user.setRole(Role.ADMIN);
+            } else if (user.getRole().equals(Role.ADMIN)) {
+                user.setRole(Role.PROVIDER);
+            } else if (user.getRole().equals(Role.PROVIDER)) {
+                user.setRole(Role.USER);
+            }
+
         }
     }
 }

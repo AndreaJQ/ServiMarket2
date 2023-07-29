@@ -23,6 +23,14 @@
         <textarea th:field="*{description}"
                   rows="4" required></textarea>
 
+            <div class="form-group mb-3">
+                <input type="hidden"
+                       class="form-control"
+                       id="userId"
+                       name="userId"
+                       th:field="*{user.id}"
+                >
+            </div>
 
             <!-- <label for="fotos"> Cargue sus imagenes :</label>
              <input type="file" id="fotos" th:field="*{fotos}" accept="image/*" required multiple>

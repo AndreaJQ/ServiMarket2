@@ -1,7 +1,7 @@
 package com.grupob.ServiMarket.entity;
 
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +9,11 @@ import java.util.List;
 @Data
 @Table(name = "publicacion")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Publication {
 
         @Id

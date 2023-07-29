@@ -1,7 +1,7 @@
 package com.grupob.ServiMarket.entity;
 
 import com.grupob.ServiMarket.enums.Role;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,7 +12,11 @@ import java.util.List;
 @Data
 @Table (name = "usuarios")
 @Entity
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class UserEntity {
 
     @Id
