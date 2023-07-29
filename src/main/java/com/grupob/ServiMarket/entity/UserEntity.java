@@ -44,6 +44,9 @@ public class UserEntity {
     @NotBlank
     private String address;
 
+    @OneToOne
+    private Image image;
+
 
     private boolean status;//anotacion para dar de baja
 

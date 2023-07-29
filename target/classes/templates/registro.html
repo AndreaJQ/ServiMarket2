@@ -43,11 +43,24 @@
     </header>
 
     <main>
+
         <div class="d-flex flex-row-reverse a1 ">
             <div class="col-md-4 panel1">
                 <div class="container p-5" id="panel">
+                    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+                        <div class="card-body">
+                            <h5 class="card-title">Exito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
                     <h1>Regístrate!</h1>
-                    <form class="formulario" th:action="@{/newuser}" method="POST" th:object="${userEntity}">
+                    <form class="formulario" th:action="@{/newuser}" method="POST" th:object="${userEntity}" enctype="multipart/form-data" >
 
 
                     <div class="form">
@@ -74,6 +87,7 @@
                                placeholder="CORREO ELECTRÓNICO"
                                id="email"
                                th:field="*{email}" />
+
 
                         <input type="password" class="form-control mb-4"
                                placeholder="CONTRASEÑA"
@@ -102,7 +116,8 @@
                             <option th:value="PROVIDER" th:text="Proovedor"></option>
                         </select>
                         <br>
-
+                        <label for="archivo">Imagen:</label>
+                        <input type="file" id="archivo" name="archivo" accept="image/*" required>
                         <button class="w-100 btn btn-success btn-lg" type="submit" id="submitButton">ENVIAR</button>
 
                     </div>

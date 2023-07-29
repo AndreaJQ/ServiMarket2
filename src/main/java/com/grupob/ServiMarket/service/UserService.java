@@ -1,8 +1,14 @@
 package com.grupob.ServiMarket.service;
 
+import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
+
+import com.grupob.ServiMarket.exceptions.MyException;
+
 import com.grupob.ServiMarket.enums.Role;
+
 import com.grupob.ServiMarket.repository.UserRepository;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,13 +20,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -28,8 +35,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ImageService imageService;
     @Transactional
-    public void create(UserEntity us, String password) {
+    public void create(UserEntity us, String password, MultipartFile archivo) throws MyException {
+        validate(us,password,archivo);
+        Image image = imageService.guardar(archivo);
+        us.setImage(image);
         us.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepository.save(us);
     }
@@ -108,9 +120,43 @@ public class UserService implements UserDetailsService {
             return null;
         }
     }
+    private void validate(UserEntity us, String password, MultipartFile archivo) throws MyException {
+
+        // Verificar que el atributo "name" no sea nulo o vacío
+        if (us.getName() == null || us.getName().isEmpty()) {
+            throw new MyException("El atributo 'name' no puede ser nulo o vacío");
+        }
+
+        // El atributo "lastName" no se valida ya que no tiene restricciones
+
+        // Verificar que el atributo "email" no sea nulo o vacío y sea un correo electrónico válido
+        if (us.getEmail() == null || us.getEmail().isEmpty()) {
+            throw new MyException("El atributo 'email' no puede ser nulo, vacío o inválido");
+        }
+
+        // Verificar que el atributo "password" no sea nulo o vacío
+        if (password == null || password.isEmpty()) {
+            throw new MyException("El atributo 'password' no puede ser nulo o vacío");
+        }
+
+        // Verificar que el atributo "contact" no sea nulo o vacío
+        if (us.getContact() == null || us.getContact().isEmpty()) {
+            throw new MyException("El atributo 'contact' no puede ser nulo o vacío");
+        }
+
+        // Verificar que el atributo "address" no sea nulo o vacío
+        if (us.getAddress() == null || us.getAddress().isEmpty()) {
+            throw new MyException("El atributo 'address' no puede ser nulo o vacío");
+        }
+
+        // Verificar que el correo electrónico no esté registrado previamente
+        if (userRepository.existsByEmail(us.getEmail())) {
+            throw new MyException("El correo electrónico ya está registrado");
+        }
+    }
     //----------------CHANGE ROLE----------------------
 
-    @Transactional
+
     public void changeRole(Long id) {
         Optional<UserEntity> answer = userRepository.findById(id);
 
@@ -125,6 +171,7 @@ public class UserService implements UserDetailsService {
             } else if (user.getRole().equals(Role.PROVIDER)) {
                 user.setRole(Role.USER);
             }
+
         }
     }
 }

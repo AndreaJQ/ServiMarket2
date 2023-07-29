@@ -17,16 +17,32 @@
 
 
         </tr>
-        </thead>
-        <tbody th:each="user : ${user}">
-        <tr>
-            <th scope="row" th:text="${user.id}"></th>
-            <td th:text="${user.name}"></td>
-            <!-- <td> <img th:if="${user.image != null}" class="logo" th:src="@{/image/profile/__${user.id}__}"> </td> -->
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.name}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.role}"></td>
+            <td>
+                <!-- Verificar si el usuario tiene una imagen asociada -->
+                <img th:if="${usuario.image != null}" th:src="@{'/imagen/' + ${usuario.image.id}}"
+                     alt="Imagen de usuario" width="100" height="100">
+            </td>
+            <td>
+            <button class="btn-editar"><a th:href="@{/admin/editar/{id}(id=${usuario.id})}">Editar</a></button> 
+            <button class="btn-eliminar"><a th:href="@{/admin/eliminar/{id}(id=${usuario.id})}" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a></button> 
+            </td>
+            <!--
+              </thead>
+              <tbody th:each="user : ${user}">
+              <tr>
+                  <th scope="row" th:text="${user.id}"></th>
+                  <td th:text="${user.name}"></td>
+                  <td> <img th:if="${user.image != null}" class="logo" th:src="@{/image/profile/__${user.id}__}"> </td>
             <td th:text="${user.role}"></td>
             <td><a th:href= "@{/admin/editRole/{id} (id=${user.id})}"><i class="far fa-edit"></i> CHANGE </a></td>
             <td><a th:href= "@{/admin/delete/{id} (id=${user.id})}"><i class="fas fa-exclamation-circle"></i> DELETE </a> </td>
-        </tr>
+
+        </tr>-->
 
         </tbody>
     </table>

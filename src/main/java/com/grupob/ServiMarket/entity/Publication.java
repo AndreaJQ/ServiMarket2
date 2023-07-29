@@ -22,7 +22,6 @@ public class Publication {
 
         @ManyToOne
         private UserEntity provider;
-
         
         private String title;
 
