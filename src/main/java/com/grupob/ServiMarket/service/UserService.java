@@ -1,6 +1,7 @@
 package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.enums.Role;
 import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,11 +36,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void delete(Long id) {
-        Optional<UserEntity> response = userRepository.findById(id);
-        if (response != null) {
-            UserEntity userToDelete = response.get();
-            userRepository.delete(userToDelete);
-        }
+        userRepository.deleteById(id);
     }
 
     public List<UserEntity> list() {
@@ -109,6 +106,25 @@ public class UserService implements UserDetailsService {
             return new User(us.getEmail(), us.getPassword(), permisos);
         }else{
             return null;
+        }
+    }
+    //----------------CHANGE ROLE----------------------
+
+    @Transactional
+    public void changeRole(Long id) {
+        Optional<UserEntity> answer = userRepository.findById(id);
+
+        if (answer.isPresent()) {
+
+            UserEntity user = answer.get();
+
+            if (user.getRole().equals(Role.USER)) {
+                user.setRole(Role.ADMIN);
+            } else if (user.getRole().equals(Role.ADMIN)) {
+                user.setRole(Role.PROVIDER);
+            } else if (user.getRole().equals(Role.PROVIDER)) {
+                user.setRole(Role.USER);
+            }
         }
     }
 }

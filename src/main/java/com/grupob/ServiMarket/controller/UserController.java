@@ -19,10 +19,10 @@ public class UserController {
 
 
     //---------------------------READ-----------------------LIST
-    @GetMapping("listaUsuarios")
+    @GetMapping("/listaUsuarios")
     public String listar(ModelMap modelo){
-        List<UserEntity> usuarios = userService.list();
-        modelo.addAttribute("usuarios", usuarios);
+        List<UserEntity> user = userService.list();
+        modelo.addAttribute("user", user);
 return "user_list.html";
     }
     //GET MAPPING
@@ -49,10 +49,10 @@ return "user_list.html";
     }
 
     //-------------------DELETE------------------------
-    @GetMapping("/user/{userId}/delete")
-    public String deleteuser(@PathVariable("userId") Long userId){
-        userService.delete(userId);
-        return "Deleted"; //string para ser visualizada en postman
+    @GetMapping("/admin/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
+        userService.delete(id);
+        return "redirect:/user/listaUsuarios";
     }
 
 
