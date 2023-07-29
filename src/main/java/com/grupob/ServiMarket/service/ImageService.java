@@ -2,6 +2,7 @@ package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image guardar(MultipartFile archivo) throws Exception{
+    public Image guardar(MultipartFile archivo) throws MyException{
         if (archivo != null) {
             try {
 
