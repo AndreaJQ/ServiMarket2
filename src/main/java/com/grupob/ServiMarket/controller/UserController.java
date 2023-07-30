@@ -54,7 +54,7 @@ return "user_list.html";
     @GetMapping("/edituser/{userId}")
     public String editUser(@PathVariable("userId") long userId, ModelMap model, HttpSession session){
         UserEntity user =userService.getUserById(userId);
-       // UserEntity userauth = (UserEntity) session.getAttribute("usuariosession");
+       //UserEntity userauth = (UserEntity) session.getAttribute("usuariosession");
 
         model.put("user", user);
         return"perfil_edit.html";
@@ -91,5 +91,11 @@ return "user_list.html";
         List<UserEntity> users = userService.searchUsers(query);
         model.addAttribute("users", users);
         return "userslist" ;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @GetMapping("/solicitud")
+    public String solicitud(){
+        return "solicitudUser";
     }
 }
