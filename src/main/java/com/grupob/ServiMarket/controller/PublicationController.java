@@ -74,6 +74,27 @@ public class PublicationController  {
         return "inicio.html";
     }
 
+    /*@GetMapping("/publist/{userId}")
+    public String publicationsListbyUser(Model model, ModelMap modelo, HttpSession session){
+
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        modelo.put("user", user);
+        Long userId = user.getId();
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication",publication);
+
+        return "public-list-provider";
+    }*/
+    @GetMapping("/publications/{userId}")
+    public String listPublic (ModelMap model, HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        model.put("user", user);
+        Long userId = user.getId();
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication", publication);
+        return "public-list-provider";
+    }
+
     //----------------------READ-----------------------DETAIL
     @GetMapping("/publication/{pubId}")
     public String newsDetail(@PathVariable("pubId") Long pubId, Model model){
