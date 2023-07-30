@@ -53,22 +53,22 @@ return "user_list.html";
     //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVIDER', 'ROLE_ADMIN')")
     @GetMapping("/edituser/{userId}")
     public String editUser(@PathVariable("userId") long userId, ModelMap model, HttpSession session){
-        UserEntity user =userService.getUserById(userId);
-       //UserEntity userauth = (UserEntity) session.getAttribute("usuariosession");
 
-        model.put("user", user);
+       UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+
+        model.addAttribute("user", user);
         return"perfil_edit.html";
     }
 
     //@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVIDER', 'ROLE_ADMIN')")
 
-    @PostMapping("/edituser/{userId}/edit")
+    @PostMapping("/edituser/{userId}")
     public String editUser(@PathVariable("userId") Long userId,@RequestParam String name, @RequestParam String lastName,
-                           @RequestParam String password,@RequestParam String address,@RequestParam String contact, ModelMap model,
+                           @RequestParam String address,@RequestParam String contact, ModelMap model,
                            MultipartFile archivo) throws Exception {
-        UserEntity user = userService.getUserById(userId);
-        userService.updateUser(userId,name,lastName,contact,address,password,archivo);
-        return "redirect:/user/perfil";
+
+        userService.updateUser(userId,name,lastName,contact,address,archivo);
+        return "redirect:/";
 
     }
 

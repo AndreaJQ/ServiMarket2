@@ -10,7 +10,7 @@
             <nav th:replace="/fragments/nav :: nav"></nav>
         </header>
         
-        <main class="bg-white pt-5" th:action="@{/user/edituser/{userId}/edit (userId = ${user.id})}"  method="POST" enctype="multipart/form-data">
+        <main class="bg-white pt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -18,19 +18,21 @@
                     </div>
                     <div class="col-md-9">
                         <div class="form">
+                            <form class="formulario" th:action="@{/user/edituser/__${session.usuariosession.id}__}"  method="POST" th:object="${userEntity}" enctype="multipart/form-data" >
                             <input type="text" class="form-control mb-4"
                                    name="name"
                                    th:value="${session.usuariosession.name}"
                                     />
                             <input type="text" class="form-control mb-4"
-                                   name="username"
+                                   name="lastName"
                                    th:value="${session.usuariosession.lastName}"/>
                             <input type="text" class="form-control mb-4"
-                                   name="username"
+                                   name="contact"
                                    th:value="${session.usuariosession.contact}" />
                             <input type="text" class="form-control mb-4"
-                                   name="username"
+                                   name="address"
                                    th:value="${session.usuariosession.address}" />
+
 
 
                             <label for="role" sec:authorize="hasAnyRole('ROLE_PROVIDER''ROLE_USER')">Seleccione su perfil:</label>
@@ -40,10 +42,11 @@
                             </select>
                             <br>
                             <label for="archivo" class="form-label">Foto de perfil</label>
-                            <input type="file" id="archivo" name="archivo" accept="image/*" required>
-
+                            <input type="file" id="archivo" name="archivo" accept="image/*"
+                                   th:value="${session.usuariosession.image}">
 
                             <button class="w-100 btn btn-success btn-lg" type="submit" id="submitButton">ENVIAR</button>
+                            </form>
                         </div>
 
                     </div>
