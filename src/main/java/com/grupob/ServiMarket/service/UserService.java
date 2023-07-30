@@ -56,8 +56,9 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    @Transactional
-    public void update(UserEntity user, String password, MultipartFile archivo, Long id, Long idImage) throws Exception {
+   /* @Transactional
+    public void update(UserEntity user, String password, MultipartFile archivo, Long id) throws Exception {
+        UserEntity User
         Optional<UserEntity> response = userRepository.findById(id);
         if (response.isPresent()) {
 
@@ -72,7 +73,7 @@ public class UserService implements UserDetailsService {
 
             userRepository.save(user);
         }
-    }
+    }*/
 
 
     //---------------------GET USER BY ID-----------------
@@ -82,16 +83,16 @@ public class UserService implements UserDetailsService {
 
     //---------------------UPDATE USER-----------------
 
-    public void updateUser(Long id,String name, String lastName,String contact, String address, String password, MultipartFile archivo) throws Exception {
-
+    public void updateUser(Long id,String name, String lastName,String contact, String address,  MultipartFile archivo) throws Exception {
+        UserEntity user = new UserEntity();
         Optional<UserEntity> answer = userRepository.findById(id);
         if (answer.isPresent()) {
-            UserEntity user = answer.get();
+            user = answer.get();
             user.setName(name);
             user.setLastName(lastName);
             user.setContact(contact);
             user.setAddress(address);
-            user.setPassword(new BCryptPasswordEncoder().encode(password));
+
             Long idImage = null;
 
             if (user.getImage() != null) {
@@ -170,7 +171,7 @@ public class UserService implements UserDetailsService {
     }
     //----------------CHANGE ROLE----------------------
 
-
+@Transactional
     public void changeRole(Long id) {
         Optional<UserEntity> answer = userRepository.findById(id);
         if (answer.isPresent()) {
