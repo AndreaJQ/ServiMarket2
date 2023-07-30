@@ -1,7 +1,9 @@
 package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Solicitud;
+import com.grupob.ServiMarket.repository.PublicationRepository;
 import com.grupob.ServiMarket.repository.SolicitudRepository;
+import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,12 @@ public class SolicitudService {
 
     @Autowired
     private SolicitudRepository solicitudRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PublicationRepository repository;
 
     //------------------------CREATE--------------------------
     @Transactional
