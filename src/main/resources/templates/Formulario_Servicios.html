@@ -3,12 +3,12 @@
     
 <head>
     <title>Ingrese sus datos</title>
-    <link rel="stylesheet" href="css/Formulario_Servicios.css">
+    <link rel="stylesheet" href="/css/Formulario_Servicios.css">
     
 </head>
 <body>
     
-    <form th:object="${publicacion}" th:action="@{/newPublication}" method="post">   <!--Aca tiene que ir la ruta donde esta el archivo Vista_formulario_Servicios.htm-->
+    <form th:object="${publicacion}" th:action="@{/newPublication}" method="post" enctype="multipart/form-data">   <!--Aca tiene que ir la ruta donde esta el archivo Vista_formulario_Servicios.htm-->
         <!-- Campos del formulario -->
 
         <section class="form-login">
@@ -16,18 +16,30 @@
             <label >Título:</label>
             <input type="text"
                    th:field="*{title}" required>
-
-            <label >Rubro:</label>
-            <input type="text"
-                   th:field="*{rubro}" required>
-
-            <label>Descripción:</label>
+            <label>Descripción corta:</label>
             <textarea th:field="*{description}"
+                      rows="1" required></textarea>
+            <label>Descripción:</label>
+            <textarea th:field="*{description2}"
                       rows="4" required></textarea>
 
 
-            <!-- <label for="fotos"> Cargue sus imagenes :</label>
-             <input type="file" id="fotos" th:field="*{fotos}" accept="image/*" required multiple>
+            <form>
+                <label for="rubro">Selecciona un rubro:</label>
+                <select class="form-control mb-4" id="rubro" name="rubro">
+                    <option th:value="ELECTRICIDAD">ELECTRICIDAD</option>
+                    <option th:value="GAS">GAS</option>
+                    <option th:value="PLOMERÍA">PLOMERÍA</option>
+                    <option th:value="PINTURA">PINTURA</option>
+                    <option th:value="ALBAÑILERÍA">ALBAÑILERÍA</option>
+                    <option th:value="FLETE">FLETE</option>
+                    <option th:value="CARPINTERIA">CARPINTERIA</option>
+                </select>
+                <br>
+
+                <label for="archivo">Cargue sus imagenes: </label>
+                <input type="file" id="archivo" name="archivo" accept="image/*" required>
+
               <div class="miniaturas" id="miniaturas"></div><!-- Contenedor para mostrar las imagenes que seleccionaste en miniaturas -->
 
         <button type="submit">Publicar</button>

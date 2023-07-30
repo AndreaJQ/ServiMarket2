@@ -1,9 +1,12 @@
 package com.grupob.ServiMarket.entity;
 
 
+import com.grupob.ServiMarket.enums.Rubro;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -25,12 +28,16 @@ public class Publication {
         
         private String title;
 
-        private String rubro;
+        private Rubro rubro;
 
         private String description;
+        private String description2;
 
-        private String urlImagen;
+        @OneToOne
+        private Image image;
 
+        @CreationTimestamp
+        private LocalDateTime createdOn;
         @OneToMany
         private List<UserEntity> usercliente;
 

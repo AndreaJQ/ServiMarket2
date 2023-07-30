@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
-    <html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="../static/css/Vista_Formulario_Servicios.css">
+    <link rel="stylesheet" type="text/css" href="/css/Vista_Formulario_Servicios.css">
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://unpkg.com/modal-css@3.0.0/dist/modal.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -22,7 +22,7 @@
         <nav class="navbar navbar-expand-lg py-4 px-5">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                    <a href="index.html"><img src="../static/img/logo horizontal.png" alt="logo" width="350" /></a>
+                    <a href="index.html"><img src="/img/logo horizontal.png" alt="logo" width="350" /></a>
                 </div>
                 <ul class="navbar-nav reg">
                     <li class="nav-item">
@@ -34,11 +34,12 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false"> Hola Gerardo
+                           aria-expanded="false" th:if="${session.usuariosession != null}"
+                           th:text=" 'Bienvenido '+ ${session.usuariosession.name} ">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                            <li><a class="dropdown-item" th:href="@{/user/perfil}">Perfil</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesion</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -51,7 +52,9 @@
             <div class="perfil-usuario-body">
                 <div class="perfil-usuario-avatar">
                     <!-- Mostrar la imagen del avatar utilizando th:src -->
-                    <img th:src="${avatarUrl}" alt="img-avatar">
+
+                    <img th:if="${user.image != null}" th:src="@{'/imagen/' + ${user.image.id}}"
+                         alt="Imagen de usuario">
                     <button type="button" class="boton-avatar">
                         <i class="far fa-image"></i>
                     </button>
@@ -59,19 +62,19 @@
             <br>
             <div class="perfil-usuario-footer">
                 <ul class="lista-datos">
-                    <li><i class="icono fas fa-map-signs"></i> Nombre: <span th:field="*{nombre}"></span></li>
-                    <li><i class="icono fas fa-phone-alt"></i> Teléfono: <span th:field="*{telefono}"></span></li>
-                    <li><i class="icono fas fa-map-signs"></i> Apellido: <span th:field="*{apellido}"></span></li>
-                    <li><i class="icono fas fa-map-signs"></i> Email: <span th:field="*{email}"></span></li>
+                    <li><i class="icono fas fa-map-signs"></i> Nombre: <span th:text="*{user.name}"></span></li>
+                    <li><i class="icono fas fa-phone-alt"></i> Teléfono: <span th:text="*{user.contact}"></span></li>
+                    <li><i class="icono fas fa-map-signs"></i> Apellido: <span th:text="*{user.lastName}"></span></li>
+                    <li><i class="icono fas fa-map-signs"></i> Email: <span th:text="*{user.email}"></span></li>
                 </ul>
                 <ul class="lista-datos">
-                    <li><i class="icono fas fa-map-signs"></i> Dirección: <span th:field="*{direccion}"></span></li>
+                    <li><i class="icono fas fa-map-signs"></i> Dirección: <span th:text="*{user.address}"></span></li>
                 </ul>
             </div>
             <br>
             <div class="titulo-Rubro">
-                <h4 class="rubro"><u><span th:field="*{rubro}">Electricidad</span></u></h4>
-                <h4 class="titulo"><span th:field="*{titulo}">Reparación de transformador</span></h4>
+                <h4 class="rubro"><span th:text="*{pub.rubro}"></span></u></h4>
+                <h4 class="titulo"><span th:text="*{pub.title}"></span></h4>
             </div>
 
             <!--Aca empieza el carrusel de imagenes. FALTA AGREGARLE THYMELEAF-->   
@@ -79,7 +82,8 @@
                 <div class="col-md-9">
 
                 <!-- Contenido del contenedor que va encima del carrusel -->
-                <img id="imagenSeleccionada" src="" alt="Imagen seleccionada">
+                <img th:if="${pub.image != null}" th:src="@{'/imagen/' + ${pub.image.id}}"  alt="Imagen publicacion" width="400" height="400">
+
                 </div>
             </div>
                 
@@ -121,33 +125,35 @@
             <!-- Empieza el container de la descripcion -->
             <div class="titulo-descripcion">
                 <h4 class="titulo"><strong>Descripcion</strong></h4>
-                <p class="texto"> <span class="texto-lorem" th:text="*{descripcion}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></p>
+                <p class="texto"> <span class="texto-lorem" th:text="*{pub.description2}"></span></p>
             </div>
          
         </div>
         </section>
-  
+
+    <div class="d-grid gap-2 my-5" >
+        <a th:href="@{/editPublication/{pId} (pId = ${pub.id})}"  class="btn btn-primary"  role="button">Editar</a>
+    </div>
 
         <div class="container">
 
             <div class="comments-section">
                 <div id="comments">
-
-                    <!-- Los comentarios se mostrarán aquí -->
+                               <!-- Los comentarios se mostrarán aquí -->
                 </div>
                 <br>
         
-                <h3>Escríbenos si tienes alguna consulta:</h3>
+               <!-- <h3>Escríbenos si tienes alguna consulta:</h3>
                 <form id="commentForm" th:action="@{/procesar-comentario}" method="post">
                     <textarea id="commentText" rows="3" cols="50" placeholder="Escribe tu pregunta" th:field="*{pregunta}"></textarea>
                     <br>
                     <button type="submit">Solicitar</button>
-                </form>
+                </form>-->
             </div>
         </div>
 
 <script src="script.js"></script>
-<script src="../static/js/Vista_Formulario_Servicios.js"></script>
+<script src="/js/Vista_Formulario_Servicios.js"></script>
 
 <footer class="container-fluid bg-dark text-white p-4">
     <div class="container text-center">

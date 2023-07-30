@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="/fragments/head :: head"></head>
 
@@ -49,9 +50,21 @@
 
                 </div>
             </div>
-            <div class="d-grid gap-2 my-5">
-                <button class="btn btn-primary" type="button">Publicar Servicio</button>
+
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/publicacion}"  sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Publicar Servicio</a>
             </div>
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/admin/users}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Usuarios</a>
+            </div>
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/admin/publications}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Publicacions</a>
+            </div>
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/user/solicitud}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Listar Servicios Contratados</a>
+            </div>
+
+
         </div>
 
 

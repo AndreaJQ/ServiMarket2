@@ -1,13 +1,16 @@
 package com.grupob.ServiMarket.service;
 
 
+import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.Publication;
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.PublicationRepository;
 import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +23,27 @@ public class PublicationService {
     private PublicationRepository pRepository;
 
     @Autowired
+    private ImageService imageService;
+
+    @Autowired
     private UserRepository userRepository;
 
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Publication publication, Long userId) {
+    public void create (Publication publication, Long userId, MultipartFile archivo) throws MyException {
+
+        UserEntity user = new UserEntity();
+
+        Optional <UserEntity> answer = userRepository.findById(userId);
+
+        if (answer.isPresent()){
+            user= answer.get();
+
+            publication.setProvider(user);
+            Image image = imageService.guardar(archivo);
+            publication.setImage(image);
             pRepository.save(publication);
+        }
 
     }
 
@@ -52,7 +70,7 @@ public class PublicationService {
             uptadePu.setTitle(publication.getTitle());
             uptadePu.setRubro(publication.getRubro());
             uptadePu.setDescription(publication.getDescription());
-            uptadePu.setUrlImagen(publication.getUrlImagen());
+           // uptadePu.setUrlImagen(publication.getUrlImagen());
             //uptadePu.setPrecio(publication.getPrecio());
             pRepository.save(uptadePu);
             return uptadePu;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head th:replace="/fragments/head :: head"></head>
 
@@ -9,7 +10,7 @@
             <nav th:replace="/fragments/nav :: nav"></nav>
         </header>
         
-        <main class="bg-white pt-5" th:action="@{/user/edituser/{userId}/edit (userId = ${user.id})}"  method="POST">
+        <main class="bg-white pt-5" th:action="@{/user/edituser/{userId}/edit (userId = ${user.id})}"  method="POST" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -32,7 +33,7 @@
                                    th:value="${session.usuariosession.address}" />
 
 
-                            <label for="role">Seleccione su perfil:</label>
+                            <label for="role" sec:authorize="hasAnyRole('ROLE_PROVIDER''ROLE_USER')">Seleccione su perfil:</label>
                             <select class="form-control mb-4" id="role" th:value="${session.usuariosession.role}" >
                                 <option th:value="USER" th:text="Usuario"></option>
                                 <option th:value="PROVIDER" th:text="Proovedor"></option>
