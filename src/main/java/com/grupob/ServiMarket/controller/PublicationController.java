@@ -1,10 +1,12 @@
 package com.grupob.ServiMarket.controller;
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.Publication;
+import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.PublicationService;
+import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +29,8 @@ public class PublicationController  {
     private PublicationService pService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SolicitudService solService;
 
 
     //-------------------CREATE PUBLICATION---------------------------

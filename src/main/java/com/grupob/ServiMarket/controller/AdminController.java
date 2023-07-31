@@ -1,8 +1,10 @@
 package com.grupob.ServiMarket.controller;
 
 import com.grupob.ServiMarket.entity.Publication;
+import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.service.PublicationService;
+import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,11 +24,13 @@ public class AdminController {
 
 private UserService userService;
 private PublicationService pService;
+private SolicitudService solService;
 
     @Autowired
-    public AdminController(UserService userService, PublicationService pService) {
+    public AdminController(UserService userService, PublicationService pService,SolicitudService solService) {
         this.userService = userService;
         this.pService=pService;
+        this.solService=solService;
     }
 
     @GetMapping("/dashboard")
@@ -70,7 +74,28 @@ private PublicationService pService;
         pService.delete(id);
         return "redirect:/admin/publications";
     }
+    @GetMapping("/solicitudes")
+    public String listsolicitudes (ModelMap model){
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
+        return "solicitudes-list";
+    }
+    @GetMapping("/editStatus/{id}")
+    public String changeStat(@PathVariable Long id){
+        solService.changeStatus(id);
+        return "redirect:/admin/solicitudes";
+    }
+    @PostMapping("/editStatus/{id}")
+    public String changeStatus(@PathVariable Long id){
+        solService.changeStatus(id);
+        return "redirect:/admin/solicitudes";
+    }
 
+    @GetMapping("/deleteSol/{solid}")
+    public String deleteSolicitud(@PathVariable("solid") Long id){
+        solService.delete(id);
+        return "redirect:/admin/solicitudes";
+    }
 
 
 
