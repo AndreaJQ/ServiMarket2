@@ -23,9 +23,10 @@
                    name="description"
                    th:value="${publication.description}" required>
             <label>Descripción:</label>
-                <input type="text"
+                <textarea type="text"
                        name="description2"
-                       th:value="${publication.description2}" required>
+                       th:value="${publication.description2}"
+                       rows="4" required></textarea>
 
 
                 <label for="rubro">Selecciona un rubro:</label>

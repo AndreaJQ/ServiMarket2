@@ -55,7 +55,10 @@
                 <a th:href="@{/publicacion}"  sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Publicar Servicio</a>
             </div>
             <div class="d-grid gap-2 my-5" >
-                <a th:href="@{/publicationsbyUser/{userId} (userId = ${session.usuariosession.id})}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Servicios Contratados</a>
+                <a th:href="@{/publicationsbyUser/{userId} (userId = ${session.usuariosession.id})}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Servicios Publicados</a>
+            </div>
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/solicitudbyProvider/{userId} (userId = ${session.usuariosession.id})}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Servicios Solicitados</a>
             </div>
             <div class="d-grid gap-2 my-5" >
                 <a th:href="@{/admin/users}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Usuarios</a>
@@ -64,9 +67,14 @@
                 <a th:href="@{/admin/publications}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Publicacions</a>
             </div>
             <div class="d-grid gap-2 my-5" >
-                <a th:href="@{/user/solicitud}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Listar Servicios Contratados</a>
+                <a th:href="@{/admin/solicitudes}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Solicitudes</a>
             </div>
-
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Visualizar Servicios</a>
+            </div>
+            <div class="d-grid gap-2 my-5" >
+                <a th:href="@{/solicitudbyUser/{userId} (userId = ${session.usuariosession.id})}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Listar Servicios Contratados</a>
+            </div>
 
         </div>
 

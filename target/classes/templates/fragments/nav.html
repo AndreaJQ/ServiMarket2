@@ -1,3 +1,5 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      >
 <nav class="navbar navbar-expand-lg py-4 px-5">
     <div class="container-fluid">
         <div class="navbar-brand">
@@ -5,16 +7,16 @@
         </div>
         <ul class="navbar-nav reg">
             <li class="nav-item">
-                <a href="/ingresar"id="login-link" class="nav-link">Ingresar</a>
+                <a href="/ingresar"id="login-link" class="nav-link" th:if="${session.usuariosession == null}">Ingresar</a>
             </li>
             <li class="nav-item">
-                <a href="registrarse"id="register-link" class="nav-link">Registrarse</a>
+                <a href="registrarse"id="register-link" class="nav-link" th:if="${session.usuariosession == null}">Registrarse</a>
             </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                   aria-expanded="false" th:if="${session.usersession != null}"
-                   th:text="${session.usersession.name} ">
+                   aria-expanded="false" th:if="${session.usuariosession != null}"
+                   th:text="${session.usuariosession.name} ">
                 </a>
 
                 <ul class="dropdown-menu">
@@ -24,3 +26,4 @@
             </li>
         </ul>
     </div>
+</nav>

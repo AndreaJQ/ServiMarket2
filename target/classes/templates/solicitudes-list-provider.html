@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Usuarios</title>
+  <link rel="stylesheet" href="/css/LisUsu.css">
+</head>
+<body>
+<img src="/img/logo horizontal.png" alt="Logotipo" class="logo">
+<h1>Lista de Usuarios</h1>
+<button class="butto">
+  <span> <a class="nav-link" th:href="@{/user/perfil}">Volver</a></span>
+</button>
+
+
+<div class="container">
+  <table class="admin-table">
+    <tr>
+      <th>ID</th>
+      <th>PULICACION</th>
+      <th>CLIENTE</th>
+      <th>FECHA DE CREACION</th>
+      <th>ESTADO</th>
+      <th>CALIFICAR</th>
+      <th>ELIMINAR</th>
+    </tr>
+
+      <tr th:each="solicitud : ${solicitud}" th:if="${session.usuariosession.id == solicitud.provider.id}">
+        <td th:text="${solicitud.id}"></td>
+        <td th:text="${solicitud.publication.id}"></td>
+        <td th:text="${solicitud.userClient.id}"></td>
+        <td th:text="${solicitud.createdOn}"></td>
+
+        <td th:text="${solicitud.estado}"></td>
+        <td><a  th:href= "@{/admin/editStatus/{id} (id=${solicitud.id})}"><i class="far fa-edit"></i> CALIFICAR </a></td>
+        <td><a th:href= "@{/admin/deleteSol/{solid} (solid=${solicitud.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
+      </tr>
+
+  </table>
+</div>
+
+<div class="navbar">
+  <!-- Contenido de la franja Azul marino -->
+</div>
+
+
+</body>
+</html>
+
