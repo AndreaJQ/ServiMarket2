@@ -2,6 +2,7 @@ package com.grupob.ServiMarket.controller;
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.Publication;
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.PublicationService;
 import com.grupob.ServiMarket.service.UserService;
@@ -85,7 +86,7 @@ public class PublicationController  {
 
         return "public-list-provider";
     }*/
-    @GetMapping("/publications/{userId}")
+    @GetMapping("/publicationsbyUser/{userId}")
     public String listPublic (ModelMap model, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         model.put("user", user);
@@ -116,12 +117,12 @@ public class PublicationController  {
     }
 
     @PostMapping("/editPublication/{pId}")
-    public String editPub(@RequestBody Publication publication,
-                           @PathVariable("pId") Long pId){
-
-        publication.setId(pId);
-        pService.updatePublication(publication);
-        return "Formulario_Servicios_Edit.html"; //string para ser visualizada en postman
+    public String editPub(@PathVariable("pId") Long pId, @RequestParam MultipartFile archivo,
+                          @RequestParam String title, @RequestParam String description,
+                          @RequestParam String description2
+                           ) throws Exception {
+        pService.updatePublication(archivo,title,description,description2, pId);
+        return "redirect:/";
 
 
     }
@@ -143,7 +144,7 @@ public class PublicationController  {
     }
 
     @GetMapping("/busqueda")
-    public String barraBusqueda(@RequestParam String rubro, ModelMap model){
+    public String barraBusqueda(@RequestParam Rubro rubro, ModelMap model){
         List<Publication> servicios = pService.findByRubro(rubro);
         model.put("servicios",servicios);
         return "index.html";

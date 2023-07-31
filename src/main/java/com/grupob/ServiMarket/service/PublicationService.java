@@ -4,6 +4,7 @@ package com.grupob.ServiMarket.service;
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.Publication;
 import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.PublicationRepository;
 import com.grupob.ServiMarket.repository.UserRepository;
@@ -64,18 +65,55 @@ public class PublicationService {
 
     //------------------------UPDATE--------------------------
 
-    public Publication updatePublication (Publication publication){
-        Publication uptadePu = pRepository.findById(publication.getId()).orElse(null);
-        if(uptadePu!=null){
-            uptadePu.setTitle(publication.getTitle());
-            uptadePu.setRubro(publication.getRubro());
-            uptadePu.setDescription(publication.getDescription());
-           // uptadePu.setUrlImagen(publication.getUrlImagen());
-            //uptadePu.setPrecio(publication.getPrecio());
-            pRepository.save(uptadePu);
-            return uptadePu;
+    public Publication updatePublication (MultipartFile archivo,
+                    String title, String description, String description2, Long id) throws Exception {
+        Publication updatePu = new Publication();
+        Optional<Publication> answer = pRepository.findById(id);
+        if (answer.isPresent()){
+            updatePu = answer.get();
+            updatePu.setTitle(title);
+            updatePu.setDescription(description);
+            updatePu.setDescription2(description2);
+            updatePu.setRubro(getPublicationById(id).getRubro());
+            updatePu.setProvider(getPublicationById(id).getProvider());
+
+            Image image = imageService.actualizar(archivo,updatePu.getImage().getId());
+            updatePu.setImage(image);
+            pRepository.save(updatePu);
         }
+        /*Optional<Publication> answer = pRepository.findById(id);
+        if (answer.isPresent()){
+            updatePu.setTitle(title);
+            updatePu.setDescription(description);
+            updatePu.setDescription2(description2);
+
+            Long idImage = null;
+            if (updatePu.getImage()!=null){
+                idImage = updatePu.getImage().getId();
+            }
+            Image image = imageService.actualizar(archivo,idImage);
+            updatePu.setImage(image);
+            pRepository.save(updatePu);
+
+        }*/
+        /*Publication updatePu = pRepository.findById(publication.getId()).orElse(null);
+        if (updatePu!= null){
+            updatePu.setTitle(publication.getTitle());
+            updatePu.setRubro(publication.getRubro());
+            updatePu.setDescription(publication.getDescription());
+            updatePu.setDescription2(publication.getDescription2());
+            Long idImage = null;
+            if (updatePu.getImage()!=null){
+                idImage = updatePu.getImage().getId();
+            }
+            Image image = imageService.actualizar(archivo,idImage);
+            updatePu.setImage(image);
+            pRepository.save(updatePu);
+            return updatePu;
+
+        }*/
         return null;
+
     }
 
 
@@ -98,7 +136,7 @@ public class PublicationService {
         return publications;
     }
 
-    public List<Publication> findByRubro(String rubro){
+    public List<Publication> findByRubro(Rubro rubro){
         return pRepository.findByRubro(rubro);
     }
 }
