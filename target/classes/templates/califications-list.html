@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Calificaciones</title>
+  <link rel="stylesheet" href="/css/LisUsu.css">
+</head>
+<body>
+<img src="/img/logo horizontal.png" alt="Logotipo" class="logo">
+<h1>Lista de Usuarios</h1>
+<button class="butto">
+  <span> <a class="nav-link" th:href="@{/user/perfil}">Volver</a></span>
+</button>
+
+
+<div class="container">
+  <table class="admin-table">
+    <tr>
+      <th>ID</th>
+      <th>CLIENTE</th>
+      <th>PROVEEDOR</th>
+      <th>SERVICIO</th>
+      <th>PUNTAJE</th>
+      <th>COMENTARIO</th>
+      <th>ELIMINAR</th>
+    </tr>
+
+      <tr th:each="score : ${score}">
+      <td th:text="${score.id}"></td>
+      <td th:text="${score.cliente.id}"></td>
+      <td th:text="${score.provider.id}"></td>
+      <td th:text="${score.solicitud.id}"></td>
+      <td th:text="${score.puntaje}"></td>
+      <td th:text="${score.comentario}"></td>
+
+      <td><a th:href= "@{/admin/deleteScore/{scid} (scid=${score.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
+    </tr>
+
+  </table>
+</div>
+
+<div class="navbar">
+  <!-- Contenido de la franja Azul marino -->
+</div>
+
+
+</body>
+</html>
+

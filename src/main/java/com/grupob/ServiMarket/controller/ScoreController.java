@@ -1,5 +1,7 @@
 package com.grupob.ServiMarket.controller;
 import com.grupob.ServiMarket.entity.Score;
+import com.grupob.ServiMarket.entity.Solicitud;
+import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,12 +22,27 @@ public class ScoreController {
     private UserService userService;//por si lo necesitamos después
 
     //-------------------CREATE score---------------------------
-    @PostMapping("/newScore")
-    public String newScore(@RequestBody Score calification){
+    @GetMapping("/calification/{solid}/nueva")
+    public String newCalifForm(@PathVariable("solid") Long solid, HttpSession session, ModelMap model){
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        Score score = new Score();
+        model.put("solid", solid);
+        model.put("score", score);
+        model.put("user", user);
+        return "calification-form";
+    }
 
-        scoreService.create(calification);
 
-        return "POSTED"; //string para ser visualizada en postman
+
+
+    @PostMapping("/calification/{solid}")
+    public String newScore(@PathVariable("solid") Long solid, @ModelAttribute("score") Score score,
+                           HttpSession session, ModelMap model){
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        model.put("user",user);
+        Long userId = user.getId();
+        scoreService.create(score,solid,userId);
+        return "redirect:/solicitudbyUser";
     }
 
     //---------------------------READ-----------------------LIST
@@ -34,6 +52,12 @@ public class ScoreController {
 
 
         return scoreService.list();
+    }
+    @GetMapping("/califications")
+    public String listCalifications(ModelMap model){
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
+        return "califications-list-provider";
     }
 
 

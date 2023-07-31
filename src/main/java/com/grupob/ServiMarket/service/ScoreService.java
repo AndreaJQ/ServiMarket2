@@ -2,7 +2,12 @@ package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Publication;
 import com.grupob.ServiMarket.entity.Score;
+import com.grupob.ServiMarket.entity.Solicitud;
+import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.repository.PublicationRepository;
 import com.grupob.ServiMarket.repository.ScoreRepository;
+import com.grupob.ServiMarket.repository.SolicitudRepository;
+import com.grupob.ServiMarket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +21,35 @@ public class ScoreService {
 
     @Autowired
     private ScoreRepository scoreRepository;
+    @Autowired
+    private SolicitudRepository solicitudRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PublicationRepository pRepository;
+
 
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Score score){
+    public void create (Score score, Long solid, Long userId){
+        Solicitud sol = solicitudRepository.findById(solid).get();
+        Score calif = score;
+        UserEntity user = new UserEntity();
+        Optional<UserEntity> usAnswer = userRepository.findById(userId);
 
-        scoreRepository.save(score);
+
+        if (usAnswer.isPresent() ){
+            user= usAnswer.get();
+           calif.setProvider(sol.getProvider());
+            calif.setCliente(user);
+            calif.setSolicitud(sol);
+
+            scoreRepository.save(score);
+        }
+
+
     }
 
     //------------------------READ--------------------------

@@ -1,7 +1,7 @@
 package com.grupob.ServiMarket.entity;
 
 import com.grupob.ServiMarket.enums.EstadoServicio;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,6 +11,11 @@ import java.util.Date;
 @Data
 @Table(name = "solicitud")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Solicitud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

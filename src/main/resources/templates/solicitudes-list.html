@@ -19,8 +19,11 @@
       <th>PULICACION</th>
       <th>CLIENTE</th>
       <th>FECHA DE CREACION</th>
+      <th>COMENTARIO</th>
       <th>ESTADO</th>
       <th>CAMBIAR ESTADO</th>
+      <th>COMPLETO</th>
+      <th>SET COMPLETO</th>
       <th>ELIMINAR</th>
     </tr>
 
@@ -29,9 +32,11 @@
       <td th:text="${solicitud.publication.id}"></td>
       <td th:text="${solicitud.userClient.id}"></td>
       <td th:text="${solicitud.createdOn}"></td>
-
+      <td th:text="${solicitud.comentario}"></td>
       <td th:text="${solicitud.estado}"></td>
-      <td><a th:href= "@{/admin/editStatus/{id} (id=${solicitud.id})}"><i class="far fa-edit"></i> CAMBIAR </a></td>
+        <td><a th:href= "@{/admin/editStatus/{id} (id=${solicitud.id})}"><i class="far fa-edit"></i> CAMBIAR </a></td>
+        <td th:text="${solicitud.completo}"></td>
+        <td><a th:href= "@{/admin/editCompleto/{id} (id=${solicitud.id})}"><i class="far fa-edit"></i> COMPLETO </a></td>
       <td><a th:href= "@{/admin/deleteSol/{solid} (solid=${solicitud.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
     </tr>
 

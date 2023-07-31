@@ -68,7 +68,7 @@ return "user_list.html";
                            MultipartFile archivo) throws Exception {
 
         userService.updateUser(userId,name,lastName,contact,address,archivo);
-        return "redirect:/";
+        return "index.html";
 
     }
 
