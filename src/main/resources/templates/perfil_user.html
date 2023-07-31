@@ -55,7 +55,7 @@
                 <a th:href="@{/publicacion}"  sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Publicar Servicio</a>
             </div>
             <div class="d-grid gap-2 my-5" >
-                <a th:href="@{/publications/{userId} (userId = ${user.id})}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Servicios Contratados</a>
+                <a th:href="@{/publicationsbyUser/{userId} (userId = ${session.usuariosession.id})}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="btn btn-primary"  role="button">Servicios Contratados</a>
             </div>
             <div class="d-grid gap-2 my-5" >
                 <a th:href="@{/admin/users}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-primary"  role="button">Listar Usuarios</a>
