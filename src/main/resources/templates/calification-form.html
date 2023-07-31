@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>CALIFICACION DE SERVICIO</title>
+    <link rel="stylesheet" href="/css/Formulario_Servicios.css">
+</head>
+<body>
+<section class="form-login">
+<form  th:action="@{/calification/{solid} (solid=${solid})}" method="POST" th:object="${score}" >
+
+
+    <h1>Calificación</h1>
+    <label >Comentario:</label>
+
+    <textarea type="text"
+           id="comentario"
+           name="comentario"
+           th:field="*{comentario}"
+            required></textarea>
+    <label >Puntaje (1 a 5):</label>
+    <input type="number"
+           th:field="*{puntaje}" required>
+
+    <button type="submit">Calificar</button>
+</form>
+
+<div id="publicacionMostrada"></div>
+
+</section>
+<script src="js/Formulario_Servicios.js"></script>
+</body>
+</html>

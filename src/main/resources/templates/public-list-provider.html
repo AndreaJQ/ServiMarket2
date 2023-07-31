@@ -20,9 +20,9 @@
       <th>USUARIO</th>
       <th>IMAGEN</th>
       <th>RUBRO</th>
-      <th>ELIMINAR</th>
       <th>VER PUBLICACION</th>
-      <th>ESTADO</th>
+      <th>ELIMINAR</th>
+
       </tr>
       </thead>
       <tbody th:each="publication : ${publication}" th:if="${session.usuariosession.id == publication.provider.id}">
@@ -36,9 +36,9 @@
 
         <td th:text="${publication.rubro}"></td>
 
-        <td><a th:href= "@{/admin/deletePub/{id} (id=${publication.id})}"><i class="fas fa-exclamation-circle"></i> DELETE </a> </td>
-          <td><a th:href= "@{/publication/{pubId} (pubId=${publication.id})}"><i class="fas fa-exclamation-circle"></i> VER </a> </td>
-          <td><a ><i class="fas fa-exclamation-circle"></i> CAMBIAR </a> </td>
+        <td><a th:href= "@{/publication/{pId} (pId=${publication.id})}"><i class="fas fa-exclamation-circle"></i> VER </a> </td>
+          <td><a th:href= "@{/publicationdel/{pubId} (pubId=${publication.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
+
       </tr>
 
       </tbody>

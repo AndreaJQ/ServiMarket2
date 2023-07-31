@@ -1,6 +1,7 @@
 package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Publication;
+import com.grupob.ServiMarket.entity.Score;
 import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.enums.EstadoServicio;
@@ -45,6 +46,7 @@ public class SolicitudService {
             sol.setPublication(publication);
             sol.setUserClient(user);
             sol.setEstado(EstadoServicio.PENDIENTE);
+            sol.setCompleto(false);
 
             solicitudRepository.save(sol);
         }
@@ -105,6 +107,19 @@ public class SolicitudService {
                 sol.setEstado(EstadoServicio.FINALIZADO);
             } else if (sol.getEstado().equals(EstadoServicio.FINALIZADO)) {
                 sol.setEstado(EstadoServicio.PENDIENTE);
+            }
+        }
+    }
+    @Transactional
+    public void changeCompleto(Long id) {
+        Optional<Solicitud> answer = solicitudRepository.findById(id);
+        if (answer.isPresent()) {
+            Solicitud sol = answer.get();
+
+            if (sol.isCompleto()) {
+                sol.setCompleto(false);
+            } else if (!sol.isCompleto()) {
+                sol.setCompleto(true);
             }
         }
     }

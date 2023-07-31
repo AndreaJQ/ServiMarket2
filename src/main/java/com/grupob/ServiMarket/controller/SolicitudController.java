@@ -1,10 +1,12 @@
 package com.grupob.ServiMarket.controller;
 
 import com.grupob.ServiMarket.entity.Publication;
+import com.grupob.ServiMarket.entity.Score;
 import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.PublicationService;
+import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,12 @@ public class SolicitudController {
     private UserService userService;
     @Autowired
     private SolicitudService solService;
+    @Autowired
+    private ScoreService scoreService;
 
 
-    //----------------------LIST-----------------------
-   //en admin controller
-    @GetMapping("/solicitudbyUser/{userId}")
+    //----------------------LIST SOLIC BY USER-----------------------
+       @GetMapping("/solicitudbyUser")
     public String listSolic (ModelMap model, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         model.put("user", user);
@@ -38,7 +41,8 @@ public class SolicitudController {
         model.addAttribute("solicitud", solicitud);
         return "solicitudes-list-client";
     }
-    @GetMapping("/solicitudbyProvider/{userId}")
+    //----------------------LIST SOLIC BY PROVIDER-----------------------
+    @GetMapping("/solicitudbyProvider")
     public String listSolicProv (ModelMap model, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         model.put("user", user);
@@ -47,9 +51,24 @@ public class SolicitudController {
         model.addAttribute("solicitud", solicitud);
         List<Publication> publication = pService.list();
         model.addAttribute("publication", publication);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
         return "solicitudes-list-provider";
     }
 
+    /*  @GetMapping("/solicitudbyProvider")
+    public String listSolicProv (ModelMap model, HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
+        model.put("user", user);
+        Long userId = user.getId();
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication", publication);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
+        return "solicitudes-list-provider";
+    }*/
 
     //-------------------CREATE SOLICITUD--------------------
     @GetMapping("/solicitud/{pId}/nueva")
@@ -71,5 +90,28 @@ public class SolicitudController {
         return "redirect:/publist";
     }
 
+    //-------------------EDIT STATUS SOLICITUD BY PROVIDER
+    @GetMapping("/editStatusByProvider/{id}")
+    public String changeStat(@PathVariable Long id){
+        solService.changeStatus(id);
+        return "redirect:/solicitudbyProvider";
+    }
+    @PostMapping("/editStatusByProvider/{id}")
+    public String changeStatus(@PathVariable Long id){
+        solService.changeStatus(id);
+        return "redirect:/solicitudbyProvider";
+    }
 
+    //----------------DELETE SOLICITUD BY USER
+    @GetMapping("/deleteSolByUser/{solid}")
+    public String deleteSolicitud(@PathVariable("solid") Long id){
+        solService.delete(id);
+        return "redirect:/solicitudbyUser";
+    }
+    //-------------------EDIT COMPLETO SOLICITUD BY PROVIDER
+    @GetMapping("/editCompletobyProvider/{id}")
+    public String changeCompletobyProvider(@PathVariable Long id){
+        solService.changeCompleto(id);
+        return "redirect:/solicitudbyProvider";
+    }
 }

@@ -26,10 +26,10 @@
                 </div>
                 <ul class="navbar-nav reg">
                     <li class="nav-item">
-                        <a href="login.html"id="login-link" class="nav-link">Ingresar</a>
+                        <a href="login.html"id="login-link" class="nav-link" th:if="${session.usuariosession == null}">Ingresar</a>
                     </li>
                     <li class="nav-item">
-                        <a href="registro.html"id="register-link" class="nav-link">Registrarse</a>
+                        <a href="registro.html"id="register-link" class="nav-link" th:if="${session.usuariosession == null}">Registrarse</a>
                     </li>
 
                     <li class="nav-item dropdown">

@@ -19,5 +19,10 @@ public class Score {
 
     @OneToOne
     private UserEntity cliente;
+    @OneToOne
+    private Solicitud solicitud;
+
+    @ManyToOne
+    private UserEntity provider;
 
 }

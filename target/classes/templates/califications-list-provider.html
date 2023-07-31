@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Calificaciones</title>
+  <link rel="stylesheet" href="/css/LisUsu.css">
+</head>
+<body>
+<img src="/img/logo horizontal.png" alt="Logotipo" class="logo">
+<h1>Lista de Usuarios</h1>
+<button class="butto">
+  <span> <a class="nav-link" th:href="@{/user/perfil}">Volver</a></span>
+</button>
+
+
+<div class="container">
+  <table class="admin-table">
+    <tr>
+      <th>ID</th>
+      <th>CLIENTE</th>
+      <th>PROVEEDOR</th>
+      <th>SERVICIO</th>
+      <th>PUNTAJE</th>
+      <th>COMENTARIO</th>
+
+    </tr>
+
+      <tr th:each="score : ${score}" th:if="${session.usuariosession.id == score.provider.id}">
+      <td th:text="${score.id}"></td>
+      <td th:text="${score.cliente.id}"></td>
+      <td th:text="${score.provider.id}"></td>
+      <td th:text="${score.solicitud.id}"></td>
+      <td th:text="${score.puntaje}"></td>
+      <td th:text="${score.comentario}"></td>
+
+
+    </tr>
+
+  </table>
+</div>
+
+<div class="navbar">
+  <!-- Contenido de la franja Azul marino -->
+</div>
+<div class="navbar">
+  <!-- Contenido de la franja Azul marino -->
+</div>
+
+
+</body>
+</html>
+

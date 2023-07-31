@@ -90,7 +90,7 @@ public class PublicationController  {
 
         return "public-list-provider";
     }*/
-    @GetMapping("/publicationsbyUser/{userId}")
+    @GetMapping("/publicationsbyUser")
     public String listPublic (ModelMap model, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         model.put("user", user);
@@ -132,10 +132,10 @@ public class PublicationController  {
     }
 
     //-------------------DELETE------------------------
-    @GetMapping("/publication/{pId}/delete")
-    public String deletePub(@PathVariable("pId") Long pId){
-        pService.delete(pId);
-        return "Deleted"; //string para ser visualizada en postman
+    @GetMapping("/publicationdel/{pubId}")
+    public String deletePub(@PathVariable("pubId") Long pubId){
+        pService.delete(pubId);
+        return "redirect:/publicationsbyUser";
     }
 
 
