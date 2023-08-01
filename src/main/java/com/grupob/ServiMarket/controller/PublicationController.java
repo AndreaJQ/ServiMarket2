@@ -64,7 +64,7 @@ public class PublicationController  {
             return "Formulario_Servicios.html";
         }
         pService.create(publication, userId, archivo);
-        return "inicio.html";
+        return "redirect:/publist";
 
     }
 

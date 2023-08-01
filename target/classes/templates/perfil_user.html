@@ -37,16 +37,29 @@
             </div>
             <div class="row">
                 <hr>
-                <div class="container">
+                <div class="container" sec:authorize="hasAnyRole('ROLE_PROVIDER')">
                     <h2 class="mb-0">Puntuación</h2>
                     <div class="puntuacion">
-                        <div class="texto-puntuacion">4.7</div>
+                        <div class="texto-puntuacion" th:text="${promedioPuntaje}" ></div>
                         <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-success" style="width: 80%"></div>
                         </div>
 
                     </div>
+                    <script>
+  $(document).ready(function() {
+    // Obtener todos los puntajes de la tabla y calcular el promedio
+    let puntajes = $('td:nth-child(5)').map(function() {
+      return parseInt($(this).text());
+    }).get();
+
+    let promedioPuntaje = puntajes.reduce((a, b) => a + b, 0) / puntajes.length;
+
+    // Mostrar el promedio del puntaje en un elemento div con id "promedioPuntaje"
+    $('#promedioPuntaje').text(promedioPuntaje);
+  });
+</script>
 
                 </div>
             </div>
