@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -47,13 +48,22 @@
             <p>Localiza fácilmente y en tu zona, el profesional que estás buscando y contrátalo de acuerdo a sus
                 calificaciones.</p>
         </div>
-        <form class="d-flex mt-3" role="search">
+        <form th:action="@{/publist/search}" method="get" class="d-flex mt-3" role="search">
             <input class="form-control me-2"
                    type="search"
-                   placeholder="Ingrese un rubro a buscar"
-                   th:action="@{/busqueda}"
+                   placeholder="Ingrese lo que desea buscar"
+                   name="query"
                    aria-label="Search">
             <button class="btn btn-success" type="submit">Buscar</button>
+        </form>
+        <form th:action="@{/publist/rubro}" method="get" class="d-flex mt-3" role="search">
+
+            <select class="form-control me-2" id="rubro" name="rubro" >
+                <option value="">Seleccione un rubro</option>
+                <option th:each="rubro : ${T(com.grupob.ServiMarket.enums.Rubro).values()}"
+                        th:value="${rubro}" th:text="${rubro}"></option>
+            </select>
+            <button class="btn btn-success" type="submit">Filtrar</button>
         </form>
 
 

@@ -17,10 +17,10 @@
                 calificaciones.</p>
         </div>
         <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2"
+            <input th:action="@{/publist/search}" class="form-control me-2"
                    type="search"
                    placeholder="Ingrese un rubro a buscar"
-                   th:action="@{/busqueda}"
+                   name="query"
                    aria-label="Search">
             <button class="btn btn-success" type="submit">Buscar</button>
         </form>
