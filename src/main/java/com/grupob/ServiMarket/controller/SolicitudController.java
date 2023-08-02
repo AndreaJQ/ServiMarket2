@@ -38,9 +38,8 @@ public class SolicitudController {
         model.put("user", user);
         Long userId = user.getId();
         List<Solicitud> solicitud = solService.list();
-
-
-
+           List<Score> score = scoreService.list();
+           model.addAttribute("score", score);
         model.addAttribute("solicitud", solicitud);
         return "solicitudes-list-client";
     }
