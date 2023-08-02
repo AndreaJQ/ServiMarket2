@@ -140,18 +140,20 @@ public class PublicationController  {
 
 
     //-------------------SEARCH QUERY------------------------
-    @GetMapping("/publist/search")
-    public String searchUsername(@RequestParam(value="query") String query, Model model){
-        List<UserEntity> users = userService.searchUsers(query);
-        model.addAttribute("users", users);
-        return "publist" ;
-    }
 
-    @GetMapping("/busqueda")
-    public String barraBusqueda(@RequestParam Rubro rubro, ModelMap model){
-        List<Publication> servicios = pService.findByRubro(rubro);
-        model.put("servicios",servicios);
-        return "index.html";
+    @GetMapping("/publist/rubro")
+    public String barraBusqueda(@RequestParam (value = "rubro") Rubro rubro, ModelMap model){
+        List<Publication> publication = pService.findByRubro(rubro);
+        model.put("publication",publication);
+        return "inicio.html";
+    }
+    @GetMapping("/publist/search")
+    public String publicationsSearch(@RequestParam(value="query") String query,Model model){
+
+        List<Publication> publication = pService.searchPublication(query);
+        model.addAttribute("publication",publication);
+
+        return "inicio.html";
     }
 
 }

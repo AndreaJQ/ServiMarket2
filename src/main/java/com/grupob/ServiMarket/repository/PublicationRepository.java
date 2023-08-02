@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
-
-    @Query("SELECT u from Publication u WHERE u.description LIKE CONCAT('%',:query,'%')")
+    Optional <Publication> findByTitle(String title);
+    @Query("SELECT p from Publication p WHERE p.title LIKE CONCAT('%',:query,'%')")
     List<Publication> searchPublication(String query);
-
+    
     List<Publication> findByRubro(Rubro rubro);
 
 
