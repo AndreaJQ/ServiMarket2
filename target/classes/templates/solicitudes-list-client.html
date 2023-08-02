@@ -24,9 +24,10 @@
       <th>ELIMINAR</th>
       <th>ESTADO</th>
       <th>CALIFICAR</th>
+      <th>CALIFICACION</th>
     </tr>
 
-      <tr th:each="solicitud : ${solicitud}" th:if="${session.usuariosession.id == solicitud.userClient.id}">
+      <tr th:each="solicitud: ${solicitud}" th:if="${session.usuariosession.id == solicitud.userClient.id}">
       <td th:text="${solicitud.id}"></td>
       <td th:text="${solicitud.publication.id}"></td>
       <td th:text="${solicitud.userClient.id}"></td>
@@ -35,8 +36,9 @@
       <td th:text="${solicitud.estado}"></td>
       <td><a th:href= "@{/deleteSolByUser/{solid} (solid=${solicitud.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
         <td th:if="${solicitud.completo == true}" text="${solicitud.estado}">FINALIZADO</td>
-        <td><a th:if="${solicitud.completo == true}" th:href= "@{/calification/{solid}/nueva (solid=${solicitud.id})}"><i class="far fa-edit"></i> CALIFICAR </a></td>
-    </tr>
+        <td><a th:if="${solicitud.completo == true && solicitud.calificado==false}" th:href= "@{/calification/{solid}/nueva (solid=${solicitud.id})}"><i class="far fa-edit"></i> CALIFICAR </a></td>
+        
+      </tr>
 
   </table>
 </div>
