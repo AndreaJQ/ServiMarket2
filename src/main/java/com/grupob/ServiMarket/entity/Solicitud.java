@@ -43,5 +43,7 @@ public class Solicitud {
 
     private boolean completo;
 
+    private boolean calificado;
+
 
 }

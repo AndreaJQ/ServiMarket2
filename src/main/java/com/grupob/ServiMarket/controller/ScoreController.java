@@ -43,6 +43,7 @@ public class ScoreController {
         model.put("user",user);
         Long userId = user.getId();
         scoreService.create(score,solid,userId);
+
         return "redirect:/solicitudbyUser";
     }
 

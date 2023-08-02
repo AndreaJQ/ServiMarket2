@@ -25,4 +25,6 @@ public class Score {
     @ManyToOne
     private UserEntity provider;
 
+    private boolean calificado;
+
 }

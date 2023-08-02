@@ -38,6 +38,9 @@ public class SolicitudController {
         model.put("user", user);
         Long userId = user.getId();
         List<Solicitud> solicitud = solService.list();
+
+
+
         model.addAttribute("solicitud", solicitud);
         return "solicitudes-list-client";
     }

@@ -33,19 +33,20 @@ public class ScoreService {
 
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Score score, Long solid, Long userId){
+    public void create(Score score, Long solid, Long userId) {
         Solicitud sol = solicitudRepository.findById(solid).get();
         Score calif = score;
         UserEntity user = new UserEntity();
         Optional<UserEntity> usAnswer = userRepository.findById(userId);
 
 
-        if (usAnswer.isPresent() ){
-            user= usAnswer.get();
-           calif.setProvider(sol.getProvider());
+        if (usAnswer.isPresent()) {
+            user = usAnswer.get();
+            calif.setProvider(sol.getProvider());
+            sol.setCalificado(true);
             calif.setCliente(user);
             calif.setSolicitud(sol);
-
+            calif.setCalificado(true);
             scoreRepository.save(score);
         }
 
@@ -54,24 +55,24 @@ public class ScoreService {
 
     //------------------------READ--------------------------
 
-    public List<Score> list(){
+    public List<Score> list() {
         List<Score> califications = new ArrayList<>();
-        califications=scoreRepository.findAll();
+        califications = scoreRepository.findAll();
         return califications;
     }
 
 
     //---------------------GET PUBLICATION BY ID-----------------
-    public Score getScoreById(Long id){
+    public Score getScoreById(Long id) {
         return scoreRepository.findById(id).orElse(null);
     }
 
 
     //------------------------UPDATE--------------------------
 
-    public Score editCalification (Score calif){
+    public Score editCalification(Score calif) {
         Score editCalif = scoreRepository.findById(calif.getId()).orElse(null);
-        if(editCalif!=null){
+        if (editCalif != null) {
             editCalif.setComentario(calif.getComentario());
             scoreRepository.save(editCalif);
             return editCalif;
@@ -80,16 +81,26 @@ public class ScoreService {
     }
 
 
-
     //------------------------DELETE--------------------------
 
     @Transactional
-    public void delete (Long id){
+    public void delete(Long id) {
         Optional<Score> response = scoreRepository.findById(id);
-        if(response!= null){
+        if (response != null) {
             Score califToDelete = response.get();
             scoreRepository.delete(califToDelete);
         }
     }
 
+    // PUNTAJE POR ID DE SOLICITUD
+    public int getScoreBySolicitud(Score score, Long solid) {
+
+
+        if (score.getSolicitud().equals(solicitudRepository.findById(solid))) {
+            return score.getPuntaje();
+
+
+        }
+        return 0;
+    }
 }
