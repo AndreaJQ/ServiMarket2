@@ -1,6 +1,7 @@
 package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Image;
+import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 
 import com.grupob.ServiMarket.exceptions.MyException;
@@ -185,6 +186,19 @@ public class UserService implements UserDetailsService {
                 user.setRole(Role.USER);
             }
 
+        }
+    }
+    @Transactional
+    public void changeUserStatus(Long id) {
+        Optional<UserEntity> answer = userRepository.findById(id);
+        if (answer.isPresent()) {
+            UserEntity user = answer.get();
+
+            if (user.isStatus()) {
+                user.setStatus(false);
+            } else if (!user.isStatus()) {
+                user.setStatus(true);
+            }
         }
     }
 }

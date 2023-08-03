@@ -66,7 +66,7 @@ public class PublicationService {
     //------------------------UPDATE--------------------------
 
     public Publication updatePublication (MultipartFile archivo,
-                    String title, String description, String description2, Long id) throws Exception {
+                    String title, String description, String description2, Long id, Rubro rubro) throws Exception {
         Publication updatePu = new Publication();
         Optional<Publication> answer = pRepository.findById(id);
         if (answer.isPresent()){
@@ -74,46 +74,14 @@ public class PublicationService {
             updatePu.setTitle(title);
             updatePu.setDescription(description);
             updatePu.setDescription2(description2);
-            updatePu.setRubro(getPublicationById(id).getRubro());
+            updatePu.setRubro(rubro);
             updatePu.setProvider(getPublicationById(id).getProvider());
 
             Image image = imageService.actualizar(archivo,updatePu.getImage().getId());
             updatePu.setImage(image);
             pRepository.save(updatePu);
         }
-        /*Optional<Publication> answer = pRepository.findById(id);
-        if (answer.isPresent()){
-            updatePu.setTitle(title);
-            updatePu.setDescription(description);
-            updatePu.setDescription2(description2);
-
-            Long idImage = null;
-            if (updatePu.getImage()!=null){
-                idImage = updatePu.getImage().getId();
-            }
-            Image image = imageService.actualizar(archivo,idImage);
-            updatePu.setImage(image);
-            pRepository.save(updatePu);
-
-        }*/
-        /*Publication updatePu = pRepository.findById(publication.getId()).orElse(null);
-        if (updatePu!= null){
-            updatePu.setTitle(publication.getTitle());
-            updatePu.setRubro(publication.getRubro());
-            updatePu.setDescription(publication.getDescription());
-            updatePu.setDescription2(publication.getDescription2());
-            Long idImage = null;
-            if (updatePu.getImage()!=null){
-                idImage = updatePu.getImage().getId();
-            }
-            Image image = imageService.actualizar(archivo,idImage);
-            updatePu.setImage(image);
-            pRepository.save(updatePu);
-            return updatePu;
-
-        }*/
         return null;
-
     }
 
 
@@ -132,8 +100,13 @@ public class PublicationService {
     //---------------------SEARCH PUBLICATION-----------------
 
     public List<Publication> searchPublication(String query) {
-        List<Publication> publications = pRepository.searchPublication(query);
-        return publications;
+        if (query != null && !query.trim().isEmpty()) {
+            List<Publication> publications = pRepository.searchPublication("%" + query.trim() + "%");
+            return publications;
+        } else {
+            return null; //
+        }
+
     }
 
     public List<Publication> findByRubro(Rubro rubro){

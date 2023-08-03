@@ -30,7 +30,8 @@
       <td th:text="${score.provider.id}"></td>
       <td th:text="${score.solicitud.id}"></td>
       <td th:text="${score.puntaje}"></td>
-      <td th:text="${score.comentario}"></td>
+        <td th:unless="${score.censured}" th:text="${score.comentario}"> </td>
+        <td th:if="${score.censured}"> CENSURADO</td>
 
 
     </tr>

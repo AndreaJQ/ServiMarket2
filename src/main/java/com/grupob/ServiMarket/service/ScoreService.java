@@ -91,21 +91,29 @@ public class ScoreService {
             scoreRepository.delete(califToDelete);
         }
     }
+//----------------------CENSURE COMMENT----------------------
+    @Transactional
+    public void censure(Long id) {
+        Optional<Score> answer = scoreRepository.findById(id);
+        if (answer.isPresent()) {
+        Score score = answer.get();
 
-    // PUNTAJE POR ID DE SOLICITUD
-    public int getScoreBySolicitud(Score score, Long solid) {
-
-
-        if (score.getSolicitud().equals(solicitudRepository.findById(solid))) {
-            return score.getPuntaje();
-
-
+        if (score.isCensured()) {
+            score.setCensured(false);
+        } else if (!score.isCensured()) {
+            score.setCensured(true);
         }
-        return 0;
     }
-
+}
     
     public Double calcularPromedioPuntaje(UserEntity provider) {
         return scoreRepository.findAverageScoreByProviderId(provider.getId());
+    }
+    public List<Score> puntajePorPublicacion(UserEntity provider, Publication publication){
+        return scoreRepository.getScoresByPublicationAndProvider(provider,publication);
+    }
+
+    public List<Object[]> getProviderIdAndScoreByPublication(Publication publication) {
+        return scoreRepository.getProviderIdAndScoreByPublication(publication);
     }
 }

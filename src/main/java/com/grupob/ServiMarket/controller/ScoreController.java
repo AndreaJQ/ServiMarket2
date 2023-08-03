@@ -24,7 +24,7 @@ public class ScoreController {
 
     //-------------------CREATE score---------------------------
     @GetMapping("/calification/{solid}/nueva")
-    public String newCalifForm(@PathVariable("solid") Long solid, HttpSession session, ModelMap model){
+       public String newCalifForm(@PathVariable("solid") Long solid, HttpSession session, ModelMap model){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         Score score = new Score();
         model.put("solid", solid);

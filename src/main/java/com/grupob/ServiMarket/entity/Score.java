@@ -26,5 +26,6 @@ public class Score {
     private UserEntity provider;
 
     private boolean calificado;
+    private boolean censured;
 
 }
