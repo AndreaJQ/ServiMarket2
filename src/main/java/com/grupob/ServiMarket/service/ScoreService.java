@@ -103,4 +103,9 @@ public class ScoreService {
         }
         return 0;
     }
+
+    
+    public Double calcularPromedioPuntaje(UserEntity provider) {
+        return scoreRepository.findAverageScoreByProviderId(provider.getId());
+    }
 }

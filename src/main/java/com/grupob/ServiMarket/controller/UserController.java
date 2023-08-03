@@ -3,6 +3,7 @@ import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.ImageService;
+import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private ScoreService scoreService;
+
 
     //---------------------------READ-----------------------LIST
     @GetMapping("/listaUsuarios")
@@ -45,6 +49,9 @@ return "user_list.html";
     public String profile(ModelMap modelo, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         modelo.put("user", user);
+
+        Double promedioPuntaje= scoreService.calcularPromedioPuntaje(user);
+        modelo.put("promedioPuntaje",promedioPuntaje);
         return "perfil_user";
     }
 
