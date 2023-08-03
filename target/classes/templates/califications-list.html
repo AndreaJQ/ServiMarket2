@@ -21,6 +21,7 @@
       <th>SERVICIO</th>
       <th>PUNTAJE</th>
       <th>COMENTARIO</th>
+      <th>CENSURAR</th>
       <th>ELIMINAR</th>
     </tr>
 
@@ -30,7 +31,9 @@
       <td th:text="${score.provider.id}"></td>
       <td th:text="${score.solicitud.id}"></td>
       <td th:text="${score.puntaje}"></td>
-      <td th:text="${score.comentario}"></td>
+        <td th:unless="${score.censured}" th:text="${score.comentario}"> </td>
+        <td th:if="${score.censured}"> CENSURADO</td>
+        <td><a th:href= "@{/admin/censureComment/{scid} (scid=${score.id})}" class="btn-eliminar"> CENSURAR </a></td>
 
       <td><a th:href= "@{/admin/deleteScore/{scid} (scid=${score.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
     </tr>

@@ -42,6 +42,7 @@ private ScoreService scoreService;
 
         return "dashboard";
     }
+    //    U - - S - - E - - R - - S
 //----------LIST USERS----------------
     @GetMapping("/users")
     public String listUser (ModelMap model){
@@ -49,13 +50,7 @@ private ScoreService scoreService;
         model.addAttribute("user", user);
         return "listUsers";
     }
-    //----------LIST PUBLICATIONS----------------
-    @GetMapping("/publications")
-    public String listPublic (ModelMap model){
-        List<Publication> publication = pService.list();
-        model.addAttribute("publication", publication);
-        return "public-list";
-    }
+
     //----------CHANGE ROLE USER----------------
     @GetMapping("/editRole/{id}")
     public String changeRol(@PathVariable Long id){
@@ -73,12 +68,34 @@ private ScoreService scoreService;
         userService.delete(id);
         return "redirect:/admin/users";
     }
+    //----------CHANGE STATUS USERS----------------
+    @GetMapping("/editUserStatus/{id}")
+    public String changeUserStat(@PathVariable Long id){
+        userService.changeUserStatus(id);
+        return "redirect:/admin/users";
+    }
+    //----------CHANGE STATUS USERS----------------
+    @PostMapping("/editUserStatus/{id}")
+    public String changeUserStatus(@PathVariable Long id){
+        userService.changeUserStatus(id);
+        return "redirect:/admin/users";
+    }
+//   P - - U - - B - - L - - I - - C - - A - - T - - I - - O - - N
+    //----------LIST PUBLICATIONS----------------
+    @GetMapping("/publications")
+    public String listPublic (ModelMap model){
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication", publication);
+        return "public-list";
+    }
     //----------DELETE PUBLICATION----------------
     @GetMapping("/deletePub/{id}")
     public String deletePublication(@PathVariable("id") Long id){
         pService.delete(id);
         return "redirect:/admin/publications";
     }
+
+    //   S- - O - - L - - I - - C - - I - - T - - U - - D
     //----------LIST SOLICITUDES----------------
     @GetMapping("/solicitudes")
     public String listsolicitudes (ModelMap model){
@@ -86,12 +103,13 @@ private ScoreService scoreService;
         model.addAttribute("solicitud", solicitud);
         return "solicitudes-list";
     }
+    //----------CHANGE STATUS SOLICITUD----------------
     @GetMapping("/editStatus/{id}")
     public String changeStat(@PathVariable Long id){
         solService.changeStatus(id);
         return "redirect:/admin/solicitudes";
     }
-    //----------CHANGE STATUS SOLICITUD----------------
+
     @PostMapping("/editStatus/{id}")
     public String changeStatus(@PathVariable Long id){
         solService.changeStatus(id);
@@ -117,10 +135,22 @@ private ScoreService scoreService;
         model.addAttribute("score", score);
         return "califications-list";
     }
-    //----------DELETE SCORE----------------
+    //----------DELETE CALIFICATIONS----------------
     @GetMapping("/deleteScore/{scid}")
     public String deleteScore(@PathVariable("scid") Long id){
         scoreService.delete(id);
+        return "redirect:/admin/califications";
+    }
+    // -----------CENSURE------------------
+    @GetMapping("/censureComment/{scid}")
+    public String censure(@PathVariable Long scid){
+        scoreService.censure(scid);
+        return "redirect:/admin/califications";
+    }
+
+    @PostMapping("/censureComment/{scid}")
+    public String censured(@PathVariable Long scid){
+        scoreService.censure(scid);
         return "redirect:/admin/califications";
     }
 }

@@ -1,11 +1,9 @@
 package com.grupob.ServiMarket.controller;
-import com.grupob.ServiMarket.entity.Image;
-import com.grupob.ServiMarket.entity.Publication;
-import com.grupob.ServiMarket.entity.Solicitud;
-import com.grupob.ServiMarket.entity.UserEntity;
+import com.grupob.ServiMarket.entity.*;
 import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.PublicationService;
+import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,6 +28,8 @@ public class PublicationController  {
     private UserService userService;
     @Autowired
     private SolicitudService solService;
+    @Autowired
+    private ScoreService scoreService;
 
 
     //-------------------CREATE PUBLICATION---------------------------
@@ -79,17 +78,6 @@ public class PublicationController  {
         return "inicio.html";
     }
 
-    /*@GetMapping("/publist/{userId}")
-    public String publicationsListbyUser(Model model, ModelMap modelo, HttpSession session){
-
-        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
-        modelo.put("user", user);
-        Long userId = user.getId();
-        List<Publication> publication = pService.list();
-        model.addAttribute("publication",publication);
-
-        return "public-list-provider";
-    }*/
     @GetMapping("/publicationsbyUser")
     public String listPublic (ModelMap model, HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
@@ -102,11 +90,17 @@ public class PublicationController  {
 
     //----------------------READ-----------------------DETAIL
     @GetMapping("/publication/{pubId}")
-    public String newsDetail(@PathVariable("pubId") Long pubId, Model model){
+    public String newsDetail(@PathVariable("pubId") Long pubId, Model model, ModelMap modelo){
         Publication pub = pService.getPublicationById(pubId);
         UserEntity user = pub.getProvider();
         model.addAttribute("pub", pub);
         model.addAttribute("user", user);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
+        Double promedioPuntaje= scoreService.calcularPromedioPuntaje(user);
+        modelo.put("promedioPuntaje",promedioPuntaje);
+        //List<Object[]> scores = scoreService.getProviderIdAndScoreByPublication(pub);
+        //modelo.addAttribute("scores", scores);
         return "Vista_formulario_Servicios.html";
     }
 
@@ -123,9 +117,9 @@ public class PublicationController  {
     @PostMapping("/editPublication/{pId}")
     public String editPub(@PathVariable("pId") Long pId, @RequestParam MultipartFile archivo,
                           @RequestParam String title, @RequestParam String description,
-                          @RequestParam String description2
+                          @RequestParam String description2, @RequestParam Rubro rubro
                            ) throws Exception {
-        pService.updatePublication(archivo,title,description,description2, pId);
+        pService.updatePublication(archivo,title,description,description2, pId, rubro);
         return "redirect:/";
 
 
@@ -149,6 +143,7 @@ public class PublicationController  {
     }
     @GetMapping("/publist/search")
     public String publicationsSearch(@RequestParam(value="query") String query,Model model){
+
 
         List<Publication> publication = pService.searchPublication(query);
         model.addAttribute("publication",publication);

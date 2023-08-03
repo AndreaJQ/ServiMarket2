@@ -94,7 +94,7 @@
                 <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Visualizar Servicios</a>
             </div>
             <div class="d-grid gap-2 my-5" >
-                <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-primary"  role="button">Listar Servicios Contratados</a>
+                <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER','ROLE_PROVIDER')"class="btn btn-primary"  role="button">Listar Servicios Contratados</a>
             </div>
 
         </div>
