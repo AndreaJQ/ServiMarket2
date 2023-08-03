@@ -75,8 +75,9 @@
 
             <div th:each="publication:${publication}" class="publicacion">
                 <div class="contenido-publicacion">
-                    <img th:if="${publication.image != null}" th:src="@{'/imagen/' + ${publication.image.id}}"  alt="Imagen publicacion" class="imagen-publicacion">
-
+                    <div th:if="${publication.image != null && publication.image.size() > 0}">
+                    <img  th:src="@{'/imagen/' + ${publication.image[0].id}}"  alt="Imagen publicacion" class="imagen-publicacion">
+                    </div>
                     <h2 class="titulo-publicacion" th:text="${publication.title}"></h2>
                     <p class="descripcion-publicacion"  th:text="${publication.description}"> </p>
 

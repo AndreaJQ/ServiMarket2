@@ -41,9 +41,10 @@
                 </select>
                 <br>
 
-                <label for="archivo">Cargue sus imagenes: </label>
-                <input type="file" id="archivo" name="archivo" accept="image/*"
-                       th:value="*{image}">
+                <label for="archivos">Cargue sus imagenes: </label>
+
+                <input type="file" id="archivos" name="archivos" accept="image/*"
+                       th:value="*{image}" multiple required>
 
               <div class="miniaturas" id="miniaturas"></div><!-- Contenedor para mostrar las imagenes que seleccionaste en miniaturas -->
 

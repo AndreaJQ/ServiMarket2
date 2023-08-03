@@ -49,7 +49,7 @@ public class PublicationController  {
     public String savePublication(@ModelAttribute("publicacion") Publication publication,
                                   HttpSession session, ModelMap modelMap,
                                   BindingResult result,
-                                  MultipartFile archivo) throws MyException {
+                                  List<MultipartFile> archivos) throws MyException {
 
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         modelMap.put("user", user);
@@ -62,7 +62,7 @@ public class PublicationController  {
 
             return "Formulario_Servicios.html";
         }
-        pService.create(publication, userId, archivo);
+        pService.create(publication, userId, archivos);
         return "redirect:/publist";
 
     }
@@ -115,11 +115,11 @@ public class PublicationController  {
     }
 
     @PostMapping("/editPublication/{pId}")
-    public String editPub(@PathVariable("pId") Long pId, @RequestParam MultipartFile archivo,
+    public String editPub(@PathVariable("pId") Long pId, @RequestParam List<MultipartFile> archivos,
                           @RequestParam String title, @RequestParam String description,
                           @RequestParam String description2, @RequestParam Rubro rubro
                            ) throws Exception {
-        pService.updatePublication(archivo,title,description,description2, pId, rubro);
+        pService.updatePublication(archivos,title,description,description2, pId, rubro);
         return "redirect:/";
 
 
