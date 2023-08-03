@@ -69,16 +69,16 @@ public class ScoreController {
 
         model.put("score", scoreService.getScoreById(sId));
 
-        return"editScore.html";
+        return"calification-form-edit.html";
     }
 
-    @PutMapping("/editScore/{sId}")
-    public String editScore(@RequestBody Score calif,
-                          @PathVariable("sId") Long sId){
+    @PostMapping("/editScore/{sId}")
+    public String editScore(@PathVariable("sId") Long sId,
+                            @RequestParam("comentario") String comentario, @RequestParam("puntaje") int puntaje){
 
-        calif.setId(sId);
-        scoreService.editCalification(calif);
-        return "Updated"; //string para ser visualizada en postman
+
+        scoreService.editCalification(comentario, puntaje,sId);
+        return "redirect:/solicitudbyUser"; //string para ser visualizada en postman
 
     }
 

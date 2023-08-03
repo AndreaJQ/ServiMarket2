@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
@@ -19,4 +18,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> searchUsername(String query);
 
     boolean existsByEmail(String email);
+
+    //User findUserByEmail (String email);
+
+    //List<UserEntity> findUserByActiveFalse();
+
+    //List<UserEntity> findUserByActiveTrue () ;
 }

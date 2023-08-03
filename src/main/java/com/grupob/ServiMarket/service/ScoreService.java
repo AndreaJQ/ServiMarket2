@@ -70,12 +70,15 @@ public class ScoreService {
 
     //------------------------UPDATE--------------------------
 
-    public Score editCalification(Score calif) {
-        Score editCalif = scoreRepository.findById(calif.getId()).orElse(null);
-        if (editCalif != null) {
-            editCalif.setComentario(calif.getComentario());
-            scoreRepository.save(editCalif);
-            return editCalif;
+    public Score editCalification( String comentario, int puntaje, Long solid) {
+       Optional<Score> optionalScore = scoreRepository.findById(solid);
+
+        if (optionalScore.isPresent()) {
+            Score updateScore = optionalScore.get();
+            updateScore.setComentario(comentario);
+            updateScore.setPuntaje(puntaje);;
+            scoreRepository.save(updateScore);
+            return updateScore;
         }
         return null;
     }
