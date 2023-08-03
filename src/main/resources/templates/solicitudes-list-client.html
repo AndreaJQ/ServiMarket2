@@ -26,6 +26,7 @@
       <th>CALIFICAR</th>
       <th>CALIFICACION</th>
       <th>COMENTARIO</th>
+      <th>EDITAR CALIFICACION</th>
     </tr>
 
       <tr th:each="solicitud: ${solicitud}" th:if="${session.usuariosession.id == solicitud.userClient.id}">
@@ -41,6 +42,8 @@
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id}" th:text="${score.puntaje}"></td>
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id}"th:unless="${score.censured}" th:text="${score.comentario}"> </td>
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id && score.censured}"> CENSURADO</td>
+        <td><a th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id && solicitud.completo == true && solicitud.calificado==true}"th:unless="${score.censured}"
+               th:href= "@{/editScore/{sId} (sId=${score.id})}"><i class="far fa-edit"></i> EDITAR </a></td>
       </tr>
 
   </table>
