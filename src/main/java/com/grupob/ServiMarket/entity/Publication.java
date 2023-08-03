@@ -33,8 +33,8 @@ public class Publication {
         private String description;
         private String description2;
 
-        @OneToOne
-        private Image image;
+        @OneToMany
+        private List<Image> image;
 
         @CreationTimestamp
         private LocalDateTime createdOn;

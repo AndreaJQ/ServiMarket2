@@ -31,7 +31,7 @@ public class PublicationService {
 
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Publication publication, Long userId, MultipartFile archivo) throws MyException {
+    public void create (Publication publication, Long userId, List<MultipartFile> archivos) throws MyException {
 
         UserEntity user = new UserEntity();
 
@@ -41,8 +41,12 @@ public class PublicationService {
             user= answer.get();
 
             publication.setProvider(user);
-            Image image = imageService.guardar(archivo);
-            publication.setImage(image);
+            List<Image> images = new ArrayList<>();
+            for (MultipartFile archivo : archivos) {
+                Image image = imageService.guardar(archivo);
+                images.add(image);
+            }
+            publication.setImage(images);
             pRepository.save(publication);
         }
 
@@ -64,24 +68,34 @@ public class PublicationService {
 
 
     //------------------------UPDATE--------------------------
-
-    public Publication updatePublication (MultipartFile archivo,
+@Transactional
+    public Publication updatePublication (List<MultipartFile> archivos,
                     String title, String description, String description2, Long id, Rubro rubro) throws Exception {
-        Publication updatePu = new Publication();
-        Optional<Publication> answer = pRepository.findById(id);
-        if (answer.isPresent()){
-            updatePu = answer.get();
+
+        Optional<Publication> optionalPublication = pRepository.findById(id);
+        if (optionalPublication.isPresent()){
+            Publication updatePu = optionalPublication.get();
             updatePu.setTitle(title);
             updatePu.setDescription(description);
             updatePu.setDescription2(description2);
             updatePu.setRubro(rubro);
             updatePu.setProvider(getPublicationById(id).getProvider());
 
-            Image image = imageService.actualizar(archivo,updatePu.getImage().getId());
-            updatePu.setImage(image);
+            // Actualiza las imágenes si se proporciona un archivo
+            if (archivos != null && !archivos.isEmpty()) {
+                List<Image> updatedImages = new ArrayList<>();
+                for (MultipartFile archivo : archivos) {
+                    Image newImage = imageService.guardar(archivo);
+                    updatedImages.add(newImage);
+                }
+                updatePu.setImage(updatedImages);
+            }
             pRepository.save(updatePu);
+            return updatePu;
+        }else {
+            return null;
         }
-        return null;
+
     }
 
 
