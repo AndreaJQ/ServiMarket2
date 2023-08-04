@@ -39,7 +39,7 @@
       </td>
       <td th:text="${user.role}"></td>
       <td><a th:href= "@{/admin/editRole/{id} (id=${user.id})}"class="btn-editar"> Cambiar Rol </a></td>
-      <td th:if="${user.status}"> ALTA</td>
+      <td th:if="${user.status}">ALTA</td>
       <td th:unless="${user.status}"> BAJA</td>
       <td><a th:href= "@{/admin/editUserStatus/{id} (id=${user.id})}" class="btn-eliminar"> Cambiar estado </a></td>
       <td><a th:href= "@{/admin/delete/{id} (id=${user.id})}" class="btn-eliminar" > Eliminar </a> </td>
