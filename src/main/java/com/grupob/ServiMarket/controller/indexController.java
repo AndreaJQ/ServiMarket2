@@ -43,7 +43,7 @@ public class indexController {
 
             model.put("exito", "Usuario registrado correctamente!");
 
-            return "index.html";
+            return "login.html";
         } catch (MyException ex) {
 
             model.put("error", ex.getMessage());

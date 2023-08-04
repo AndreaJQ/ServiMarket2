@@ -93,6 +93,7 @@ public class UserService implements UserDetailsService {
             user.setLastName(lastName);
             user.setContact(contact);
             user.setAddress(address);
+            user.setStatus(true);
 
             Long idImage = null;
 

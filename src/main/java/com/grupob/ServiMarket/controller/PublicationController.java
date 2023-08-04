@@ -136,9 +136,9 @@ public class PublicationController  {
     //-------------------SEARCH QUERY------------------------
 
     @GetMapping("/publist/rubro")
-    public String barraBusqueda(@RequestParam (value = "rubro") Rubro rubro, ModelMap model){
+    public String barraBusqueda(@RequestParam (value = "rubro") Rubro rubro, Model model){
         List<Publication> publication = pService.findByRubro(rubro);
-        model.put("publication",publication);
+        model.addAttribute("publication",publication);
         return "inicio.html";
     }
     @GetMapping("/publist/search")
