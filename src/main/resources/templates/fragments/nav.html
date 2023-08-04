@@ -1,6 +1,5 @@
-<html lang="es" xmlns:th="http://www.thymeleaf.org"
-      >
-<nav class="navbar navbar-expand-lg py-4 px-5">
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg py-4 px-5">
     <div class="container-fluid">
         <div class="navbar-brand">
             <a href="/"><img src="/img/logo horizontal.png" alt="logo" width="350" /></a>
@@ -20,8 +19,8 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/user/perfil">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/logout">Cerrar Sesion</a></li>
+                    <li><a class="dropdown-item" th:href="@{/user/perfil}">Perfil</a></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesion</a></li>
                 </ul>
             </li>
         </ul>

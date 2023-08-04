@@ -21,8 +21,19 @@ body {
 header {
     background-color: whitesmoke;
     opacity: 80%;
+    transition: 0.5s;
 }
 
+header.abajo{
+    top: 0;
+    left: 0;
+    padding-top: 0;
+    width: 100%;
+    position: fixed;
+    justify-content: space-around;
+    opacity: 0.70;
+    z-index: 10;
+}
 .reg {
     display: block;
     text-decoration: none;

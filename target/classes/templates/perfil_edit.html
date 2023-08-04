@@ -1,53 +1,49 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head th:replace="/fragments/head :: head"></head>
+    <head th:replace="/fragments/head :: _head"></head>
 
 
     <body>
         <header>
-            <nav th:replace="/fragments/nav :: nav"></nav>
+            <nav th:replace="/fragments/nav :: navbar"></nav>
         </header>
         
-        <main class="bg-white pt-5">
+        <main class="bg-body-tertiary pt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
                         <img th:if="${session.usuariosession.image != null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="perfil" width="250" class="rounded-circle">
                     </div>
                     <div class="col-md-9">
-                        <div class="form">
-                            <form class="formulario" th:action="@{/user/edituser/__${session.usuariosession.id}__}"  method="POST" th:object="${userEntity}" enctype="multipart/form-data" >
-                            <input type="text" class="form-control mb-4"
-                                   name="name"
-                                   th:value="${session.usuariosession.name}"
-                                    />
-                            <input type="text" class="form-control mb-4"
-                                   name="lastName"
-                                   th:value="${session.usuariosession.lastName}"/>
-                            <input type="text" class="form-control mb-4"
-                                   name="contact"
-                                   th:value="${session.usuariosession.contact}" />
-                            <input type="text" class="form-control mb-4"
-                                   name="address"
-                                   th:value="${session.usuariosession.address}" />
+                            <form class="form" th:action="@{/user/edituser/__${session.usuariosession.id}__}"  method="POST" th:object="${userEntity}" enctype="multipart/form-data" >
+                                <input type="text" class="form-control mb-4"
+                                       name="name"
+                                       th:value="${session.usuariosession.name}"
+                                        />
+                                <input type="text" class="form-control mb-4"
+                                       name="lastName"
+                                       th:value="${session.usuariosession.lastName}"/>
+                                <input type="text" class="form-control mb-4"
+                                       name="contact"
+                                       th:value="${session.usuariosession.contact}" />
+                                <input type="text" class="form-control mb-4"
+                                       name="address"
+                                       th:value="${session.usuariosession.address}" />
 
 
 
-                            <label for="role" sec:authorize="hasAnyRole('ROLE_PROVIDER''ROLE_USER')">Seleccione su perfil:</label>
-                            <select class="form-control mb-4" id="role" th:value="${session.usuariosession.role}" >
-                                <option th:value="USER" th:text="Usuario"></option>
-                                <option th:value="PROVIDER" th:text="Proovedor"></option>
-                            </select>
-                            <br>
-                            <label for="archivo" class="form-label">Foto de perfil</label>
-                            <input type="file" id="archivo" name="archivo" accept="image/*"
-                                   th:value="${session.usuariosession.image}">
+                                <label class="form-label" for="role" sec:authorize="hasAnyRole('ROLE_PROVIDER''ROLE_USER')">Seleccione su perfil:</label>
+                                <select class="form-control mb-4" id="role" th:value="${session.usuariosession.role}" >
+                                    <option th:value="USER" th:text="Usuario"></option>
+                                    <option th:value="PROVIDER" th:text="Proovedor"></option>
+                                </select>
+                                <label for="archivo" class="form-label">Foto de perfil</label>
+                                <input class="form-control mb-4" type="file" id="archivo" name="archivo" accept="image/*"
+                                       th:value="${session.usuariosession.image}">
 
-                            <button class="w-100 btn btn-success btn-lg" type="submit" id="submitButton">ENVIAR</button>
+                                <button class="w-100 btn btn-success btn-lg mb-4" type="submit" id="submitButton">ENVIAR</button>
                             </form>
-                        </div>
 
                     </div>
 
@@ -59,7 +55,7 @@
 
         </main>
 
-        <footer th:replace="/fragments/footer :: footer"></footer>
+        <footer th:replace="/fragments/footer :: _footer"></footer>
 
 
         <script src="js/fuction.js"></script>
