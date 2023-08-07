@@ -11,6 +11,7 @@ import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,9 +65,15 @@ private ScoreService scoreService;
     }
     //----------DELETE USERS----------------
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id){
-        userService.delete(id);
-        return "redirect:/admin/users";
+    public String deleteUser(@PathVariable("id") Long id, Model model){
+        try{
+            userService.delete(id);
+            return "redirect:/admin/users";
+        } catch (Exception ex){
+            model.addAttribute("error", "No se puede eliminar el Usuario porque se encuentra vinculado a una publicación o comentario");
+            return "error-deleteUser";
+    }
+
     }
     //----------CHANGE STATUS USERS----------------
     @GetMapping("/editUserStatus/{id}")
@@ -90,9 +97,14 @@ private ScoreService scoreService;
     }
     //----------DELETE PUBLICATION----------------
     @GetMapping("/deletePub/{id}")
-    public String deletePublication(@PathVariable("id") Long id){
-        pService.delete(id);
-        return "redirect:/admin/publications";
+    public String deletePublication(@PathVariable("id") Long id, Model model){
+        try{
+            pService.delete(id);
+            return "redirect:/admin/publications";
+        }catch (Exception ex){
+            model.addAttribute("error", "No se puede eliminar la Publicacion porque se encuentra vinculada a una solicitud o comentario");
+            return "error-deletePublication";
+        }
     }
 
     //   S- - O - - L - - I - - C - - I - - T - - U - - D
@@ -101,6 +113,8 @@ private ScoreService scoreService;
     public String listsolicitudes (ModelMap model){
         List<Solicitud> solicitud = solService.list();
         model.addAttribute("solicitud", solicitud);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
         return "solicitudes-list";
     }
     //----------CHANGE STATUS SOLICITUD----------------
@@ -117,9 +131,15 @@ private ScoreService scoreService;
     }
     //----------DELETE SOLICITUD----------------
     @GetMapping("/deleteSol/{solid}")
-    public String deleteSolicitud(@PathVariable("solid") Long id){
-        solService.delete(id);
-        return "redirect:/admin/solicitudes";
+    public String deleteSolicitud(@PathVariable("solid") Long id, Model model){
+        try{
+            solService.delete(id);
+            return "redirect:/admin/solicitudes";
+        } catch (Exception ex){
+            model.addAttribute("error", "No se puede eliminar la Solicitud porque se encuentra vinculada a un comentario");
+            return "error-deleteSol";
+        }
+
     }
     //----------CHANGE COMPLETO SOLICITUD----------------
     @GetMapping("/editCompleto/{id}")
