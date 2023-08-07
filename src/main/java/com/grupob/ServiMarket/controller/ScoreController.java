@@ -59,7 +59,7 @@ public class ScoreController {
     public String listCalifications(ModelMap model){
         List<Score> score = scoreService.list();
         model.addAttribute("score", score);
-        return "califications-list-provider";
+        return "califications-list-provider.html";
     }
 
 

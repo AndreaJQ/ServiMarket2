@@ -43,11 +43,12 @@ function mostrarMiniaturas() {
 
         reader.onload = function (e) {
             const miniatura = document.createElement('div');
-            miniatura.classList.add('miniatura');
+            miniatura.classList.add('col-2', 'mb-4');
 
             const imagen = document.createElement('img');
             imagen.src = e.target.result;
             imagen.alt = 'Miniatura';
+            imagen.classList.add('img-thumbnail'); // Agregamos la clase para la miniatura de Bootstrap
 
             miniatura.appendChild(imagen);
             contenedorMiniaturas.appendChild(miniatura);

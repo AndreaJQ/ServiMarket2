@@ -1,49 +1,42 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
-html {
-    font-family: 'Bree Serif', serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap');
 
 body {
-    background-image: url('../img/portada1.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: background-image 1.5s ease-in-out;
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
+       font-family: 'Signika', sans-serif !important;
+       background-image: url('../img/portada1.webp');
+       background-size: cover;
+       background-repeat: no-repeat;
+       transition: background-image 1.5s ease-in-out;
+       display: grid;
+       min-height: 100vh;
+       grid-template-rows: auto 1fr auto;
 }
 
 header {
     background-color: whitesmoke;
     opacity: 80%;
+    transition: 0.5s;
+}
+
+header.abajo{
+    top: 0;
+    left: 0;
+    padding-top: 0;
+    width: 100%;
+    position: fixed;
+    justify-content: space-around;
+    opacity: 0.70;
+    z-index: 10;
 }
 
 .reg {
-    display: block;
     text-decoration: none;
     font-size: 1.2rem;
     padding: 0.5rem;
-
-}
-.nav-link:hover {
-    text-decoration: underline; /* Subraya cuando acerco el mouse */
-    transform: scale(1.1); /* Aplica una escala de 1.1 cuando acerco el mouse */
-  }
-  .nav-link:hover {
-    text-decoration: underline; /* Subraya cuando acerco el mouse */
-    transform: scale(1.1); /* Aplica una escala de 1.1 al acercar el mouse */
-  }
-.ingr {
-    color: #2C9B51;
 }
 
-.reg {
-    color: #0F2E5B;
+.main-gris{
+    background-color: #f2f2f2;
 }
 
 .jumbot {
@@ -56,6 +49,11 @@ header {
     padding-block: 40px;
     color: #0F2E5B;
     border-radius: 7px;
+}
+
+.nav-link:hover {
+    text-decoration: underline; /* Subraya cuando acerco el mouse */
+    transform: scale(1.1); /* Aplica una escala de 1.1 al acercar el mouse */
 }
 
 .btn-1 {

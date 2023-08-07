@@ -52,7 +52,7 @@ return "user_list.html";
 
         Double promedioPuntaje= scoreService.calcularPromedioPuntaje(user);
         modelo.put("promedioPuntaje",promedioPuntaje);
-        return "perfil_user";
+        return "perfil_user.html";
     }
 
 
@@ -75,7 +75,7 @@ return "user_list.html";
                            MultipartFile archivo) throws Exception {
 
         userService.updateUser(userId,name,lastName,contact,address,archivo);
-        return "login.html";
+        return "redirect:/user/perfil";
 
     }
 
