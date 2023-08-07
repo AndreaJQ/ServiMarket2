@@ -8,6 +8,9 @@ import com.grupob.ServiMarket.service.PublicationService;
 import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
+import com.grupob.ServiMarket.util.reports.UserExporterExcel;
+import com.grupob.ServiMarket.util.reports.UsersExporterPDF;
+import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -172,5 +180,39 @@ private ScoreService scoreService;
     public String censured(@PathVariable Long scid){
         scoreService.censure(scid);
         return "redirect:/admin/califications";
+    }
+    @GetMapping("/exportarPDF")
+    public void exportarListadoDeUsuariosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Usuarios_" + fechaActual + ".pdf";
+
+        response.setHeader(cabecera, valor);
+
+        List<UserEntity> users = userService.list();
+
+        UsersExporterPDF exporter = new UsersExporterPDF(users);
+        exporter.exportar(response);
+    }
+    @GetMapping("/exportarExcel")
+    public void exportarListadoDeUsuariosEnExcel(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/octet-stream");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Usuarios_" + fechaActual + ".xlsx";
+
+        response.setHeader(cabecera, valor);
+
+        List<UserEntity> users = userService.list();
+
+        UserExporterExcel exporter = new UserExporterExcel(users);
+        exporter.exportar(response);
     }
 }
