@@ -105,7 +105,13 @@ public class UserService implements UserDetailsService {
             if (user.getImage() != null) {
                 idImage = user.getImage().getId();
             }
-            Image image = imageService.actualizar(archivo,idImage);
+            Image image;
+            if (archivo != null && !archivo.isEmpty()) {
+                image = imageService.actualizar(archivo,idImage);
+            } else {
+                image = imageService.getDefaultImage();
+            }
+
 
             user.setImage(image);
 
