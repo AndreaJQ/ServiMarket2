@@ -58,19 +58,7 @@ public class SolicitudController {
         return "solicitudes-list-provider";
     }
 
-    /*  @GetMapping("/solicitudbyProvider")
-    public String listSolicProv (ModelMap model, HttpSession session){
-        UserEntity user = (UserEntity) session.getAttribute("usuariosession");
-        model.put("user", user);
-        Long userId = user.getId();
-        List<Solicitud> solicitud = solService.list();
-        model.addAttribute("solicitud", solicitud);
-        List<Publication> publication = pService.list();
-        model.addAttribute("publication", publication);
-        List<Score> score = scoreService.list();
-        model.addAttribute("score", score);
-        return "solicitudes-list-provider";
-    }*/
+
 
     //-------------------CREATE SOLICITUD--------------------
     @GetMapping("/solicitud/{pId}/nueva")

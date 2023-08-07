@@ -65,7 +65,7 @@
                     <a th:href="@{/admin/solicitudes}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-secondary m-3"  role="button">Listar Solicitudes</a>
                     <a th:href="@{/admin/califications}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-secondary m-3"  role="button">Listar Calificaciones</a>
                     <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-secondary m,-3"  role="button">Visualizar Servicios</a>
-                    <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER','ROLE_PROVIDER')"class="btn btn-secondary m-3"  role="button">Listar Servicios Contratados</a>
+                    <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')"class="btn btn-secondary m-3"  role="button">Listar Servicios Contratados</a>
                 </div>
 
             </div>

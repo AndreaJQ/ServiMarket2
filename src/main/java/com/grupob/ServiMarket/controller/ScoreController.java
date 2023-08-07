@@ -58,9 +58,18 @@ public class ScoreController {
     @GetMapping("/califications")
     public String listCalifications(ModelMap model){
         List<Score> score = scoreService.list();
-        model.addAttribute("score", score);
+        model.put("score", score);
         return "califications-list-provider.html";
     }
+
+    //-------read calification by solicitud-----
+    @GetMapping("/calificationsbySol")
+    public String calificationsbySol(ModelMap model){
+        List<Score> score = scoreService.list();
+        model.put("score", score);
+        return "calificationsbySol.html";
+    }
+
 
 
     //--------------------------UPDATE-----------------

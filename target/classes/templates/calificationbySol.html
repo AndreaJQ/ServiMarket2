@@ -13,7 +13,7 @@
       <div class="container">
         <nav class="navbar">
           <div class="container-fluid">
-            <h1 class="navbar-brand">Lista de Usuarios</h1>
+            <h1 class="navbar-brand">Calificiones por Solicitud</h1>
             <a class="btn btn-outline-success" th:href="@{/user/perfil}" type="button">Volver</a>
           </div>
         </nav>
@@ -41,7 +41,7 @@
                       <td th:text="${score.solicitud.id}"></td>
                       <td th:text="${score.puntaje}"></td>
                       <td th:text="${score.comentario}"></td>
-                    </th>
+                    </tr>
                   </tbody>
 
                 </table>

@@ -2,11 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Lista de Usuarios</title>
-
   <head th:replace="/fragments/head :: _head"></head>
 </head>
 
+<body>
 <header>
   <nav th:replace="/fragments/nav :: navbar"></nav>
 </header>
@@ -16,12 +15,12 @@
       <h1>Lista de Usuarios</h1>
       <a class="btn btn-outline-success" th:href="@{/user/perfil}" type="button">Volver</a>
     </div>
-<body>
 
 
 
-<div class="container">
-  <table class="admin-table">
+
+  <table class="table">
+    <thead>
     <tr>
       <th>ID</th>
       <th>Nombre</th>
@@ -33,9 +32,10 @@
       <th>Estado</th>
       <th>Cambiar Estado</th>
       <th>Eliminar</th>
-
     </tr>
-    <tr th:each="user : ${user}">
+    </thead>
+    <tbody th:each="user : ${user}">
+
       <td th:text="${user.id}"></td>
       <td th:text="${user.name}"></td>
       <td th:text="${user.lastName}"></td>
@@ -52,6 +52,7 @@
       <td><a th:href= "@{/admin/editUserStatus/{id} (id=${user.id})}" class="btn-eliminar"> Cambiar estado </a></td>
       <td><a th:href= "@{/admin/delete/{id} (id=${user.id})}" class="btn-eliminar" > Eliminar </a> </td>
     </tr>
+    </tbody>
   </table>
 </div>
 </main>
