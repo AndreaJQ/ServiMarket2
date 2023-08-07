@@ -1,59 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Lista de Calificaciones</title>
-  <link rel="stylesheet" href="/css/LisUsu.css">
-</head>
-<body>
-<img src="/img/logo horizontal.png" alt="Logotipo" class="logo">
-<h1>Lista de Usuarios</h1>
-<button class="butto">
-  <span> <a class="nav-link" th:href="@{/user/perfil}">Volver</a></span>
-</button>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+  <head th:replace="/fragments/head :: _head"></head>
 
 
-<div class="container">
-  <table class="admin-table">
-    <tr>
-      <th>ID</th>
-      <th>CLIENTE</th>
-      <th>PROVEEDOR</th>
-      <th>SERVICIO</th>
-      <th>PUNTAJE</th>
-      <th>COMENTARIO</th>
+  <body>
+    <header>
+      <nav th:replace="/fragments/nav :: navbar"></nav>
+    </header>
 
-    </tr>
-
-      <tr th:each="score : ${score}" th:if="${session.usuariosession.id == score.provider.id}">
-      <td th:text="${score.id}"></td>
-      <td th:text="${score.cliente.id}"></td>
-      <td th:text="${score.provider.id}"></td>
-      <td th:text="${score.solicitud.id}"></td>
-      <td th:text="${score.puntaje}"></td>
-      <td th:text="${score.comentario}"></td>
-
-    </tr>
-
-  </table>
-</div>
-<div class="container">
-  <h2 class="mb-0">Puntuación</h2>
-  <div class="puntuacion">
-    <div class="texto-puntuacion" th:text = ${score.puntaje}>4.7</div>
-    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
-         aria-valuemin="0" aria-valuemax="100">
-      <div class="progress-bar bg-success" style="width: 80%"></div>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="navbar">
-  <!-- Contenido de la franja Azul marino -->
-</div>
+    <main class="main-gris pt-5">
+      <div class="container">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <h1 class="navbar-brand">Lista de Usuarios</h1>
+            <a class="btn btn-outline-success" th:href="@{/user/perfil}" type="button">Volver</a>
+          </div>
+        </nav>
 
 
-</body>
+              <div class="container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>CLIENTE</th>
+                      <th>PROVEEDOR</th>
+                      <th>SERVICIO</th>
+                      <th>PUNTAJE</th>
+                      <th>COMENTARIO</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th th:each="score : ${score}" th:if="${session.usuariosession.id == score.provider.id}"></th>
+                      <td th:text="${score.id}"></td>
+                      <td th:text="${score.cliente.id}"></td>
+                      <td th:text="${score.provider.id}"></td>
+                      <td th:text="${score.solicitud.id}"></td>
+                      <td th:text="${score.puntaje}"></td>
+                      <td th:text="${score.comentario}"></td>
+                    </th>
+                  </tbody>
+
+                </table>
+              </div>
+              <div class="container">
+                <h2 class="mb-0">Puntuación</h2>
+                <div class="puntuacion">
+                  <div class="texto-puntuacion" th:text = ${score.puntaje}>4.7</div>
+                  <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
+                       aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" style="width: 80%"></div>
+                  </div>
+
+                </div>
+
+              </div>
+
+      </div>
+    </main>
+    <script src="js/fuction.js"></script>
+    <script src="../static/js/Formulario_Servicios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+
 </html>
 
