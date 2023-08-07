@@ -13,6 +13,10 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
     Optional <Publication> findByTitle(String title);
     @Query("SELECT p from Publication p WHERE p.title LIKE CONCAT('%',:query,'%')")
     List<Publication> searchPublication(String query);
+    @Query("SELECT p from Publication p WHERE p.description LIKE CONCAT('%',:query,'%')")
+    List<Publication> searchContentPublication(String query);
+    @Query("SELECT p from Publication p WHERE p.description2 LIKE CONCAT('%',:query,'%')")
+    List<Publication> searchContentPublication2(String query);
     
     List<Publication> findByRubro(Rubro rubro);
 

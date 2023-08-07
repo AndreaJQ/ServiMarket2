@@ -13,26 +13,25 @@
             <div class="container">
                 <form th:object="${score}" th:action="@{/editScore/{sId} (sId=${score.id})}" method="post"  >
 
-
                     <h1>Calificación</h1>
-                    <label >Comentario:</label>
+                    <label class="form-label">Comentario:</label>
 
-                    <textarea type="text"
+                    <textarea class="form-control mb-4" type="text"
                            id="comentario"
                            name="comentario"
                               th:field="*{comentario}"
                            th:value="${score.comentario}"
                             required></textarea>
-                    <label >Puntaje (1 a 5):</label>
-                    <input type="number"
+                    <label class="forlm-label">Puntaje (1 a 5):</label>
+                    <input class="form-control mb-4" type="number"
                            id="puntaje"
                            name="puntaje"
                            th:value="${score.puntaje}" required>
 
-                    <button type="submit">Calificar</button>
+                    <button class="w-100 btn btn-success btn-lg mb-4" type="submit">Calificar</button>
                 </form>
 
-                <div id="publicacionMostrada"></div>
+                <div  id="publicacionMostrada"></div>
 
             </div>
         </main>

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -144,9 +147,24 @@ public class PublicationController  {
     @GetMapping("/publist/search")
     public String publicationsSearch(@RequestParam(value="query") String query,Model model){
 
+        Set<Publication> uniquePublications = new HashSet<>();
 
-        List<Publication> publication = pService.searchPublication(query);
-        model.addAttribute("publication",publication);
+        List<Publication> publications = pService.searchPublication(query);
+        if (publications != null) {
+            uniquePublications.addAll(publications);
+        }
+
+        List<Publication> content1 = pService.searchContentPublication(query);
+        if (content1 != null) {
+            uniquePublications.addAll(content1);
+        }
+
+        List<Publication> content2 = pService.searchContentPublication2(query);
+        if (content2 != null) {
+            uniquePublications.addAll(content2);
+        }
+
+        model.addAttribute("publication", new ArrayList<>(uniquePublications));
 
         return "inicio.html";
     }

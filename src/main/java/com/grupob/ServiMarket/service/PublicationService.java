@@ -120,7 +120,22 @@ public class PublicationService {
         } else {
             return null; //
         }
-
+    }
+    public List<Publication> searchContentPublication(String query) {
+        if (query != null && !query.trim().isEmpty()) {
+            List<Publication> publications = pRepository.searchContentPublication("%" + query.trim() + "%");
+            return publications;
+        } else {
+            return null; //
+        }
+    }
+    public List<Publication> searchContentPublication2(String query) {
+        if (query != null && !query.trim().isEmpty()) {
+            List<Publication> publications = pRepository.searchContentPublication2("%" + query.trim() + "%");
+            return publications;
+        } else {
+            return null; //
+        }
     }
 
     public List<Publication> findByRubro(Rubro rubro){
