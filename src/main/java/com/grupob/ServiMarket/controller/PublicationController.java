@@ -140,33 +140,46 @@ public class PublicationController  {
 
     @GetMapping("/publist/rubro")
     public String barraBusqueda(@RequestParam (value = "rubro") Rubro rubro, Model model){
-        List<Publication> publication = pService.findByRubro(rubro);
-        model.addAttribute("publication",publication);
-        return "inicio.html";
+            List<Publication> publication = pService.findByRubro(rubro);
+            if (publication.isEmpty()) {
+                model.addAttribute("error", "No se encontraron Publicaciones en ese Rubro");
+            } else {
+                model.addAttribute("publication",publication);
+            }
+
+            return "inicio.html";
+
+
     }
     @GetMapping("/publist/search")
     public String publicationsSearch(@RequestParam(value="query") String query,Model model){
 
         Set<Publication> uniquePublications = new HashSet<>();
 
-        List<Publication> publications = pService.searchPublication(query);
-        if (publications != null) {
-            uniquePublications.addAll(publications);
+
+            List<Publication> publications = pService.searchPublication(query);
+            if (publications != null) {
+                uniquePublications.addAll(publications);
+            }
+
+            List<Publication> content1 = pService.searchContentPublication(query);
+            if (content1 != null) {
+                uniquePublications.addAll(content1);
+            }
+
+            List<Publication> content2 = pService.searchContentPublication2(query);
+            if (content2 != null) {
+                uniquePublications.addAll(content2);
+            }
+        if (uniquePublications.isEmpty()) {
+            model.addAttribute("error", "No se encontraron resultados para la búsqueda.");
+        } else {
+            model.addAttribute("publication", new ArrayList<>(uniquePublications));
         }
 
-        List<Publication> content1 = pService.searchContentPublication(query);
-        if (content1 != null) {
-            uniquePublications.addAll(content1);
-        }
-
-        List<Publication> content2 = pService.searchContentPublication2(query);
-        if (content2 != null) {
-            uniquePublications.addAll(content2);
-        }
-
-        model.addAttribute("publication", new ArrayList<>(uniquePublications));
 
         return "inicio.html";
+
     }
 
 }
