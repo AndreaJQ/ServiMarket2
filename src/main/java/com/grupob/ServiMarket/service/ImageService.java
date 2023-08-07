@@ -5,10 +5,13 @@ import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,5 +79,24 @@ public class ImageService {
     public Image getImageById(Long id) {
 
         return imageRepository.findById(id).orElse(null);
+    }
+
+
+    public Image getDefaultImage() {
+        try {
+            ClassPathResource defaultImageResource = new ClassPathResource("static/img/avatar.png");
+            byte[] imageBytes = Files.readAllBytes(defaultImageResource.getFile().toPath());
+
+            Image defaultImage = new Image();
+            defaultImage.setMime("image/png");
+            defaultImage.setNombre("avatar.png");
+            defaultImage.setContenido(imageBytes);
+
+            return imageRepository.save(defaultImage);
+        } catch (IOException e) {
+
+            System.err.println("Error al cargar la imagen por defecto: " + e.getMessage());
+            return null;
+        }
     }
 }

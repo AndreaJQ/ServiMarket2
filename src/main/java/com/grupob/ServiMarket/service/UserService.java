@@ -40,7 +40,12 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void create(UserEntity us, String password, MultipartFile archivo) throws MyException {
         validate(us,password,archivo);
-        Image image = imageService.guardar(archivo);
+        Image image;
+        if (archivo != null && !archivo.isEmpty()) {
+            image = imageService.guardar(archivo);
+        } else {
+            image = imageService.getDefaultImage();
+        }
         us.setImage(image);
         us.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepository.save(us);
