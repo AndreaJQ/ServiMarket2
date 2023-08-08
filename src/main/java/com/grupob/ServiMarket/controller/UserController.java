@@ -82,9 +82,10 @@ return "user_list.html";
     @PostMapping("/edituser/{userId}")
     public String editUser(@PathVariable("userId") Long userId,@RequestParam String name, @RequestParam String lastName,
                            @RequestParam String address,@RequestParam String contact, ModelMap model,
-                           MultipartFile archivo) throws Exception {
+                           MultipartFile archivo, HttpSession session) throws Exception {
 
-        userService.updateUser(userId,name,lastName,contact,address,archivo);
+        UserEntity updatedUser= userService.updateUser(userId,name,lastName,contact,address,archivo);
+        session.setAttribute("usuariosession", updatedUser);
         return "redirect:/user/perfil";
 
     }

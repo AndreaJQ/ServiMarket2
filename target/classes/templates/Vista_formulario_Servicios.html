@@ -167,13 +167,13 @@
         </section>
 
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/editPublication/{pId} (pId = ${pub.id})}" th:if="${session.usuariosession.id == user.id}" class="btn btn-primary"  role="button">Editar</a>
+        <a th:href="@{/editPublication/{pId} (pId = ${pub.id})}" th:if="${session.usuariosession.id == user.id }"  class="btn btn-outline-success"  role="button">Editar</a>
     </div>
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/solicitudbyProvider}"  th:if="${session.usuariosession.id == user.id}" class="btn btn-primary"  role="button">Servicios Solicitados</a>
+        <a th:href="@{/solicitudbyProvider}"  th:if="${session.usuariosession.id == user.id}" class="btn btn-outline-success"  role="button">Servicios Solicitados</a>
     </div>
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/solicitud/{pId}/nueva (pId = ${pub.id})}" th:if="${session.usuariosession.id != user.id}" class="btn btn-primary"  role="button">Solicitar Servicio</a>
+        <a th:href="@{/solicitud/{pId}/nueva (pId = ${pub.id})}" th:if="${session.usuariosession.id != user.id}" class="btn btn-outline-success"  role="button">Solicitar Servicio</a>
     </div>
 
 

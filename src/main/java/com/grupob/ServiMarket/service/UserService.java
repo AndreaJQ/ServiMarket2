@@ -1,7 +1,6 @@
 package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Image;
-import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 
 import com.grupob.ServiMarket.exceptions.MyException;
@@ -89,7 +88,7 @@ public class UserService implements UserDetailsService {
 
     //---------------------UPDATE USER-----------------
 
-    public void updateUser(Long id,String name, String lastName,String contact, String address,  MultipartFile archivo) throws Exception {
+    public UserEntity updateUser(Long id, String name, String lastName, String contact, String address, MultipartFile archivo) throws Exception {
         UserEntity user = new UserEntity();
         Optional<UserEntity> answer = userRepository.findById(id);
         if (answer.isPresent()) {
@@ -117,6 +116,7 @@ public class UserService implements UserDetailsService {
 
             userRepository.save(user);
         }
+        return user;
     }
 
     //---------------------SEARCH USER NAME-----------------

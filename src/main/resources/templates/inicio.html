@@ -31,8 +31,8 @@
                 <!-- En esta parte de abajo agregue los contenedores section que aparecen abajo de la pagina -->
 
                 <div class="publicaciones-container" >
-                    <div th:if="${error != null}" class="alert alert-danger" role="alert">
-                        <p th:text="${error}"></p>
+                    <div th:if="${error != null}" class="alert alert-danger" role="alert" style="text-align: center;">
+                        <p th:utext="${error}" style="text-align: center;"></p>
                     </div>
 
                     <div th:each="publication:${publication}" class="publicacion">
@@ -47,8 +47,8 @@
                         </div>
 
                         <div>
-                            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROVIDER')" th:href="@{/publication/{pubId}(pubId=${publication.id})}">View</a>
-                            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/editPublication/{pId}(pId=${publication.id})}">Edit</a>
+                            <a class="btn btn-outline-success" sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROVIDER')" th:href="@{/publication/{pubId}(pubId=${publication.id})}">Ver Servicio</a>
+                            <a class="btn btn-outline-success" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/editPublication/{pId}(pId=${publication.id})}">Editar Servicio</a>
 
 
                         </div>
