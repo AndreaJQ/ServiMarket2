@@ -46,6 +46,9 @@ public class ScoreController {
         try {
 
             model.put("exito", "Calificación modificada correctamente");
+            //int puntajeInEstrellas = score.getPuntaje();
+            //int puntajeEnPuntos = puntajeInEstrellas * 25;
+          //  score.setPuntaje(puntajeEnPuntos);
 
             scoreService.create(score, solid, userId);
             return "redirect:/solicitudbyUser";

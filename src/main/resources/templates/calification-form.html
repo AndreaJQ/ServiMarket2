@@ -17,7 +17,7 @@
                         <p class="card-text" th:text="${error}"></p>
                     </div>
                 </div>
-                
+
                 <form class="form" th:action="@{/calification/{solid} (solid=${solid})}" method="POST" th:object="${score}" >
                     <h1>Calificación</h1>
                     <label class="form-label">Comentario:</label>
@@ -27,9 +27,28 @@
                            name="comentario"
                            th:field="*{comentario}"
                             required></textarea>
-                    <label class="forlm-label" >Puntaje (1 a 5):</label>
-                    <input class="form-control mb-4" type="number"
-                           th:field="*{puntaje}" required>
+                    <div class="rating">
+                        <input type="radio" id="star10" name="puntaje" value="100" th:checked="${score.puntaje == 100}" />
+                        <label for="star10"></label>
+                        <input type="radio" id="star9" name="puntaje" value="90" th:checked="${score.puntaje == 90}" />
+                        <label for="star9"></label>
+                        <input type="radio" id="star8" name="puntaje" value="80" th:checked="${score.puntaje == 80}" />
+                        <label for="star8"></label>
+                        <input type="radio" id="star7" name="puntaje" value="70" th:checked="${score.puntaje == 70}" />
+                        <label for="star7"></label>
+                        <input type="radio" id="star6" name="puntaje" value="60" th:checked="${score.puntaje == 60}" />
+                        <label for="star6"></label>
+                        <input type="radio" id="star5" name="puntaje" value="50" th:checked="${score.puntaje == 50}" />
+                        <label for="star5"></label>
+                        <input type="radio" id="star4" name="puntaje" value="40" th:checked="${score.puntaje == 40}" />
+                        <label for="star4"></label>
+                        <input type="radio" id="star3" name="puntaje" value="30" th:checked="${score.puntaje == 30}" />
+                        <label for="star3"></label>
+                        <input type="radio" id="star2" name="puntaje" value="20" th:checked="${score.puntaje == 20}" />
+                        <label for="star2"></label>
+                        <input type="radio" id="star1" name="puntaje" value="10" th:checked="${score.puntaje == 10}" />
+                        <label for="star1"></label>
+                    </div>
 
                     <button class="w-100 btn btn-success btn-lg mb-4" type="submit">Calificar</button>
                 </form>
