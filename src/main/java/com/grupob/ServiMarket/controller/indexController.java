@@ -26,7 +26,7 @@ public class indexController {
 
     @GetMapping("/")
     public String index (){
-        return "index.html";
+        return "redirect:/publist";
     }
 
 

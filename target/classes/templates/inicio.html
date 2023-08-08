@@ -47,8 +47,8 @@
                         </div>
 
                         <div>
-                            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROVIDER')" th:href="@{/publication/{pubId}(pubId=${publication.id})}">View</a>
-                            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/editPublication/{pId}(pId=${publication.id})}">Edit</a>
+                            <a class="btn btn-outline-success" sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROVIDER')" th:href="@{/publication/{pubId}(pubId=${publication.id})}">Ver Servicio</a>
+                            <a class="btn btn-outline-success" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/editPublication/{pId}(pId=${publication.id})}">Editar Servicio</a>
 
 
                         </div>
