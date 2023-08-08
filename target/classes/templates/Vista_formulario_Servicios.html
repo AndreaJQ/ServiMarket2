@@ -51,19 +51,29 @@
 
          <!--Aca esta el circulo con la imagen de perfil del avatar-->
          <section class="seccion-perfil-usuario">
-            <div class="perfil-usuario-body">
-                <div class="perfil-usuario-avatar">
-                    <!-- Mostrar la imagen del avatar utilizando th:src -->
+             <div class="perfil-usuario-body">
+                 <div class="perfil-usuario-avatar">
+                     <!-- Mostrar la imagen del avatar utilizando th:src -->
+                     <img th:if="${user.image != null}" th:src="@{'/imagen/' + ${user.image.id}}"
+                          alt="Imagen de usuario">
+                     <button type="button" class="boton-avatar">
+                         <i class="far fa-image"></i>
+                     </button>
+                 </div>
+                 <div class="perfil-usuario-footer">
+                     <ul class="lista-datos">
+                         <li><i class="icono fas fa-map-signs"></i> Nombre: <span th:text="*{user.name}"></span></li>
+                         <li><i class="icono fas fa-phone-alt"></i> Teléfono: <span th:text="*{user.contact}"></span></li>
+                         <li><i class="icono fas fa-map-signs"></i> Apellido: <span th:text="*{user.lastName}"></span></li>
+                         <li><i class="icono fas fa-map-signs"></i> Email: <span th:text="*{user.email}"></span></li>
+                         <li><i class="icono fas fa-map-signs"></i> Dirección: <span th:text="*{user.address}"></span></li>
+                     </ul>
+                 </div>
 
-                    <img th:if="${user.image != null}" th:src="@{'/imagen/' + ${user.image.id}}"
-                         alt="Imagen de usuario">
-                    <button type="button" class="boton-avatar">
-                        <i class="far fa-image"></i>
-                    </button>
-                </div>
-                <div class="row">
-                    <hr>
-                    <div class="container" sec:authorize="hasAnyRole('ROLE_PROVIDER')">
+             </div>
+
+
+                    <div class="container" >
                         <h2 class="mb-0">Puntuación</h2>
                         <div class="puntuacion">
                             <div class="texto-puntuacion" th:text="${promedioPuntaje}" >
@@ -77,47 +87,23 @@
 
                         </div>
                     </div>
-                </div>
 
-            <br>
-            <div class="perfil-usuario-footer">
-                <ul class="lista-datos">
-                    <li><i class="icono fas fa-map-signs"></i> Nombre: <span th:text="*{user.name}"></span></li>
-                    <li><i class="icono fas fa-phone-alt"></i> Teléfono: <span th:text="*{user.contact}"></span></li>
-                    <li><i class="icono fas fa-map-signs"></i> Apellido: <span th:text="*{user.lastName}"></span></li>
-                    <li><i class="icono fas fa-map-signs"></i> Email: <span th:text="*{user.email}"></span></li>
-                </ul>
-                <ul class="lista-datos">
-                    <li><i class="icono fas fa-map-signs"></i> Dirección: <span th:text="*{user.address}"></span></li>
-                </ul>
-            </div>
-            <br>
+
+
+
             <div class="titulo-Rubro">
                 <h4 class="rubro"><span th:text="*{pub.rubro}"></span></u></h4>
                 <h4 class="titulo"><span th:text="*{pub.title}"></span></h4>
             </div>
 
             <!--Aca empieza el carrusel de imagenes. FALTA AGREGARLE THYMELEAF-->   
-            <div class="d-flex flex-row">
-                <div class="col-md-9">
 
-                <!-- Contenido del contenedor que va encima del carrusel -->
-                    <!--  <div th:each="image : ${pub.image}">
-                          <img th:if="${pub.image != null}" th:src="@{'/imagen/' + ${image.id}}"  alt="Imagen publicacion" class="imagen-publicacion"
-                               width="400" height="400">
-                      </div>-->
-
-
-                  </div>
-              </div>
                 <!-- --------CORROBORAR VISTA CAROUSEL -->
-
+            <div class="ImagenesyDescripcion">
                   <div class="peliculas-recomendadas contenedor">
-                      <div class="contenedor-titulo-controles">
-                          <div class="indicadores"></div>
-                      </div>
+
                       <div class="contenedor-principal">
-                          <button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>
+
                           <div class="contenedor-carousel">
                               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                   <ol class="carousel-indicators">
@@ -138,9 +124,10 @@
                                   </a>
                               </div>
                           </div>
-                          <button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>
+
                       </div>
                   </div>
+
 
 
               <!-- Empieza el container de la descripcion -->
@@ -148,7 +135,7 @@
                 <h4 class="titulo"><strong>Descripcion</strong></h4>
                 <p class="texto"> <span class="texto-lorem" th:text="*{pub.description2}"></span></p>
             </div>
-
+            </div>
 
              <div class="titulo-descripcion">
                  <h4 class="titulo"><strong>Calificaciones</strong></h4>
