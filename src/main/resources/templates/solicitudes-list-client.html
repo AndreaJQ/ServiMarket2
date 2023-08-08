@@ -39,7 +39,7 @@
         <td th:text="${solicitud.estado}"></td>
         <td><a th:href= "@{/deleteSolByUser/{solid} (solid=${solicitud.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
         <td th:if="${solicitud.completo == true}" text="${solicitud.estado}">FINALIZADO</td>
-        <td><a th:if="${solicitud.completo == true && solicitud.calificado==false}" th:href= "@{/calification/{solid}/nueva (solid=${solicitud.id})}"><i class="far fa-edit"></i> CALIFICAR </a></td>
+        <td><a th:if="${solicitud.completo == true && solicitud.calificado==false}" th:href= "@{/calification/{solid}/nueva (solid=${solicitud.id})}"><i class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i> CALIFICAR </a></td>
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id}" th:text="${score.puntaje}"></td>
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id}"th:unless="${score.censured}" th:text="${score.comentario}"> </td>
         <td th:each="score: ${score}" th:if="${solicitud.id == score.solicitud.id && score.censured}"> CENSURADO</td>

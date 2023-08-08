@@ -20,6 +20,25 @@ header {
 
 }
 
+.boton-volver {
+    text-align: right; /* Alinea el botón a la derecha */
+    margin-top: 1px; /* Agrega un margen superior para separar del contenido anterior */
+    
+    margin-bottom: 130px; /* Ajusta el margen inferior según lo deseado */
+}
+
+.boton-volver button {
+    background-color: #007bff; /* Cambia el color de fondo del botón */
+    color: #fff; /* Cambia el color del texto del botón */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.boton-volver button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo del botón al hacer hover */
+}
+
 
 /* Estilos para la sección de imágenes */
 .seccion-imagen {
@@ -158,7 +177,7 @@ Copiar esto
 h4{
     text-align: center;
 }
-.seccion-perfil-usuario .perfil-usuario-footer,
+.seccion-perfil-usuario .datos-personales,
 .seccion-perfil-usuario .perfil-usuario-bio {           /* Esto es del container de info de contacto */
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
@@ -171,9 +190,22 @@ h4{
     
 }
 
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 2px solid #ccc;
+    padding: 8px;
+}
+
 
 .seccion-perfil-usuario .titulo-descripcion {
-    display: block;
+    display: flex;
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
@@ -191,7 +223,7 @@ h4{
     color: rgb(5, 5, 5); /* Cambia "red" al color deseado */
     font-weight: bold;
 }
-.titulo-descripcion .texto-lorem {
+.titulo-descripcion .texto-desc {
     color: rgb(40, 40, 41); /* Cambia "blue" al color deseado */
 }
 
@@ -222,7 +254,7 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
     color: #000; /* Color de texto en negro */
 }
 .rubro{
-    font-size: 15px;
+    font-size: 19px;
     display: inline-block;
     flex: 0 0 auto; /* El título "Rubro: Electricidad" ocupa el ancho necesario */
     margin-right: 10px; /* Agregamos un pequeño margen derecho para separarlo del título */
@@ -307,13 +339,15 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
 .ImagenesyDescripcion{
     display: flex;
     flex-direction: row; /* Organiza los elementos en una fila horizontal */
-    align-items: start; /* Alinea los elementos en la parte superior */
-    justify-content: space-around; /* Distribuye el espacio entre los elementos */
-    flex-wrap: nowrap;
-    margin: 60px; /* Ajusta los márgenes según lo necesario */
+    align-items: flex-start; /* Alinea los elementos en la parte superior */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap;
+    margin: 20px; /* Ajusta los márgenes según lo necesario */
 }
 /*FIN LINEAS AGREGADAS POR ANDREA-----*/
 /* adactacion a dispositivos */
+
+
 @media (max-width: 750px) {
     
     .seccion-perfil-usuario .lista-datos {
@@ -402,21 +436,20 @@ button:hover {
     flex: 1;
     margin-right: 60px;
 }
-.peliculas-recomendadas {
+.imagenes-recomendadas {
 	margin-bottom: 70px;
     flex:1;
 }
 
-.peliculas-recomendadas .contenedor-principal {
-
+.imagenes-recomendadas .contenedor-principal {
+	display: flex;
 	align-items: align-left;
 	position: relative;
 }
 
-.peliculas-recomendadas .contenedor-principal .flecha-izquierda,
-.peliculas-recomendadas .contenedor-principal .flecha-derecha {
-	position: static;
-
+.pimagenes-recomendadas .contenedor-principal .flecha-izquierda,
+.imagenes-recomendadas .contenedor-principal .flecha-derecha {
+	position: absolute;
 	border: none;
 	background: rgba(0,0,0,0.3);
 	font-size: 40px;
@@ -430,46 +463,44 @@ button:hover {
 	transition: .2s ease all;
 }
 
-.peliculas-recomendadas .contenedor-principal .flecha-izquierda:hover,
-.peliculas-recomendadas .contenedor-principal .flecha-derecha:hover {
+.imagenes-recomendadas .contenedor-principal .flecha-izquierda:hover,
+.imagenes-recomendadas .contenedor-principal .flecha-derecha:hover {
 	background: rgba(0,0,0, .9);
 }
 
-.peliculas-recomendadas .contenedor-principal .flecha-izquierda {
+.imagenes-recomendadas .contenedor-principal .flecha-izquierda {
 	left: 0;
 }
 
-.peliculas-recomendadas .contenedor-principal .flecha-derecha {
+.imagenes-recomendadas .contenedor-principal .flecha-derecha {
 	right: 0;
 }
 
 /* ---- ----- ----- Carousel ----- ----- ----- */
-.peliculas-recomendadas .contenedor-carousel {
-position: static
-	width: 80%;
-	padding: 60 px ;
+.imagenes-recomendadas .contenedor-carousel {
+	width: 100%;
+	padding: 20px 0;
 	overflow: hidden;
 	scroll-behavior: smooth;
 }
 
-.peliculas-recomendadas .contenedor-carousel .carousel {
-position: static
-	display: block ;
+.imagenes-recomendadas .contenedor-carousel .carousel {
+	display: block;
 	flex-wrap: nowrap;
 }
 
-.peliculas-recomendadas .contenedor-carousel .carousel .pelicula {
+.imagenes-recomendadas .contenedor-carousel .carousel .pelicula {
 	min-width: 20%;
 	transition: .3s ease all;
 	box-shadow: 5px 5px 10px rgba(0,0,0, .3);
 }
 
-.peliculas-recomendadas .contenedor-carousel .carousel .pelicula.hover {
+.imagenes-recomendadas .contenedor-carousel .carousel .pelicula.hover {
 	transform: scale(1.2);
 	transform-origin: center;
 }
 
-.peliculas-recomendadas .contenedor-carousel .carousel .pelicula img {
+.imagenes-recomendadas .contenedor-carousel .carousel .pelicula img {
 	width: 100%;
 	vertical-align: top;
 }
@@ -486,27 +517,27 @@ position: static
 		text-align: center;
 	}
 
-	.pelicula-principal {
+	.imagenes-principal {
 		font-size: 14px;
 	}
 
-	.pelicula-principal .descripcion {
+	.imagenes-principal .descripcion {
 		max-width: 100%;
 	}
 
-	.peliculas-recomendadas .contenedor-carousel {
+	.imagenes-recomendadas .contenedor-carousel {
 		overflow: visible;
 	}
 
-	.peliculas-recomendadas .contenedor-carousel .carousel {
+	.imagenes-recomendadas .contenedor-carousel .carousel {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 20px;
 	}
 
-	.peliculas-recomendadas .indicadores,
-	.peliculas-recomendadas .flecha-izquierda,
-	.peliculas-recomendadas .flecha-derecha {
+	.imagenes-recomendadas .indicadores,
+	.imagenes-recomendadas .flecha-izquierda,
+	.imagenes-recomendadas .flecha-derecha {
 		display: none;
 	}
 }
