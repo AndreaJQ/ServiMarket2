@@ -1,8 +1,8 @@
-
+/*
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@500&display=swap');
-
+*/
 body {
-       font-family: 'Signika', sans-serif !important;
+       /*font-family: 'Signika', sans-serif !important;*/
        background-image: url('../img/portada1.webp');
        background-size: cover;
        background-repeat: no-repeat;
@@ -29,6 +29,35 @@ header.abajo{
     z-index: 10;
 }
 
+
+.linea-azul{
+    background-color:#0F2E5B;
+    width: 100%;
+    height: 0.5rem;
+}
+/*barra de navegación de servicios*/
+.navbar-actions{
+    background-color: #7CA676;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.nav-item1{
+    flex: 1 1 auto;
+    height : 3em;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #2C9B51;
+}
+
+.nav-item1:hover{
+    background-color: #364F75;
+    color: #fff;
+    border: 1px solid #4D72A8;
+}
+
+
 .reg {
     text-decoration: none;
     font-size: 1.2rem;
@@ -51,10 +80,6 @@ header.abajo{
     border-radius: 7px;
 }
 
-.nav-link:hover {
-    text-decoration: underline; /* Subraya cuando acerco el mouse */
-    transform: scale(1.1); /* Aplica una escala de 1.1 al acercar el mouse */
-}
 
 .btn-1 {
     background-color: #2C9B51;
@@ -74,11 +99,11 @@ header.abajo{
 .a1 {
     min-height: 100%;
 }
-
+/*
 label>a {
     text-decoration: none;
 }
-
+*/
 
 
 /* Estilos para la sección de publicaciones */

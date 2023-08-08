@@ -11,6 +11,10 @@
         
         <main class="main-gris pt-5">
             <div class="container">
+                <div class="d-flex fles-row justify-content-between align-items-center">
+                    <h1>Edite su perfil</h1>
+                    <a class="btn btn-outline-success" th:href="@{/user/perfil}" type="button">Volver</a>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <img th:if="${session.usuariosession.image != null}" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" alt="perfil" width="250" class="rounded-circle">
