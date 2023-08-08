@@ -167,6 +167,11 @@ public class UserService implements UserDetailsService {
             throw new MyException("El atributo 'password' no puede ser nulo o vacío");
         }
 
+        if (password.length() <= 8) {
+            throw new MyException("La contraseña debe tener mínimo 8 caracteres");
+        }
+
+
         // Verificar que el atributo "contact" no sea nulo o vacío
         if (us.getContact() == null || us.getContact().isEmpty()) {
             throw new MyException("El atributo 'contact' no puede ser nulo o vacío");
