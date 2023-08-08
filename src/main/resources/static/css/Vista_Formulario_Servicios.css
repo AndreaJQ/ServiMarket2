@@ -70,7 +70,6 @@ body {
 estilos de la utilidad
 Copiar esto
 =====================================*/
-.seccion-perfil-usuario .perfil-usuario-body,
 .seccion-perfil-usuario {
     display: flex;
     flex-wrap: wrap;
@@ -153,28 +152,8 @@ Copiar esto
     cursor: pointer;
 }
 
-.seccion-perfil-usuario .perfil-usuario-body {
-    width: 70%;
-    position: relative;
-    max-width: 750px;
-}
-.seccion-perfil-usuario .perfil-usuario-titulo-descripcion{
-    width: 70%;
-    position: relative;
-    max-width: 750px;
-}
 
-.seccion-perfil-usuario .perfil-usuario-body .titulo {
-    display: block;
-    width: 100%;
-    font-size: 1.75em;
-    margin-bottom: 0.5rem;
-}
 
-.seccion-perfil-usuario .perfil-usuario-body .texto {
-    color: #848484;
-    font-size: 0.95em;
-}
 
 h4{
     text-align: center;
@@ -200,7 +179,7 @@ h4{
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
     background-color: #fff;
     border-radius: 15px;
-    width: 100%;
+    width: 60%;
     margin-bottom: 1.25rem;
     text-align: center;
     height: auto
@@ -316,7 +295,24 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
 .seccion-perfil-usuario .boton-redes.instagram {
     background: linear-gradient(45deg, #FF2DFD, #40A7FF);
 }
+/*LINEAS AGREGADAS POR ANDREA-----*/
+.perfil-usuario-body{
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* Alinea verticalmente en el centro */
+        justify-content: space-around; /* Distribuye el espacio sobrante entre los elementos */
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan en una nueva línea si no caben */
+    }
 
+.ImagenesyDescripcion{
+    display: flex;
+    flex-direction: row; /* Organiza los elementos en una fila horizontal */
+    align-items: flex-start; /* Alinea los elementos en la parte superior */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap;
+    margin: 20px; /* Ajusta los márgenes según lo necesario */
+}
+/*FIN LINEAS AGREGADAS POR ANDREA-----*/
 /* adactacion a dispositivos */
 @media (max-width: 750px) {
     
