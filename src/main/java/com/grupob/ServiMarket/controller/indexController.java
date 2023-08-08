@@ -41,7 +41,7 @@ public class indexController {
         try {
             userService.create(userEntity, password, archivo);
 
-            model.put("exito", "Usuario registrado correctamente!");
+            model.addAttribute("exito", "Usuario registrado correctamente!");
 
             return "login.html";
         } catch (MyException ex) {
@@ -55,7 +55,7 @@ public class indexController {
     @GetMapping("/ingresar")
     public String login(@RequestParam (required = false) String error, ModelMap modelo) {
         if (error != null){
-            modelo.put("error","Usuario o contrasena invalidos ");
+            modelo.addAttribute("error","Usuario o contrasena invalidos. <br> Intenta nuevamente!");
         }
 
         return "login.html";

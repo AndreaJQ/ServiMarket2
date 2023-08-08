@@ -31,8 +31,8 @@
                 <!-- En esta parte de abajo agregue los contenedores section que aparecen abajo de la pagina -->
 
                 <div class="publicaciones-container" >
-                    <div th:if="${error != null}" class="alert alert-danger" role="alert">
-                        <p th:text="${error}"></p>
+                    <div th:if="${error != null}" class="alert alert-danger" role="alert" style="text-align: center;">
+                        <p th:utext="${error}" style="text-align: center;"></p>
                     </div>
 
                     <div th:each="publication:${publication}" class="publicacion">

@@ -11,6 +11,9 @@
     <div class="d-flex flex-row-reverse a1">
         <div class="col-md-4 panel2" id="panel">
             <div class="container p-5">
+                <div th:if="${error != null}" class="alert alert-danger" role="alert">
+                    <p th:utext="${error}"></p>
+                </div>
                 <h1>Logéate!</h1>
 
                 <form class="form" th:action="@{/logincheck}" method="POST">
