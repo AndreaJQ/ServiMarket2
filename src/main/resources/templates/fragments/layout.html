@@ -8,6 +8,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         <title>ServiceMARKET - Tu app de servicios confiables</title>
     </head>
     <body>
@@ -47,7 +48,14 @@
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/publicationsbyUser}" sec:authorize="hasAnyRole('ROLE_PROVIDER')"
-                       class="nav-link" role="button">Servicios Publicados</a>
+                       class="nav-link" role="button">Servicios Publicados
+                       </a>
+                </div>
+                <div class="nav-item1">
+                    <a th:href="@{/solicitudbyProvider}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="nav-link"
+                       role="button">Servicios Solicitados
+                        <i th:each="solicitud: ${solicitud}" th:if="${solicitud.completo == false}"
+                        class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i></a>
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/califications}" sec:authorize="hasAnyRole('ROLE_PROVIDER')" class="nav-link"
@@ -63,19 +71,32 @@
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/admin/solicitudes}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
-                       role="button">Listar Solicitudes</a>
+                       role="button" > </i>Listar Solicitudes
+                        <i th:each="solicitud: ${solicitud}"
+                           th:if="${solicitud.completo == false}"
+                           class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i>
+                    </a>
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/admin/califications}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
-                       role="button">Listar Calificaciones</a>
+                       role="button">Listar Calificaciones
+                        </a>
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link"
                        role="button">Visualizar Servicios</a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link"
-                       role="button">Listar Servicios Contratados</a>
+                    <div>
+                        <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link"
+                           role="button">Listar Servicios Contratados
+                            <i th:each="solicitud: ${solicitud}"
+                               th:if="${solicitud.userClient.id ==session.usuariosession.id && solicitud.completo == true && solicitud.calificado==false}"
+                               class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i>
+                        </a>
+                         </div>
+
+
                 </div>
 
             </div>

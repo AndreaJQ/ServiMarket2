@@ -1,10 +1,10 @@
 package com.grupob.ServiMarket.controller;
 import com.grupob.ServiMarket.entity.Image;
+import com.grupob.ServiMarket.entity.Score;
+import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
-import com.grupob.ServiMarket.service.ImageService;
-import com.grupob.ServiMarket.service.ScoreService;
-import com.grupob.ServiMarket.service.UserService;
+import com.grupob.ServiMarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -28,6 +28,12 @@ public class UserController {
 
     @Autowired
     private ScoreService scoreService;
+    @Autowired
+    private PublicationService pService;
+
+    @Autowired
+    private SolicitudService solService;
+
 
 
     //---------------------------READ-----------------------LIST
@@ -52,6 +58,10 @@ return "user_list.html";
 
         Double promedioPuntaje= scoreService.calcularPromedioPuntaje(user);
         modelo.put("promedioPuntaje",promedioPuntaje);
+        List<Solicitud> solicitud = solService.list();
+        modelo.addAttribute("solicitud", solicitud);
+        List<Score> score = scoreService.list();
+        modelo.addAttribute("score", score);
         return "perfil_user.html";
     }
 

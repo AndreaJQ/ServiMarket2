@@ -173,7 +173,7 @@ h4{
 
 
 .seccion-perfil-usuario .titulo-descripcion {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
@@ -222,7 +222,7 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
     color: #000; /* Color de texto en negro */
 }
 .rubro{
-    font-size: 19px;
+    font-size: 15px;
     display: inline-block;
     flex: 0 0 auto; /* El título "Rubro: Electricidad" ocupa el ancho necesario */
     margin-right: 10px; /* Agregamos un pequeño margen derecho para separarlo del título */
@@ -307,10 +307,10 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
 .ImagenesyDescripcion{
     display: flex;
     flex-direction: row; /* Organiza los elementos en una fila horizontal */
-    align-items: flex-start; /* Alinea los elementos en la parte superior */
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    flex-wrap: wrap;
-    margin: 20px; /* Ajusta los márgenes según lo necesario */
+    align-items: start; /* Alinea los elementos en la parte superior */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: nowrap;
+    margin: 60px; /* Ajusta los márgenes según lo necesario */
 }
 /*FIN LINEAS AGREGADAS POR ANDREA-----*/
 /* adactacion a dispositivos */
@@ -400,7 +400,7 @@ button:hover {
 /* ---- ----- ----- Estilos para el carrusel de imagenes ----- ----- ----- */
 .carrusel-container {
     flex: 1;
-    margin-right: 20px;
+    margin-right: 60px;
 }
 .peliculas-recomendadas {
 	margin-bottom: 70px;
@@ -408,14 +408,15 @@ button:hover {
 }
 
 .peliculas-recomendadas .contenedor-principal {
-	display: flex;
-	align-items: center;
+
+	align-items: align-left;
 	position: relative;
 }
 
 .peliculas-recomendadas .contenedor-principal .flecha-izquierda,
 .peliculas-recomendadas .contenedor-principal .flecha-derecha {
-	position: absolute;
+	position: static;
+
 	border: none;
 	background: rgba(0,0,0,0.3);
 	font-size: 40px;
@@ -444,14 +445,16 @@ button:hover {
 
 /* ---- ----- ----- Carousel ----- ----- ----- */
 .peliculas-recomendadas .contenedor-carousel {
-	width: 100%;
-	padding: 20px 0;
+position: static
+	width: 80%;
+	padding: 60 px ;
 	overflow: hidden;
 	scroll-behavior: smooth;
 }
 
 .peliculas-recomendadas .contenedor-carousel .carousel {
-	display: flex;
+position: static
+	display: block ;
 	flex-wrap: nowrap;
 }
 
