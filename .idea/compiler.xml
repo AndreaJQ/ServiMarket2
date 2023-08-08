@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ServiMarket" />
         <module name="santi2" />
+        <module name="ServiMarket2" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ServiMarket" options="-parameters" />
+      <module name="ServiMarket2" options="-parameters" />
       <module name="santi2" options="-parameters" />
     </option>
   </component>
