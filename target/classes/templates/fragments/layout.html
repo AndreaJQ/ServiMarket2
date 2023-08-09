@@ -93,6 +93,10 @@
                             <i th:each="solicitud: ${solicitud}"
                                th:if="${solicitud.userClient.id ==session.usuariosession.id && solicitud.completo == true && solicitud.calificado==false}"
                                class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i>
+                            <!--<i th:each="score: ${score}"
+                               th:if="${score.cliente.id ==session.usuariosession.id && score.censured == true}"
+                               class="bi bi-bell-fill" style=" color: rgb(255, 0, 0); opacity: 1;" ></i>-->
+
                         </a>
                          </div>
 

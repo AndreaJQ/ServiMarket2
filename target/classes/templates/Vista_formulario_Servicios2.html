@@ -70,7 +70,7 @@
                      </ul>
                  </div>
                  <div class="boton-volver">
-                    <button onclick="goBack()" class="btn btn-primary">Volver</button>
+                     <a class="btn btn-outline-success"  th:href="@{/publist}" type="button">Volver</a>
                 </div>
              </div>
 
@@ -82,8 +82,8 @@
 
                             </div>
                             <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-success"  th:style="'width: ' + ${promedioPuntaje} + '%'">
+                                 aria-valuemin="0" aria-valuemax="10">
+                                <div class="progress-bar bg-success"   th:style="'width: ' + (${promedioPuntaje} != null ? ${promedioPuntaje}*10 : 0) + '%'">
                                 </div>
                             </div>
 
@@ -100,18 +100,12 @@
         </div>
 
 
- 
 
-
-            <!--Aca empieza el carrusel de imagenes. FALTA AGREGARLE THYMELEAF-->   
 
                 <!-- --------CORROBORAR VISTA CAROUSEL -->
             <div class="ImagenesyDescripcion">
-                  <div class="imagenes-recomendadas contenedor">
 
-                      <div class="contenedor-principal">
-
-                          <div class="contenedor-carousel">
+                          <div class="imagenes">
                               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                   <ol class="carousel-indicators">
                                       <li th:each="image, iterStat : ${pub.image}" th:data-target="'#carouselExampleIndicators'" th:data-slide-to="${iterStat.index}" th:class="${iterStat.index == 0} ? 'active' : ''"></li>
@@ -130,18 +124,16 @@
                                       <span class="sr-only">Next</span>
                                   </a>
                               </div>
+
                           </div>
-
-                      </div>
-                  </div>
-
+                    <div class="descripcion">
+                         <h4 class="titulo"><strong>Descripcion</strong></h4>
+                         <p class="texto"> <span class="texto-desc" th:text="*{pub.description2}"></span></p>
+                     </div>
 
 
               <!-- Empieza el container de la descripcion -->
-            <div class="titulo-descripcion">
-                <h4 class="titulo"><strong>Descripcion</strong></h4>
-                <p class="texto"> <span class="texto-desc" th:text="*{pub.description2}"></span></p>
-            </div>
+
             </div>
 
              <div class="titulo-descripcion">
@@ -172,13 +164,13 @@
         </section>
 
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/editPublication/{pId} (pId = ${pub.id})}" th:if="${session.usuariosession.id == user.id}" class="btn btn-primary"  role="button">Editar</a>
+        <a th:href="@{/editPublication/{pId} (pId = ${pub.id})}" th:if="${session.usuariosession.id == user.id }"  class="btn btn-outline-success"  role="button">Editar</a>
     </div>
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/solicitudbyProvider}"  th:if="${session.usuariosession.id == user.id}" class="btn btn-primary"  role="button">Servicios Solicitados</a>
+        <a th:href="@{/solicitudbyProvider}"  th:if="${session.usuariosession.id == user.id}" class="btn btn-outline-success"  role="button">Servicios Solicitados</a>
     </div>
     <div class="d-grid gap-2 my-5" >
-        <a th:href="@{/solicitud/{pId}/nueva (pId = ${pub.id})}" th:if="${session.usuariosession.id != user.id}" class="btn btn-primary"  role="button">Solicitar Servicio</a>
+        <a th:href="@{/solicitud/{pId}/nueva (pId = ${pub.id})}" th:if="${session.usuariosession.id != user.id}" class="btn btn-outline-success"  role="button">Solicitar Servicio</a>
     </div>
 
 
