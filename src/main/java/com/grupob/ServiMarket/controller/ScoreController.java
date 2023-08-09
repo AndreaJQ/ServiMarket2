@@ -5,6 +5,7 @@ import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.service.ScoreService;
+import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,9 @@ public class ScoreController {
     @Autowired
     private ScoreService scoreService;
     @Autowired
-    private UserService userService;//por si lo necesitamos después
+    private SolicitudService solService;
+    @Autowired
+    private UserService userService;
 
     //-------------------CREATE score---------------------------
     @GetMapping("/calification/{solid}/nueva")
@@ -73,6 +76,8 @@ public class ScoreController {
         public String listCalifications (ModelMap model){
             List<Score> score = scoreService.list();
             model.put("score", score);
+            List<Solicitud> solicitud = solService.list();
+            model.addAttribute("solicitud", solicitud);
             return "califications-list-provider.html";
         }
 
