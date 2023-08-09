@@ -182,8 +182,6 @@ public class UserService implements UserDetailsService {
             throw new MyException("La contraseña debe tener mínimo 8 caracteres");
         }
 
-
-
         // Verificar que el correo electrónico no esté registrado previamente
         if (userRepository.existsByEmail(us.getEmail())) {
             throw new MyException("El correo electrónico ya está registrado");
