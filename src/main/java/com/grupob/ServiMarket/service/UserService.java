@@ -152,36 +152,34 @@ public class UserService implements UserDetailsService {
 
         // Verificar que el atributo "name" no sea nulo o vacío
         if (us.getName() == null || us.getName().isEmpty()) {
-            throw new MyException("El atributo 'name' no puede ser nulo o vacío");
+            throw new MyException("El campo 'NOMBRE' no puede quedar vacío");
         }
 
         // El atributo "lastName" no se valida ya que no tiene restricciones
-
-        // Verificar que el atributo "email" no sea nulo o vacío y sea un correo electrónico válido
-        if (us.getEmail() == null || us.getEmail().isEmpty()) {
-            throw new MyException("El atributo 'email' no puede ser nulo, vacío o inválido");
-        }
-
-        // Verificar que el atributo "password" no sea nulo o vacío
-        if (password == null || password.isEmpty()) {
-            throw new MyException("El atributo 'password' no puede ser nulo o vacío");
-        }
-
-        if (password.length() <= 8) {
-            throw new MyException("La contraseña debe tener mínimo 8 caracteres");
-        }
-
-        if (!password.equals(password2)) {
-            throw new MyException("Las contraseñas ingresadas deben ser iguales");
-        }
         // Verificar que el atributo "contact" no sea nulo o vacío
         if (us.getContact() == null || us.getContact().isEmpty()) {
-            throw new MyException("El atributo 'contact' no puede ser nulo o vacío");
+            throw new MyException("El campo 'CONTACTO' no puede quedar vacío");
         }
 
         // Verificar que el atributo "address" no sea nulo o vacío
         if (us.getAddress() == null || us.getAddress().isEmpty()) {
-            throw new MyException("El atributo 'address' no puede ser nulo o vacío");
+            throw new MyException("El campo 'DIRECCION' no puede quedar vacío");
+        }
+
+        // Verificar que el atributo "email" no sea nulo o vacío y sea un correo electrónico válido
+        if (us.getEmail() == null || us.getEmail().isEmpty()) {
+            throw new MyException("El campo 'CORREO ELECTRÓNICO' no puede ser nulo, vacío o inválido");
+        }
+
+        // Verificar que el atributo "password" no sea nulo o vacío
+        if (password == null || password.isEmpty()) {
+            throw new MyException("El campo 'CONTRASEÑA' no puede quedar vacío");
+        }
+        if (!password.equals(password2)) {
+            throw new MyException("Las contraseñas ingresadas deben ser iguales");
+        }
+        if (password.length() <= 8) {
+            throw new MyException("La contraseña debe tener mínimo 8 caracteres");
         }
 
         // Verificar que el correo electrónico no esté registrado previamente

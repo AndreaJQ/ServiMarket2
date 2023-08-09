@@ -118,3 +118,29 @@ button {
     font-weight: bold;
     color: #007bff;
 }
+.rich-text-editor {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.toolbar {
+    margin-bottom: 10px;
+}
+
+.toolbar button {
+    margin-right: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content {
+    border: 1px solid #ccc;
+    min-height: 150px;
+    padding: 5px;
+    overflow-y: auto;
+}
+
+#hidden-editor {
+    display: none;
+}
+

@@ -37,9 +37,11 @@ public class indexController {
         return "registro.html";
     }
     @PostMapping("/newuser")
+
     public String saveUser(@Valid UserEntity userEntity, String password, String password2 MultipartFile archivo , BindingResult result, ModelMap model ) throws Exception {
         try {
             userService.create(userEntity, password,password2 archivo);
+
 
             model.addAttribute("exito", "Usuario registrado correctamente!");
 
@@ -50,7 +52,7 @@ public class indexController {
 
             return "registro.html";
         }
-        }
+    }
 
     @GetMapping("/ingresar")
     public String login(@RequestParam (required = false) String error, ModelMap modelo) {

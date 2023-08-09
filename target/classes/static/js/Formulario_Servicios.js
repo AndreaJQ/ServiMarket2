@@ -60,3 +60,16 @@ function mostrarMiniaturas() {
 
 // Evento para mostrar las miniaturas al seleccionar imágenes
 document.getElementById('fotos').addEventListener('change', mostrarMiniaturas);
+
+function formatText(command, value = null) {
+    document.execCommand(command, false, value);
+    updateHiddenEditor();
+}
+
+function updateHiddenEditor() {
+    const editor = document.getElementById('editor');
+    const hiddenEditor = document.getElementById('hidden-editor');
+    hiddenEditor.value = editor.innerHTML;
+}
+
+document.getElementById('editor').addEventListener('input', updateHiddenEditor);

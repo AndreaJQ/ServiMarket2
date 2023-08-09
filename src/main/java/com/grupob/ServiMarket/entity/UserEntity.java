@@ -23,25 +23,25 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+
     private String name;
 
 
     private String lastName;
 
-    @NotBlank
+
     @Email
     private String email;
 
 
-    @NotBlank
+
     private String password;
 
-    @NotBlank
+
 
     private String contact;
 
-    @NotBlank
+
     private String address;
 
     @OneToOne
