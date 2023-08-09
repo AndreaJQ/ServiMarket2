@@ -33,16 +33,11 @@
 
 
                 <label class="form-label" for="rubro">Selecciona un rubro:</label>
-                <select class="form-control mb-4" id="rubro" name="rubro">
-                    <option th:value="ELECTRICIDAD">ELECTRICIDAD</option>
-                    <option th:value="GAS">GAS</option>
-                    <option th:value="PLOMERÍA">PLOMERÍA</option>
-                    <option th:value="PINTURA">PINTURA</option>
-                    <option th:value="ALBAÑILERÍA">ALBAÑILERÍA</option>
-                    <option th:value="FLETE">FLETE</option>
-                    <option th:value="CARPINTERIA">CARPINTERIA</option>
-
-
+                <select class="form-control me-2" id="rubro" name="rubro" >
+                    <option value="">Seleccione un rubro</option>
+                    <option th:each="rubro : ${T(com.grupob.ServiMarket.enums.Rubro).values()}"
+                            th:value="${rubro}" th:text="${rubro}"></option>
+                </select>
 
                 <label class="form-label" for="archivo">Cargue sus imagenes: </label>
 

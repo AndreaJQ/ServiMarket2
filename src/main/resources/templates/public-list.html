@@ -24,8 +24,10 @@
           <th>USUARIO</th>
           <th>IMAGEN</th>
           <th>RUBRO</th>
-          <th>ELIMINAR</th>
+          <th>ESTADO</th>
           <th>VER PUBLICACION</th>
+          <th>PUBLICACION</th>
+          <th>ELIMINAR</th>
           </tr>
       </thead>
       <tbody th:each="publication : ${publication}">
@@ -39,8 +41,11 @@
 
           <td th:text="${publication.rubro}"></td>
 
-        <td><a th:href= "@{/admin/deletePub/{id} (id=${publication.id})}" class="btn btn-outline-danger"> ELIMINAR </a> </td>
+        <td th:if="${publication.publicated}">ALTA</td>
+        <td th:unless="${publication.publicated}"> BAJA</td>
           <td><a th:href= "@{/publication/{pubId} (pubId=${publication.id})}" class="btn btn-outline-info"> VER </a> </td>
+        <td><a th:href= "@{/admin/publicated/{id} (id=${publication.id})}" class="btn btn-outline-info"> DAR ALTA/BAJA </a> </td>
+          <td><a th:href= "@{/admin/deletePub/{id} (id=${publication.id})}" class="btn btn-outline-danger"> ELIMINAR </a> </td>
       </tr>
 
       </tbody>

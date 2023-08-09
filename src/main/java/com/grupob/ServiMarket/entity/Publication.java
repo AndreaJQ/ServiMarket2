@@ -42,5 +42,7 @@ public class Publication {
         private List<UserEntity> usercliente;
 
         private boolean confirmacion;// atributo para ver si el trabajo es rechazado/aceptado
-        private boolean estado;//atributo para ver si esta en curso o finalizado el trabajo
+        private boolean estado;//// atributo para ver si esta en curso o finalizado el trabajo
+
+        private boolean publicated;// atributo para ver si esta visible o no
 }

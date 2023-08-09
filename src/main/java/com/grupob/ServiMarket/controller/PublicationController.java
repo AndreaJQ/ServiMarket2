@@ -8,6 +8,8 @@ import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -72,11 +74,16 @@ public class PublicationController  {
 
     //---------------------------READ-----------------------LIST
     //GET MAPPING
+
     @GetMapping("/publist")
-    public String publicationsList(Model model){
+    public String publicationsList(Model model, Authentication authentication){
 
         List<Publication> publication = pService.list();
         model.addAttribute("publication",publication);
+
+        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(authority -> ((GrantedAuthority) authority).getAuthority().equals("ROLE_ADMIN"));
+        model.addAttribute("isAdmin", isAdmin);
 
         return "inicio.html";
     }

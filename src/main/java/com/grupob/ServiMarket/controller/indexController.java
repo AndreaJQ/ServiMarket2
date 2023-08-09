@@ -25,7 +25,7 @@ public class indexController {
     private UserService userService;
 
     @GetMapping("/")
-    public String index (){
+    public String index ( ){
         return "redirect:/publist";
     }
 

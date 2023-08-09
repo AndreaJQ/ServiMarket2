@@ -111,6 +111,18 @@ private ScoreService scoreService;
         model.addAttribute("score", score);
         return "public-list";
     }
+    //----------CHANGE PUBLICATION STATUS----------------
+    @GetMapping("/publicated/{id}")
+    public String changeStatuspub(@PathVariable Long id){
+       pService.changePublicated(id);
+        return "redirect:/admin/publications";
+    }
+
+    @PostMapping("/publicated/{id}")
+    public String changeStatuspubl(@PathVariable Long id){
+        pService.changePublicated(id);
+        return "redirect:/admin/publications";
+    }
     //----------DELETE PUBLICATION----------------
     @GetMapping("/deletePub/{id}")
     public String deletePublication(@PathVariable("id") Long id, Model model){
