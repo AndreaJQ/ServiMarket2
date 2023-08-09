@@ -43,34 +43,34 @@
         <main>
             <div th:fragment="nav-server" class="navbar-actions mb-5">
                 <div class="nav-item1">
-                    <a th:href="@{/publicacion}" sec:authorize="hasAnyRole('ROLE_PROVIDER')" class="nav-link"
+                    <a th:href="@{/publicacion}" sec:authorize="hasAnyRole('ROLE_PROVIDER')" class="nav-link link-custom"
                        role="button">Publicar Servicio</a>
                 </div>
                 <div class="nav-item1">
                     <a th:href="@{/publicationsbyUser}" sec:authorize="hasAnyRole('ROLE_PROVIDER')"
-                       class="nav-link" role="button">Servicios Publicados
+                       class="nav-link link-custom" role="button">Servicios Publicados
                        </a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/solicitudbyProvider}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="nav-link"
+                    <a th:href="@{/solicitudbyProvider}"   sec:authorize="hasAnyRole('ROLE_PROVIDER')"class="nav-link link-custom"
                        role="button">Servicios Solicitados
                         <i th:each="solicitud: ${solicitud}" th:if="${solicitud.completo == false}"
                         class="bi bi-bell-fill" style=" color: rgb(255, 210, 48); opacity: 1;" ></i></a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/califications}" sec:authorize="hasAnyRole('ROLE_PROVIDER')" class="nav-link"
+                    <a th:href="@{/califications}" sec:authorize="hasAnyRole('ROLE_PROVIDER')" class="nav-link link-custom"
                        role="button">Listar Calificaciones</a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/admin/users}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
+                    <a th:href="@{/admin/users}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link link-custom"
                        role="button">Listar Usuarios</a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/admin/publications}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
+                    <a th:href="@{/admin/publications}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link link-custom"
                        role="button">Listar Publicacions</a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/admin/solicitudes}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
+                    <a th:href="@{/admin/solicitudes}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link link-custom"
                        role="button" > </i>Listar Solicitudes
                         <i th:each="solicitud: ${solicitud}"
                            th:if="${solicitud.completo == false}"
@@ -78,17 +78,17 @@
                     </a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/admin/califications}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link"
+                    <a th:href="@{/admin/califications}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="nav-link link-custom"
                        role="button">Listar Calificaciones
                         </a>
                 </div>
                 <div class="nav-item1">
-                    <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link"
+                    <a th:href="@{/publist}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link link-custom"
                        role="button">Visualizar Servicios</a>
                 </div>
                 <div class="nav-item1">
                     <div>
-                        <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link"
+                        <a th:href="@{/solicitudbyUser}" sec:authorize="hasAnyRole('ROLE_USER')" class="nav-link link-custom"
                            role="button">Listar Servicios Contratados
                             <i th:each="solicitud: ${solicitud}"
                                th:if="${solicitud.userClient.id ==session.usuariosession.id && solicitud.completo == true && solicitud.calificado==false}"

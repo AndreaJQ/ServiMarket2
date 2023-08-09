@@ -14,6 +14,9 @@
                 <div th:if="${error != null}" class="alert alert-danger" role="alert">
                     <p th:utext="${error}"></p>
                 </div>
+                <div th:if="${exito != null}" class="alert alert-success" role="alert">
+                    <p th:utext="${exito}"></p>
+                </div>
                 <h1>Logéate!</h1>
 
                 <form class="form" th:action="@{/logincheck}" method="POST">

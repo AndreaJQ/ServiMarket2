@@ -42,15 +42,22 @@ header.abajo{
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
+    text-decoration: none;
 }
 .nav-item1{
     flex: 1 1 auto;
     height : 3em;
     text-align: center;
     padding: 0.5rem;
-    border: 1px solid #2C9B51;
 }
-
+.nav-link.link-custom {
+    color: white;
+    text-decoration: none;
+}
+.link-custom {
+    color: white !important;
+    text-decoration: none;
+}
 .nav-item1:hover{
     background-color: #364F75;
     color: #fff;
