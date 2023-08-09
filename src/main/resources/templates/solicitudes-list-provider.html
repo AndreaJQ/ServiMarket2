@@ -41,7 +41,8 @@
       <td><a  th:href= "@{/editStatusByProvider/{id} (id=${solicitud.id})}" class="btn btn-outline-info"> CAMBIAR </a></td>
       <td th:if="${solicitud.completo}">COMPLETO</td>
       <td th:unless="${solicitud.completo}"> - </td>
-      <td><a th:href= "@{/editCompletobyProvider/{id} (id=${solicitud.id})}" class="btn btn-outline-info"> COMPLETO </a></td>
+      <td th:if="${solicitud.dardebaja}">ALTA</td>
+      <td th:unless="${solicitud.dardebaja}"> BAJA</td>
       <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.puntaje}"> </td>
       <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.comentario}"> </td>
       </tr>

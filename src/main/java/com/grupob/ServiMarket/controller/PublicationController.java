@@ -81,11 +81,17 @@ public class PublicationController  {
         List<Publication> publication = pService.list();
         model.addAttribute("publication",publication);
 
-        boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
-                .anyMatch(authority -> ((GrantedAuthority) authority).getAuthority().equals("ROLE_ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
 
         return "inicio.html";
+    }
+    @GetMapping("/publistAdminView")
+    public String publicationsListAdmin(Model model, Authentication authentication){
+
+        List<Publication> publication = pService.list();
+        model.addAttribute("publication",publication);
+
+
+        return "pubListAdminView.html";
     }
 
     @GetMapping("/publicationsbyUser")
