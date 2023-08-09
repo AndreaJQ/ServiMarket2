@@ -173,7 +173,7 @@ h4{
 
 
 .seccion-perfil-usuario .titulo-descripcion {
-    display: block;
+    display: flex;
     flex-wrap: wrap;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 12px rgba(0, 0, 0, .2);
@@ -312,6 +312,39 @@ seccion-perfil-usuario .perfil-usuario-titulo-Rubro .titulo {
     flex-wrap: nowrap;
     margin: 60px; /* Ajusta los márgenes según lo necesario */
 }
+.ImagenesyDescripcion{
+    display: flex;
+    flex-direction: row; /* Organiza los elementos en una fila horizontal */
+    align-items: flex-start; /* Alinea los elementos en la parte superior */
+
+    flex-wrap: wrap;
+    margin: 20px; /* Ajusta los márgenes según lo necesario */
+    padding: 1.5rem 2rem;
+        box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+        background-color: #fff;
+        border-radius: 15px;
+        width: 60%;
+        margin-bottom: 1.25rem;
+        text-align: center;
+        height: auto
+}
+.imagenes {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+     margin-right: 50px/* Permite que las imágenes se envuelvan en una nueva línea si no caben */
+}
+
+.imagen {
+    width: 80%; /* Cada imagen ocupa la mitad del ancho del contenedor de imágenes */
+    padding: 5px; /* Agrega espacios entre las imágenes */
+    box-sizing: border-box;
+     /* Evita que los espacios añadan al ancho total */
+}
+.descripcion{
+ flex: 1;
+ margin-left: 100px
+
 /*FIN LINEAS AGREGADAS POR ANDREA-----*/
 /* adactacion a dispositivos */
 @media (max-width: 750px) {

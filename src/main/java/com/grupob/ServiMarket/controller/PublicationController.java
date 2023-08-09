@@ -108,7 +108,7 @@ public class PublicationController  {
         modelo.put("promedioPuntaje",promedioPuntaje);
         //List<Object[]> scores = scoreService.getProviderIdAndScoreByPublication(pub);
         //modelo.addAttribute("scores", scores);
-        return "Vista_formulario_Servicios.html";
+        return "Vista_formulario_Servicios2.html";
     }
 
 
