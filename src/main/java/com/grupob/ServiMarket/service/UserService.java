@@ -37,8 +37,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private ImageService imageService;
     @Transactional
-    public void create(UserEntity us, String password, MultipartFile archivo) throws MyException {
-        validate(us,password,archivo);
+    public void create(UserEntity us, String password,String password2, MultipartFile archivo) throws MyException {
+        validate(us,password,password2,archivo);
         Image image;
         if (archivo != null && !archivo.isEmpty()) {
             image = imageService.guardar(archivo);
@@ -148,7 +148,7 @@ public class UserService implements UserDetailsService {
             return null;
         }
     }
-    private void validate(UserEntity us, String password, MultipartFile archivo) throws MyException {
+    private void validate(UserEntity us, String password,String password2, MultipartFile archivo) throws MyException {
 
         // Verificar que el atributo "name" no sea nulo o vacío
         if (us.getName() == null || us.getName().isEmpty()) {
@@ -171,7 +171,9 @@ public class UserService implements UserDetailsService {
             throw new MyException("La contraseña debe tener mínimo 8 caracteres");
         }
 
-
+        if (!password.equals(password2)) {
+            throw new MyException("Las contraseñas ingresadas deben ser iguales");
+        }
         // Verificar que el atributo "contact" no sea nulo o vacío
         if (us.getContact() == null || us.getContact().isEmpty()) {
             throw new MyException("El atributo 'contact' no puede ser nulo o vacío");
