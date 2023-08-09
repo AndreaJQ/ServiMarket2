@@ -35,7 +35,7 @@
                         <p th:utext="${error}" style="text-align: center;"></p>
                     </div>
 
-                    <div th:each="publication:${publication}" class="publicacion" th:if="${publication.publicated or isAdmin}">
+                    <div th:each="publication:${publication}" class="publicacion" th:if="${publication.publicated}">
                         <div class="contenido-publicacion">
                             <div th:if="${publication.image != null && publication.image.size() > 0}">
                             <img  th:src="@{'/imagen/' + ${publication.image[0].id}}"  alt="Imagen publicacion" class="imagen-publicacion">
@@ -55,6 +55,12 @@
 
                     </div>
 
+                    <div>
+
+                        <a class="btn btn-success" sec:authorize="hasAnyRole('ROLE_ADMIN')" th:href="@{/publistAdminView}">VER TODOS LOS SERVICIOS</a>
+
+
+                    </div>
 
                     <!--Aca finaliza ese codigo de los contenedores -->
 
