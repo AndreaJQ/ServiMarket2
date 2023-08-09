@@ -45,5 +45,7 @@ public class Solicitud {
 
     private boolean calificado;
 
+    private boolean dardebaja;
+
 
 }

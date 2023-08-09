@@ -7,5 +7,8 @@ public enum Rubro {
     PINTURA,
     ALBAÑILERÍA,
     FLETE,
-    CARPINTERIA;
+    CARPINTERIA,
+
+    LIMPIEZA,
+    PILETAS;
 }

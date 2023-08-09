@@ -24,6 +24,7 @@
               <th>USUARIO</th>
               <th>IMAGEN</th>
               <th>RUBRO</th>
+              <th>ESTADO</th>
               <th>VER PUBLICACION</th>
               <th>ELIMINAR</th>
 
@@ -40,6 +41,8 @@
                   <td><img th:if="${publication.image != null && publication.image.size() > 0}" th:src="@{'/imagen/' + ${publication.image[0].id}}"  alt="Imagen publicacion" class="imagen-publicacion" width="100" height="100"></td>
 
                   <td th:text="${publication.rubro}"></td>
+                  <td th:if="${publication.publicated}">ALTA</td>
+                  <td th:unless="${publication.publicated}"> BAJA</td>
 
                   <td><a th:href= "@{/publication/{pId} (pId=${publication.id})}" class="btn btn-outline-info"> VER </a> </td>
                   <td><a th:href= "@{/publicationdel/{pubId} (pubId=${publication.id})}" class="btn btn-outline-danger"> ELIMINAR </a> </td>

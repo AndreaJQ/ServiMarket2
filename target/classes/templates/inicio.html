@@ -35,7 +35,7 @@
                         <p th:utext="${error}" style="text-align: center;"></p>
                     </div>
 
-                    <div th:each="publication:${publication}" class="publicacion">
+                    <div th:each="publication:${publication}" class="publicacion" th:if="${publication.publicated or isAdmin}">
                         <div class="contenido-publicacion">
                             <div th:if="${publication.image != null && publication.image.size() > 0}">
                             <img  th:src="@{'/imagen/' + ${publication.image[0].id}}"  alt="Imagen publicacion" class="imagen-publicacion">

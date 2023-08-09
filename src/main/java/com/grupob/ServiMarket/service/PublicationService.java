@@ -3,6 +3,7 @@ package com.grupob.ServiMarket.service;
 
 import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.Publication;
+import com.grupob.ServiMarket.entity.Solicitud;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
@@ -97,7 +98,20 @@ public class PublicationService {
         }
 
     }
+    //------------------------CHANGE PUBLICATION STATUS--------------------------
+    @Transactional
+    public void changePublicated(Long id) {
+        Optional<Publication> answer = pRepository.findById(id);
+        if (answer.isPresent()) {
+            Publication pub = answer.get();
 
+            if (pub.isPublicated()) {
+                pub.setPublicated(false);
+            } else if (!pub.isPublicated()) {
+                pub.setPublicated(true);
+            }
+        }
+    }
 
 
     //------------------------DELETE--------------------------
