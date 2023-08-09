@@ -22,10 +22,12 @@
       <th>CLIENTE</th>
       <th>FECHA DE CREACION</th>
       <th>COMENTARIO SOLICITUD</th>
-      <th>ESTADO</th>
+      <th>ESTADO SERVICIO</th>
       <th>CAMBIAR ESTADO</th>
       <th>COMPLETO</th>
       <th>SET COMPLETO</th>
+      <th>ESTADO SOLICITUD</th>
+      <th>DAR DE BAJA</th>
       <th>CALIFICACION</th>
       <th>COMENTARIO</th>
 
@@ -43,6 +45,9 @@
         <td th:if="${solicitud.completo}">COMPLETO</td>
         <td th:unless="${solicitud.completo}"> - </td>
         <td><a th:href= "@{/admin/editCompleto/{id} (id=${solicitud.id})}" class="btn btn-outline-info">  COMPLETO </a></td>
+      <td th:if="${solicitud.dardebaja}">ALTA</td>
+      <td th:unless="${solicitud.dardebaja}"> BAJA</td>
+        <td><a th:href= "@{/admin/solicitudAltaBaja/{id} (id=${solicitud.id})}" class="btn btn-outline-info">  ALTA/BAJA </a></td>
         <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.puntaje}"> </td>
         <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.comentario}"> </td>
 

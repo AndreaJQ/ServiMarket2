@@ -21,10 +21,11 @@
         <th>CLIENTE</th>
         <th>FECHA DE CREACION</th>
         <th>COMENTARIO SOLICITUD</th>
-        <th>ESTADO</th>
+        <th>ESTADO SERVICIO</th>
         <th>CAMBIAR ESTADO</th>
         <th>COMPLETO</th>
         <th>SET COMPLETO</th>
+        <th>ESTADO SOLICITUD</th>
         <th>CALIFICACION</th>
         <th>COMENTARIO</th>
       </tr>
@@ -38,7 +39,8 @@
       <td th:text="${solicitud.comentario}"></td>
       <td th:text="${solicitud.estado}"></td>
       <td><a  th:href= "@{/editStatusByProvider/{id} (id=${solicitud.id})}" class="btn btn-outline-info"> CAMBIAR </a></td>
-      <td th:text="${solicitud.completo}"></td>
+      <td th:if="${solicitud.completo}">COMPLETO</td>
+      <td th:unless="${solicitud.completo}"> - </td>
       <td><a th:href= "@{/editCompletobyProvider/{id} (id=${solicitud.id})}" class="btn btn-outline-info"> COMPLETO </a></td>
       <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.puntaje}"> </td>
       <td th:each=" score : ${score}"  th:if="${solicitud.id == score.solicitud.id}" th:text="${score.comentario}"> </td>

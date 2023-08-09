@@ -157,6 +157,18 @@ private ScoreService scoreService;
         solService.changeStatus(id);
         return "redirect:/admin/solicitudes";
     }
+    //----------ALTA /BAJA  SOLICITUD----------------
+    @GetMapping("/solicitudAltaBaja/{id}")
+    public String solicitudAltaOBaja(@PathVariable Long id){
+        solService.solicitudAltaBaja(id);
+        return "redirect:/admin/solicitudes";
+    }
+
+    @PostMapping("/solicitudAltaBaja/{id}")
+    public String solicitudAltaBaja(@PathVariable Long id){
+        solService.solicitudAltaBaja(id);
+        return "redirect:/admin/solicitudes";
+    }
     //----------DELETE SOLICITUD----------------
     @GetMapping("/deleteSol/{solid}")
     public String deleteSolicitud(@PathVariable("solid") Long id, Model model){

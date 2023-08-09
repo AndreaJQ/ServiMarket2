@@ -47,6 +47,7 @@ public class SolicitudService {
             sol.setUserClient(user);
             sol.setEstado(EstadoServicio.PENDIENTE);
             sol.setCompleto(false);
+            sol.setDardebaja(true);
 
             solicitudRepository.save(sol);
         }
@@ -123,7 +124,19 @@ public class SolicitudService {
             }
         }
     }
+    @Transactional
+    public void solicitudAltaBaja(Long id) {
+        Optional<Solicitud> answer = solicitudRepository.findById(id);
+        if (answer.isPresent()) {
+            Solicitud sol = answer.get();
 
+            if (sol.isDardebaja()) {
+                sol.setDardebaja(false);
+            } else if (!sol.isDardebaja()) {
+                sol.setDardebaja(true);
+            }
+        }
+    }
 
 
 
