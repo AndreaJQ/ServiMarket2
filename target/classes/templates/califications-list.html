@@ -4,12 +4,11 @@
 
 
 <body>
-<header>
-  <nav th:replace="/fragments/nav :: navbar"></nav>
-</header>
+<header th:replace="fragments/layout :: _header"></header>
 
+<main class="main-gris">
+  <div th:replace="fragments/layout :: nav-server"></div>
 
-<main class="main-gris pt-5">
   <div class="container">
     <div class="d-flex fles-row justify-content-between align-items-center">
       <h1>Lista de Calificaciones</h1>
@@ -37,9 +36,9 @@
       <td th:text="${score.puntaje}"></td>
         <td th:unless="${score.censured}" th:text="${score.comentario}"> </td>
         <td th:if="${score.censured}"> CENSURADO</td>
-        <td><a th:href= "@{/admin/censureComment/{scid} (scid=${score.id})}" class="btn-eliminar"> CENSURAR </a></td>
+        <td><a th:href= "@{/admin/censureComment/{scid} (scid=${score.id})}" class="btn btn-outline-danger"> CENSURAR </a></td>
 
-      <td><a th:href= "@{/admin/deleteScore/{scid} (scid=${score.id})}"><i class="fas fa-exclamation-circle"></i> ELIMINAR </a> </td>
+      <td><a th:href= "@{/admin/deleteScore/{scid} (scid=${score.id})}" class="btn btn-outline-danger"> ELIMINAR </a> </td>
     </tr>
     </tbody>
   </table>

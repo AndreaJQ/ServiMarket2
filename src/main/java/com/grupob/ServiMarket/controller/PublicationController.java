@@ -88,6 +88,10 @@ public class PublicationController  {
         Long userId = user.getId();
         List<Publication> publication = pService.list();
         model.addAttribute("publication", publication);
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
         return "public-list-provider";
     }
 

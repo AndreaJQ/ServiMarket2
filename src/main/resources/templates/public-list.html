@@ -39,8 +39,8 @@
 
           <td th:text="${publication.rubro}"></td>
 
-        <td><a th:href= "@{/admin/deletePub/{id} (id=${publication.id})}"><i class="fas fa-exclamation-circle"></i> DELETE </a> </td>
-          <td><a th:href= "@{/publication/{pubId} (pubId=${publication.id})}"><i class="fas fa-exclamation-circle"></i> VER </a> </td>
+        <td><a th:href= "@{/admin/deletePub/{id} (id=${publication.id})}" class="btn btn-outline-danger"> ELIMINAR </a> </td>
+          <td><a th:href= "@{/publication/{pubId} (pubId=${publication.id})}" class="btn btn-outline-info"> VER </a> </td>
       </tr>
 
       </tbody>

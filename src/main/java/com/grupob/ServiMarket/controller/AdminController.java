@@ -57,6 +57,10 @@ private ScoreService scoreService;
     public String listUser (ModelMap model){
         List<UserEntity> user = userService.list();
         model.addAttribute("user", user);
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
         return "listUsers";
     }
 
@@ -101,6 +105,10 @@ private ScoreService scoreService;
     public String listPublic (ModelMap model){
         List<Publication> publication = pService.list();
         model.addAttribute("publication", publication);
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
+        List<Score> score = scoreService.list();
+        model.addAttribute("score", score);
         return "public-list";
     }
     //----------DELETE PUBLICATION----------------
@@ -161,6 +169,8 @@ private ScoreService scoreService;
     public String listCalifications(ModelMap model){
         List<Score> score = scoreService.list();
         model.addAttribute("score", score);
+        List<Solicitud> solicitud = solService.list();
+        model.addAttribute("solicitud", solicitud);
         return "califications-list";
     }
     //----------DELETE CALIFICATIONS----------------
