@@ -38,9 +38,9 @@ public class indexController {
     }
     @PostMapping("/newuser")
 
-    public String saveUser(@Valid UserEntity userEntity, String password, String password2 MultipartFile archivo , BindingResult result, ModelMap model ) throws Exception {
+    public String saveUser(@Valid UserEntity userEntity, String password, String password2, MultipartFile archivo , BindingResult result, ModelMap model ) throws Exception {
         try {
-            userService.create(userEntity, password,password2 archivo);
+            userService.create(userEntity, password,password2, archivo);
 
 
             model.addAttribute("exito", "Usuario registrado correctamente!");

@@ -18,13 +18,13 @@
   <table class="table">
     <thead>
         <tr>
-          <th>ID</th>
-          <th>TITULO</th>
-          <th>DESCRIPCION</th>
-          <th>USUARIO</th>
+          <th onclick="sortTable(0)" class="desc">ID</th>
+          <th onclick="sortTable(1)" class="desc">TITULO</th>
+          <th onclick="sortTable(2)" class="desc">DESCRIPCION</th>
+          <th onclick="sortTable(3)" class="desc">USUARIO</th>
           <th>IMAGEN</th>
-          <th>RUBRO</th>
-          <th>ESTADO</th>
+          <th onclick="sortTable(4)" class="desc">RUBRO</th>
+          <th onclick="sortTable(5)" class="desc ">ESTADO</th>
           <th>VER PUBLICACION</th>
           <th>PUBLICACION</th>
           <th>ELIMINAR</th>
@@ -54,6 +54,75 @@
 </main>
 <footer th:replace="fragments/layout :: _footer"></footer>
 <div th:replace="fragments/layout :: _script"></div>
+<script>
+    // Variables para mantener el estado de ordenamiento
+    const sortStates = [null, null, null, null, null, null, null, null, null, null];
+
+    // Función para obtener el contenido de texto de un elemento (ignorando etiquetas HTML)
+    function getTextContent(element) {
+      return element.textContent || element.innerText;
+    }
+
+    // Función para cambiar el estado de ordenamiento
+    function toggleSortState(columnIndex) {
+      if (sortStates[columnIndex] === "asc") {
+        sortStates[columnIndex] = "desc";
+      } else {
+        sortStates[columnIndex] = "asc";
+      }
+    }
+
+    // Función para obtener el estado de ordenamiento
+    function getSortState(columnIndex) {
+      return sortStates[columnIndex];
+    }
+
+    // Función para ordenar la tabla por la columna indicada
+    function sortTable(columnIndex) {
+      let table, rows, switching, i, x, y, shouldSwitch;
+      table = document.querySelector(".table");  // Cambia el selector para obtener la tabla
+      switching = true;
+
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[columnIndex];
+          y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+          // Obtén el contenido de texto de las celdas (ignorando enlaces)
+          const xText = getTextContent(x);
+          const yText = getTextContent(y);
+
+          // Compara los valores según el tipo de columna (numérico o alfanumérico)
+          if (columnIndex === 0 || columnIndex === 3 || columnIndex === 5) {
+            if ((getSortState(columnIndex) === "asc" && Number(xText) > Number(yText)) ||
+                (getSortState(columnIndex) === "desc" && Number(xText) < Number(yText))) {
+              shouldSwitch = true;
+              break;
+            }
+          } else {
+            if ((getSortState(columnIndex) === "asc" && xText.toLowerCase() > yText.toLowerCase()) ||
+                (getSortState(columnIndex) === "desc" && xText.toLowerCase() < yText.toLowerCase())) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+
+      // Cambia el estado de ordenamiento después de ordenar la tabla
+      toggleSortState(columnIndex);
+    }
+  </script>
+
 </body>
 
 </html>

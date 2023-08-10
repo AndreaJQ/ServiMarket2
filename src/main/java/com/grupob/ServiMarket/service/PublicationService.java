@@ -9,6 +9,7 @@ import com.grupob.ServiMarket.enums.Rubro;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.PublicationRepository;
 import com.grupob.ServiMarket.repository.UserRepository;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class PublicationService {
 
     //------------------------CREATE--------------------------
     @Transactional
-    public void create (Publication publication, Long userId, List<MultipartFile> archivos) throws MyException {
+    public void create (Publication publication, Long userId, List<MultipartFile> archivos) throws MyException, FileUploadException {
 
         UserEntity user = new UserEntity();
 

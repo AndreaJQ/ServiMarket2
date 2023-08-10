@@ -8,6 +8,7 @@ import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.enums.Role;
 
 import com.grupob.ServiMarket.repository.UserRepository;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,7 +38,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private ImageService imageService;
     @Transactional
-    public void create(UserEntity us, String password,String password2, MultipartFile archivo) throws MyException {
+    public void create(UserEntity us, String password,String password2, MultipartFile archivo) throws MyException, FileUploadException {
         validate(us,password,password2,archivo);
         Image image;
         if (archivo != null && !archivo.isEmpty()) {
