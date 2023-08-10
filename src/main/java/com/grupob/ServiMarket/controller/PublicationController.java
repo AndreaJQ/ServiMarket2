@@ -6,6 +6,7 @@ import com.grupob.ServiMarket.service.PublicationService;
 import com.grupob.ServiMarket.service.ScoreService;
 import com.grupob.ServiMarket.service.SolicitudService;
 import com.grupob.ServiMarket.service.UserService;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -54,7 +55,7 @@ public class PublicationController  {
     public String savePublication(@ModelAttribute("publicacion") Publication publication,
                                   HttpSession session, ModelMap modelMap,
                                   BindingResult result,
-                                  List<MultipartFile> archivos) throws MyException {
+                                  List<MultipartFile> archivos) throws MyException, FileUploadException {
 
         UserEntity user = (UserEntity) session.getAttribute("usuariosession");
         modelMap.put("user", user);
@@ -67,6 +68,7 @@ public class PublicationController  {
 
             return "Formulario_Servicios.html";
         }
+        publication.setDescription2(publication.getDescription2().replace("\n", "<br>"));
         pService.create(publication, userId, archivos);
         return "redirect:/publist";
 

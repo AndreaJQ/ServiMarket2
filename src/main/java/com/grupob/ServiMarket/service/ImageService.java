@@ -4,10 +4,12 @@ import com.grupob.ServiMarket.entity.Image;
 import com.grupob.ServiMarket.entity.UserEntity;
 import com.grupob.ServiMarket.exceptions.MyException;
 import com.grupob.ServiMarket.repository.ImageRepository;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public Image guardar(MultipartFile archivo) throws MyException{
+    public Image guardar(MultipartFile archivo) throws MyException, FileUploadException {
         if (archivo != null) {
             try {
 
@@ -33,6 +35,8 @@ public class ImageService {
                 image.setContenido(archivo.getBytes());
 
                 return imageRepository.save(image);
+            } catch (MaxUploadSizeExceededException e) {
+                throw new FileUploadException("El tamaño del archivo excede el límite permitido.", e);
 
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -62,6 +66,8 @@ public class ImageService {
                 image.setContenido(archivo.getBytes());
 
                 return imageRepository.save(image);
+            } catch (MaxUploadSizeExceededException e) {
+                throw new FileUploadException("El tamaño del archivo excede el límite permitido.", e);
 
             } catch (Exception e) {
                 System.err.println(e.getMessage());
